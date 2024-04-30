@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
+import 'package:aidafine/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
@@ -27,7 +30,33 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
   Bloc.observer = const AppBlocObserver();
 
-  // Add cross-flavor configuration here
+  await runZonedGuarded(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(await builder());
+      HydratedBloc.storage = await HydratedStorage.build(
+        storageDirectory: await getApplicationDocumentsDirectory(),
+      );
+
+      await Firebase.initializeApp(
+        options:
+            DefaultFirebaseOptions.currentPlatform(Environment.development),
+      );
+
+      // final host = Platform.isAndroid ? '127.0.0.1' : 'localhost';
+      // FirebaseFunctions.instanceFor(region: 'us-central1')
+      //     .useFunctionsEmulator(host, 5001);
+
+      // FirebaseMessaging.onBackgroundMessage(
+      //   _fcmBgHandler,
+      // );
+
+      // if (!kIsWeb && !Platform.isIOS) {
+      //   await setupFlutterNotifications();
+      // }
+
+      runApp(await builder());
+    },
+    (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
+  );
 }
