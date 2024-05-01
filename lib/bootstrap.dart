@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:aidafine/engine/engine.dart';
 import 'package:aidafine/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
@@ -41,6 +43,10 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
       await Firebase.initializeApp(
         options:
             DefaultFirebaseOptions.currentPlatform(Environment.development),
+      );
+
+      await RemoteConfig.initialize(
+        remoteConfig: FirebaseRemoteConfig.instance,
       );
 
       // final host = Platform.isAndroid ? '127.0.0.1' : 'localhost';

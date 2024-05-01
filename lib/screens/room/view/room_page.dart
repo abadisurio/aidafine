@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:aidafine/screens/room/room.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class RoomPage extends StatelessWidget {
@@ -9,7 +11,11 @@ class RoomPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const _RoomView();
+    return BlocProvider(
+      create: (context) => RoomBloc(),
+      lazy: false,
+      child: const _RoomView(),
+    );
   }
 }
 
