@@ -1,4 +1,5 @@
 import 'package:aidafine/app/bloc/app_bloc.dart';
+import 'package:aidafine/app/themes/themes.dart';
 import 'package:aidafine/engine/engine.dart';
 import 'package:aidafine/l10n/l10n.dart';
 import 'package:aidafine/router/aidafine_router.dart';
@@ -116,4 +117,6 @@ final _app = MaterialApp.router(
   localizationsDelegates: AppLocalizations.localizationsDelegates,
   supportedLocales: AppLocalizations.supportedLocales,
   routerConfig: _appRouter.config(),
+  theme: blueTheme,
+  // darkTheme: darkTheme,
 );
