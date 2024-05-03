@@ -15,6 +15,14 @@ class RoomState with _$RoomState {
       _$RoomStateFromJson(json);
 
   const RoomState._();
+
+  @override
+  String toString() {
+    return '''
+RoomState(
+  answerStreaming: $answerStreaming
+)''';
+  }
 }
 
 enum AuthState {

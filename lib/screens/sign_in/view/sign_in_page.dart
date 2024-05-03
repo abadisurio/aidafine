@@ -62,7 +62,9 @@ class SignInPage extends StatelessWidget {
                               duration: const Duration(milliseconds: 400),
                               curve: Curves.easeOutCirc,
                               child: state.authState == AuthState.loading
-                                  ? const CircularProgressIndicator()
+                                  ? const Center(
+                                      child: CircularProgressIndicator(),
+                                    )
                                   : ElevatedButton(
                                       onPressed: () {
                                         context

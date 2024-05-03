@@ -216,11 +216,6 @@ class _$RoomStateImpl extends _RoomState {
   final Chat? answerStreaming;
 
   @override
-  String toString() {
-    return 'RoomState(user: $user, chats: $chats, isLoadingAnswer: $isLoadingAnswer, isGeneratingAnswer: $isGeneratingAnswer, answerStreaming: $answerStreaming)';
-  }
-
-  @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&

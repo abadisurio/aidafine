@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:aidafine/screens/room/room.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -84,35 +82,35 @@ class _PromptInputState extends State<_PromptInput> {
 
   @override
   Widget build(BuildContext context) {
-    log('_isPromptEmpty $_isPromptEmpty');
     return Row(
       children: [
         Expanded(
           child: Card(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-              child: BlocBuilder<RoomBloc, RoomState>(
-                buildWhen: (previous, current) {
-                  return previous.isLoadingAnswer != current.isLoadingAnswer;
-                },
-                builder: (context, state) {
-                  return TextFormField(
-                    focusNode: _inputFieldNode,
-                    // enabled: !state.isLoadingAnswer,
-                    controller: _promptInputController,
-                    decoration: const InputDecoration(
-                      // suffix: !state.isLoadingAnswer
-                      //     ? null
-                      //     : const SizedBox.square(
-                      //         dimension: 12,
-                      //         child: CircularProgressIndicator(),
-                      //       ),
-                      border: InputBorder.none,
-                      hintText: 'Type something',
-                    ),
-                  );
-                },
-              ),
+            child: BlocBuilder<RoomBloc, RoomState>(
+              buildWhen: (previous, current) {
+                return previous.isLoadingAnswer != current.isLoadingAnswer;
+              },
+              builder: (context, state) {
+                return TextFormField(
+                  focusNode: _inputFieldNode,
+                  maxLines: null,
+                  textAlignVertical: TextAlignVertical.center,
+                  // enabled: !state.isLoadingAnswer,
+                  controller: _promptInputController,
+                  decoration: const InputDecoration(
+                    isDense: true,
+                    contentPadding: EdgeInsets.fromLTRB(8, 4, 8, 8),
+                    // suffix: !state.isLoadingAnswer
+                    //     ? null
+                    //     : const SizedBox.square(
+                    //         dimension: 12,
+                    //         child: CircularProgressIndicator(),
+                    //       ),
+                    border: InputBorder.none,
+                    hintText: 'Type something',
+                  ),
+                );
+              },
             ),
           ),
         ),

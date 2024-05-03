@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:aidafine/engine/engine.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -52,21 +51,8 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
     UserInitialize event,
     Emitter<UserState> emit,
   ) async {
-    log('state auth ${state.authState}');
-    // if (state.authState != AuthState.signedIn) {
-    //   emit(state.copyWith(authState: AuthState.signedOut));
-    //   return;
-    // }
-    // await _storage.delete(
-    //   key: _keyStoredOrbyteUser,
-    //   aOptions: _secureStorageAndroidOptions,
-    // );
-    // await _storage.delete(
-    //   key: _keyStoredGoogleUser,
-    //   aOptions: _secureStorageAndroidOptions,
-    // );
     await _initializeLocalCredential();
-    log('_currentCredential $_currentCredential');
+
     if (_currentCredential != null) {
       await _initializeUserData();
       emit(
@@ -111,9 +97,8 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
     // _localUser = await _readFromStorage();
     _remoteUser = await _readFromFirestore();
 
-    // log('_localUser $_localUser');
-    log('_localUser ${state.user}');
-    log('_remoteUser $_remoteUser');
+    //
+
     final user = _remoteUser ?? state.user;
     if (state.user != null && _remoteUser == null) {
       await _createNewUserToFirestore();
@@ -122,7 +107,7 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
       await _readFromFirestore();
     }
     _currentOrbyteUser = user ?? await _createNewUserToFirestore();
-    log('_currentOrbyteUser2 $_currentOrbyteUser');
+
     // add(const RefreshOrbyteUser());
   }
 
@@ -157,8 +142,6 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
     await _signInWithGoogle();
     await _initializeUserData();
 
-    log('_currentOrbyteUser $_currentOrbyteUser');
-
     emit(
       state.copyWith(
         authState: AuthState.signedIn,
@@ -172,7 +155,7 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
     final snapshot = await _userDoc.get();
     final remoteData = snapshot.data() as Map<String, dynamic>?;
 
-    // log('snapshot $remoteData');
+    //
     if (snapshot.exists) {
       return Pilot.fromJson({
         'id': _userDoc.id,
@@ -183,7 +166,6 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
   }
 
   Future<void> _writeToFirestore(Pilot orbyteUser) async {
-    log('orbyteUser2 $orbyteUser');
     await _userDoc.set(
       orbyteUser.toJson()..remove('id'),
       SetOptions(merge: true),
@@ -242,7 +224,7 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
   ) async {
     emit(state.copyWith(authState: AuthState.loading));
     await _googleSignIn.signOut();
-    // await FirebaseMessaging.instance.deleteToken();
+
     await _storage.delete(
       key: _keyStoredOrbyteUser,
       aOptions: _secureStorageAndroidOptions,
@@ -258,12 +240,10 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
   @override
   UserState? fromJson(Map<String, dynamic> json) {
     return UserState.fromJson(json);
-    // return null;
   }
 
   @override
   Map<String, dynamic>? toJson(UserState state) {
-    log('state ${state.user}');
     return state.toJson();
   }
 }

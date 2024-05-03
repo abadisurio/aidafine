@@ -2,7 +2,6 @@
 
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:aidafine/engine/engine.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -23,9 +22,7 @@ class RoomBloc extends HydratedBloc<RoomEvent, RoomState> {
   late Gemini _gemini;
 
   void _initialize() {
-    log('debug loaddd');
     final key = RemoteConfig.geminiAPIKey;
-    log('debug key $key');
     try {
       if (key == null) throw Exception('gemini api key not found');
       _gemini = Gemini.init(apiKey: key);
@@ -54,42 +51,21 @@ class RoomBloc extends HydratedBloc<RoomEvent, RoomState> {
     );
     final complete = Completer<void>();
 
+    // ignore: unnecessary_string_interpolations
     final prompt = '''
-${event.prompt}, make the answer in short sentence and friendly''';
+${event.prompt}''';
 
     final stream = _gemini.streamGenerateContent(prompt).listen((addedValue) {
-      // log('value.output ${addedValue.output}');
-      if (addedValue.output == null) return;
-      // log('debug state.answerStreaming ${state.answerStreaming == null}');
-      // if (state.answerStreaming == null) {
-      //   final newAnswer = Chat(
-      //     id: 'id',
-      //     username: 'gemini',
-      //     data: '${addedValue.output}',
-      //     createdAt: DateTime.now(),
-      //   );
-      //   add(UpdateAnswerGeneration(newAnswer));
-      // } else {
-      //   final updatedAnswer = state.answerStreaming!.copyWith(
-      //     data: '${state.answerStreaming!.data}${addedValue.output}',
-      //   );
-      // }
-      add(UpdateAnswerGeneration('${addedValue.output}'));
+      if (addedValue.content?.parts?.last.text == null) return;
+      add(UpdateAnswerGeneration('${addedValue.content?.parts?.last.text}'));
     })
       ..onDone(complete.complete);
 
     await complete.future;
     await stream.cancel();
-    // final newAnswer = Chat(
-    //   id: 'id',
-    //   username: 'gemini',
-    //   data: '${state.answerStreaming}',
-    //   createdAt: DateTime.now(),
-    // );
-    // log('newAnswer $newAnswer');
+
     final finalChats = List<Chat>.from(state.chats);
 
-    log('debug state.answerStreaming ${state.answerStreaming}');
     finalChats[finalChats.length - 1] = state.answerStreaming!;
     emit(
       state.copyWith(
@@ -99,7 +75,6 @@ ${event.prompt}, make the answer in short sentence and friendly''';
         answerStreaming: null,
       ),
     );
-    log('debug finalChats.last ${state.answerStreaming == null && !state.isGeneratingAnswer} ${state.chats.last}');
   }
 
   Future<void> _onUpdateAnswerGeneration(
@@ -126,7 +101,7 @@ ${event.prompt}, make the answer in short sentence and friendly''';
       emit(
         state.copyWith(
           answerStreaming: state.answerStreaming!.copyWith(
-            data: '${state.answerStreaming!.data}${event.addedAnswer}',
+            data: '${state.answerStreaming!.data}${event.addedAnswer} ',
           ),
         ),
       );
