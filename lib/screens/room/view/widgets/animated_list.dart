@@ -98,6 +98,7 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
 
   @override
   Widget build(BuildContext context) {
+    final screenPadding = MediaQuery.of(context).padding;
     return BlocListener<RoomBloc, RoomState>(
       listenWhen: (previous, current) =>
           previous.chats.length != current.chats.length,
@@ -105,7 +106,8 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
         _insert(state.chats.length);
       },
       child: AnimatedList(
-        padding: const EdgeInsets.only(bottom: 80),
+        padding: screenPadding.copyWith(bottom: screenPadding.bottom + 80),
+        // padding: const EdgeInsets.only(bottom: 80),
         reverse: true,
         key: _listKey,
         initialItemCount: _list.length,

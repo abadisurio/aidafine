@@ -41,9 +41,11 @@ class _RoomView extends StatelessWidget {
           //     height: 100,
           //   ),
           // ),
-          Padding(
-            padding: EdgeInsets.all(8),
-            child: _PromptInput(),
+          SafeArea(
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: _PromptInput(),
+            ),
           ),
         ],
       ),
@@ -126,7 +128,7 @@ class _PromptInputState extends State<_PromptInput> {
                       context
                           .read<RoomBloc>()
                           .add(QueryPrompt(_promptInputController.text));
-                      FocusScope.of(context).unfocus();
+                      // FocusScope.of(context).unfocus();
                       _promptInputController.clear();
 
                       // _inputFieldNode.
