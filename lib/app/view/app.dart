@@ -117,6 +117,6 @@ final _app = MaterialApp.router(
   localizationsDelegates: AppLocalizations.localizationsDelegates,
   supportedLocales: AppLocalizations.supportedLocales,
   routerConfig: _appRouter.config(),
-  theme: blueTheme,
-  // darkTheme: darkTheme,
+  theme: lightTheme,
+  darkTheme: darkTheme,
 );

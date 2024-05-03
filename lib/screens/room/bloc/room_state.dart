@@ -5,7 +5,10 @@ class RoomState with _$RoomState {
   @JsonSerializable(explicitToJson: true)
   const factory RoomState({
     Pilot? user,
-    @Default(AuthState.loading) AuthState authState,
+    @Default([]) List<Chat> chats,
+    @Default(false) bool isLoadingAnswer,
+    @Default(false) bool isGeneratingAnswer,
+    Chat? answerStreaming,
   }) = _RoomState;
 
   factory RoomState.fromJson(Map<String, dynamic> json) =>

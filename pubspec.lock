@@ -273,6 +273,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.1"
+  dio:
+    dependency: transitive
+    description:
+      name: dio
+      sha256: "11e40df547d418cc0c4900a9318b26304e665da6fa4755399a9ff9efd09034b5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.4.3+1"
   fake_async:
     dependency: transitive
     description:
@@ -398,11 +406,27 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.2"
+  flutter_gemini:
+    dependency: "direct main"
+    description:
+      name: flutter_gemini
+      sha256: "1e106f4644d1bc3b1806c9fbf0b6399873b16041d61ea12e3fc229f23f3aa067"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_markdown:
+    dependency: "direct main"
+    description:
+      name: flutter_markdown
+      sha256: "9921f9deda326f8a885e202b1e35237eadfc1345239a0f6f0f1ff287e047547f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.1"
   flutter_secure_storage:
     dependency: "direct main"
     description:
@@ -501,14 +525,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.2.1"
-  google_gemini:
-    dependency: "direct main"
-    description:
-      name: google_gemini
-      sha256: a99e14ba2d497ec8e2b4c83e483204709a4ce3ec6c0a6021b3c4a9b2cd671150
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.2"
   google_identity_services_web:
     dependency: transitive
     description:
@@ -630,7 +646,7 @@ packages:
     source: hosted
     version: "0.6.7"
   json_annotation:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: json_annotation
       sha256: "1ce844379ca14835a50d2f019a3099f419082cfdd231cd86a142af94dd5c6bb1"
@@ -677,6 +693,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  markdown:
+    dependency: "direct main"
+    description:
+      name: markdown
+      sha256: ef2a1298144e3f985cc736b22e0ccdaf188b5b3970648f2d9dc13efd1d9df051
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.2.2"
   matcher:
     dependency: transitive
     description:

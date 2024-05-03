@@ -1,4 +1,4 @@
-import 'dart:async';
+import 'dart:developer';
 
 import 'package:aidafine/screens/room/room.dart';
 import 'package:auto_route/auto_route.dart';
@@ -28,27 +28,22 @@ class _RoomView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Aidafine'),
       ),
-      body: Stack(
+      body: const Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          const _ListBubble(),
+          // const _ListBubble(),
+          AnimatedListSample(),
+          // Padding(
+          //   padding:  EdgeInsets.only(bottom: 100),
+          //   child: Container(
+          //     color: Colors.blue,
+          //     width: 100,
+          //     height: 100,
+          //   ),
+          // ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 100),
-            child: Container(
-              color: Colors.blue,
-              width: 100,
-              height: 100,
-            ),
-          ),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 16),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                ),
-              ),
-            ),
+            padding: EdgeInsets.all(8),
+            child: _PromptInput(),
           ),
         ],
       ),
@@ -56,152 +51,101 @@ class _RoomView extends StatelessWidget {
   }
 }
 
-class _ListBubble extends StatefulWidget {
-  const _ListBubble();
+class _PromptInput extends StatefulWidget {
+  const _PromptInput();
 
   @override
-  State<_ListBubble> createState() => _ListBubbleState();
+  State<_PromptInput> createState() => _PromptInputState();
 }
 
-class _ListBubbleState extends State<_ListBubble> {
-  bool _isSticky = true;
-  final _scrollController = ScrollController();
+class _PromptInputState extends State<_PromptInput> {
+  final _promptInputController = TextEditingController();
+  final _inputFieldNode = FocusNode();
+  bool _isPromptEmpty = true;
+
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      final stickyHeight = MediaQuery.of(context).size.height;
-      _scrollController.addListener(() {
-        if (_isSticky && _scrollController.offset > stickyHeight / 3) {
-          setState(() {
-            _isSticky = false;
-          });
-        } else if (!_isSticky && _scrollController.offset < stickyHeight / 3) {
-          setState(() {
-            _isSticky = true;
-          });
-        }
-      });
-    });
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      controller: _scrollController,
-      physics:
-          _isSticky ? const PageScrollPhysics() : const BouncingScrollPhysics(),
-      padding: const EdgeInsets.only(bottom: 250),
-      reverse: true,
-      itemCount: 3,
-      itemBuilder: (context, index) {
-        if (index == 2) {
-          return const SizedBox(height: 500);
-        }
-        if (index.isEven) {
-          return const _BubbleAnswer(data: _exampleAnswer);
-        }
-        return const _BubbleQuestion();
-      },
-    );
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-}
-
-const _exampleAnswer =
-    '''Prescriptive analytics is a form of data analytics that uses past performance and trends to determine what needs to be done to achieve future goals. Even with the obvious benefits, business leaders should understand that prescriptive analytics has its own drawbacks.''';
-
-class _BubbleAnswer extends StatefulWidget {
-  const _BubbleAnswer({
-    required this.data,
-  });
-
-  final String data;
-
-  @override
-  State<_BubbleAnswer> createState() => _BubbleAnswerState();
-}
-
-class _BubbleAnswerState extends State<_BubbleAnswer>
-    with TickerProviderStateMixin {
-  late List<String> splittedText = widget.data.split(' ');
-
-  late Timer _timer;
-  int _index = 0;
-
-  void _startTimer() {
-    _timer = Timer.periodic(const Duration(milliseconds: 100), (Timer timer) {
-      if (_index >= splittedText.length) {
-        timer.cancel();
+    _promptInputController.addListener(() {
+      if (!_isPromptEmpty && _promptInputController.value.text.isEmpty) {
+        setState(() {
+          _isPromptEmpty = true;
+        });
       }
-      setState(() {
-        _index++;
-      });
+      if (_isPromptEmpty && _promptInputController.value.text.isNotEmpty) {
+        setState(() {
+          _isPromptEmpty = false;
+        });
+      }
     });
-  }
-
-  @override
-  void initState() {
-    _startTimer();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Wrap(
-        children: [
-          for (var i = 0; i < splittedText.length; i++)
-            AnimatedScale(
-              alignment: Alignment.bottomLeft,
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.easeOutCirc,
-              scale: _index >= i ? 1 : 0,
-              child: AnimatedOpacity(
-                duration: const Duration(milliseconds: 500),
-                opacity: _index >= i ? 1 : 0,
-                child: Text(
-                  '${splittedText[i]} ',
-                  style: const TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
+    log('_isPromptEmpty $_isPromptEmpty');
+    return Row(
+      children: [
+        Expanded(
+          child: Card(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+              child: BlocBuilder<RoomBloc, RoomState>(
+                buildWhen: (previous, current) {
+                  return previous.isLoadingAnswer != current.isLoadingAnswer;
+                },
+                builder: (context, state) {
+                  return TextFormField(
+                    focusNode: _inputFieldNode,
+                    // enabled: !state.isLoadingAnswer,
+                    controller: _promptInputController,
+                    decoration: const InputDecoration(
+                      // suffix: !state.isLoadingAnswer
+                      //     ? null
+                      //     : const SizedBox.square(
+                      //         dimension: 12,
+                      //         child: CircularProgressIndicator(),
+                      //       ),
+                      border: InputBorder.none,
+                      hintText: 'Type something',
+                    ),
+                  );
+                },
               ),
             ),
-        ],
-      ),
+          ),
+        ),
+        BlocBuilder<RoomBloc, RoomState>(
+          buildWhen: (previous, current) {
+            return previous.isLoadingAnswer != current.isLoadingAnswer;
+          },
+          builder: (context, state) {
+            return IconButton(
+              onPressed: _isPromptEmpty
+                  ? null
+                  : () {
+                      context
+                          .read<RoomBloc>()
+                          .add(QueryPrompt(_promptInputController.text));
+                      FocusScope.of(context).unfocus();
+                      _promptInputController.clear();
+
+                      // _inputFieldNode.
+                    },
+              icon: state.isLoadingAnswer
+                  ? const CircularProgressIndicator()
+                  : const Icon(
+                      Icons.send,
+                    ),
+            );
+          },
+        ),
+      ],
     );
   }
 
   @override
   void dispose() {
-    _timer.cancel();
+    _inputFieldNode.dispose();
     super.dispose();
-  }
-}
-
-class _BubbleQuestion extends StatelessWidget {
-  const _BubbleQuestion();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(16),
-      child: Text(
-        '''What is prescriptive analysis?''',
-        textAlign: TextAlign.end,
-        style: TextStyle(
-          fontSize: 28,
-          fontWeight: FontWeight.w800,
-        ),
-      ),
-    );
   }
 }
