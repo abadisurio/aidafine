@@ -1,28 +1,28 @@
 import 'package:aidafine/engine/models/models.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'chat.freezed.dart';
-part 'chat.g.dart';
+part 'catalog.freezed.dart';
+part 'catalog.g.dart';
 
 @freezed
-class Chat with _$Chat {
+class Catalog with _$Catalog {
   // ignore: invalid_annotation_target
   @JsonSerializable(
     explicitToJson: true,
     includeIfNull: false,
   )
-  factory Chat({
+  factory Catalog({
     required String id,
-    required String username,
-    required String data,
     // @Default(DateTime(2024))
     @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
     required DateTime createdAt,
     // @Default(DateTime(2024))
     @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
     DateTime? modifiedAt,
-    List<Catalog>? catalogs,
-  }) = _Chat;
+    String? name,
+    String? description,
+  }) = _Catalog;
 
-  factory Chat.fromJson(Map<String, dynamic> json) => _$ChatFromJson(json);
+  factory Catalog.fromJson(Map<String, dynamic> json) =>
+      _$CatalogFromJson(json);
 }

@@ -1,4 +1,5 @@
 import 'package:aidafine/screens/room/room.dart';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,13 +31,13 @@ class _RoomView extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         children: [
           // const _ListBubble(),
-          AnimatedListSample(),
+          AnimatedChatList(),
           // Padding(
           //   padding:  EdgeInsets.only(bottom: 100),
-          //   child: Container(
-          //     color: Colors.blue,
-          //     width: 100,
-          //     height: 100,
+          //   child: BubbleCarousel(
+          //     catalogs: [
+
+          //     ],
           //   ),
           // ),
           SafeArea(
@@ -92,11 +93,17 @@ class _PromptInputState extends State<_PromptInput> {
               },
               builder: (context, state) {
                 return TextFormField(
+                  // onTapOutside: (event) {
+                  // log('event $event');
+                  // FocusManager.instance.primaryFocus?.unfocus();
+                  // },
                   focusNode: _inputFieldNode,
                   maxLines: null,
                   textAlignVertical: TextAlignVertical.center,
                   // enabled: !state.isLoadingAnswer,
                   controller: _promptInputController,
+                  cursorHeight: 28,
+                  cursorRadius: const Radius.circular(12),
                   decoration: const InputDecoration(
                     isDense: true,
                     contentPadding: EdgeInsets.fromLTRB(8, 4, 8, 8),

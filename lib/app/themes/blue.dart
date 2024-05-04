@@ -22,6 +22,6 @@ final blueTheme = ThemeData.dark().copyWith(
   ),
   canvasColor: Colors.blue,
   scaffoldBackgroundColor: Colors.blue.shade900,
-  textTheme: GoogleFonts.plusJakartaSansTextTheme(ThemeData.dark().textTheme),
+  textTheme: GoogleFonts.plusJakartaSansTextTheme(TextStyleTheme.darkTextTheme),
   // scaffoldBackgroundColor: Colors.grey.shade900,
 );

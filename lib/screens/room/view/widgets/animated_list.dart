@@ -1,25 +1,31 @@
 // ignore_for_file: comment_references
 
+import 'dart:developer';
+import 'package:aidafine/engine/engine.dart';
 import 'package:aidafine/screens/room/room.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AnimatedListSample extends StatefulWidget {
-  const AnimatedListSample({super.key});
+class AnimatedChatList extends StatefulWidget {
+  const AnimatedChatList({super.key});
 
   @override
-  State<AnimatedListSample> createState() => _AnimatedListSampleState();
+  State<AnimatedChatList> createState() => _AnimatedChatListState();
 }
 
-class _AnimatedListSampleState extends State<AnimatedListSample> {
+class _AnimatedChatListState extends State<AnimatedChatList> {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
   late ListModel<int> _list;
   // Chat? _selectedItem;
 
+  final _scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
-
+    // _scrollController.addListener(() {
+    //   _scrollController.
+    // });
     _list = ListModel<int>(
       listKey: _listKey,
       initialItems: <int>[],
@@ -37,9 +43,34 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
       builder: (context, state) {
         final chat = state.chats[state.chats.length - 1 - index];
         if (chat.username == 'gemini') {
-          final fixChat = index == 0 && state.answerStreaming != null
-              ? state.answerStreaming!
-              : chat;
+          // var fixChat = index == 0 && state.answerStreaming != null
+          //     ? state.answerStreaming!
+          //     : chat;
+          late Chat fixChat;
+          if (index == 0 && state.answerStreaming != null) {
+            fixChat = state.answerStreaming!;
+          } else {
+            fixChat = chat.copyWith(
+              catalogs: [
+                Catalog(
+                  id: '0',
+                  name: 'Produk keuangaaan 0',
+                  createdAt: DateTime.now(),
+                ),
+                Catalog(
+                  id: '1',
+                  name: 'Produk keuangaaan 1',
+                  createdAt: DateTime.now(),
+                ),
+                Catalog(
+                  id: '12',
+                  name: 'Produk keuangaaan 1',
+                  createdAt: DateTime.now(),
+                ),
+              ],
+            );
+          }
+
           return SizeTransition(
             sizeFactor: CurvedAnimation(
               parent: animation,
@@ -96,6 +127,25 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
   //   }
   // }
 
+  // void _onUpdateScroll(ScrollUpdateNotification event) {
+  //   log('event.dragDetails ${event.dragDetails?.delta}');
+  //   final position = event.dragDetails?.delta.dy ?? 0;
+  //   if (FocusScope.of(context).hasFocus) {
+  //     if (position > 20 || position < -20) {
+  //       FocusScope.of(context).unfocus();
+  //     }
+  //   }
+  // }
+
+  void _onEndScroll(ScrollEndNotification event) {
+    log('event ${event.dragDetails}');
+    if (event.dragDetails != null && FocusScope.of(context).hasFocus) {
+      Future.delayed(const Duration(milliseconds: 300), () {
+        FocusScope.of(context).unfocus();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenPadding = MediaQuery.of(context).padding;
@@ -105,13 +155,27 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
       listener: (context, state) {
         _insert(state.chats.length);
       },
-      child: AnimatedList(
-        padding: screenPadding.copyWith(bottom: screenPadding.bottom + 80),
-        // padding: const EdgeInsets.only(bottom: 80),
-        reverse: true,
-        key: _listKey,
-        initialItemCount: _list.length,
-        itemBuilder: _buildItem,
+      child: NotificationListener<ScrollNotification>(
+        onNotification: (scrollNotification) {
+          // log('scrollNotification ${scrollNotification}');
+          if (scrollNotification is ScrollStartNotification) {
+            // _onStartScroll(scrollNotification);
+          } else if (scrollNotification is ScrollUpdateNotification) {
+            // _onUpdateScroll(scrollNotification);
+          } else if (scrollNotification is ScrollEndNotification) {
+            _onEndScroll(scrollNotification);
+          }
+          return true;
+        },
+        child: AnimatedList(
+          controller: _scrollController,
+          padding: screenPadding.copyWith(bottom: screenPadding.bottom + 80),
+          // padding: const EdgeInsets.only(bottom: 80),
+          reverse: true,
+          key: _listKey,
+          initialItemCount: _list.length,
+          itemBuilder: _buildItem,
+        ),
       ),
     );
   }

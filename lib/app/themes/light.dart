@@ -15,6 +15,7 @@ final lightTheme = ThemeData.light().copyWith(
       foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
     ),
   ),
-  textTheme: GoogleFonts.plusJakartaSansTextTheme(ThemeData.light().textTheme),
+  textTheme:
+      GoogleFonts.plusJakartaSansTextTheme(TextStyleTheme.lightTextTheme),
   canvasColor: const Color.fromARGB(255, 129, 139, 195),
 );

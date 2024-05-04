@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'chat.dart';
+part of 'catalog.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,48 +14,46 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Chat _$ChatFromJson(Map<String, dynamic> json) {
-  return _Chat.fromJson(json);
+Catalog _$CatalogFromJson(Map<String, dynamic> json) {
+  return _Catalog.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Chat {
-  String get id => throw _privateConstructorUsedError;
-  String get username => throw _privateConstructorUsedError;
-  String get data =>
+mixin _$Catalog {
+  String get id =>
       throw _privateConstructorUsedError; // @Default(DateTime(2024))
   @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
   DateTime get createdAt =>
       throw _privateConstructorUsedError; // @Default(DateTime(2024))
   @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
   DateTime? get modifiedAt => throw _privateConstructorUsedError;
-  List<Catalog>? get catalogs => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ChatCopyWith<Chat> get copyWith => throw _privateConstructorUsedError;
+  $CatalogCopyWith<Catalog> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ChatCopyWith<$Res> {
-  factory $ChatCopyWith(Chat value, $Res Function(Chat) then) =
-      _$ChatCopyWithImpl<$Res, Chat>;
+abstract class $CatalogCopyWith<$Res> {
+  factory $CatalogCopyWith(Catalog value, $Res Function(Catalog) then) =
+      _$CatalogCopyWithImpl<$Res, Catalog>;
   @useResult
   $Res call(
       {String id,
-      String username,
-      String data,
       @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
       DateTime createdAt,
       @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
       DateTime? modifiedAt,
-      List<Catalog>? catalogs});
+      String? name,
+      String? description});
 }
 
 /// @nodoc
-class _$ChatCopyWithImpl<$Res, $Val extends Chat>
-    implements $ChatCopyWith<$Res> {
-  _$ChatCopyWithImpl(this._value, this._then);
+class _$CatalogCopyWithImpl<$Res, $Val extends Catalog>
+    implements $CatalogCopyWith<$Res> {
+  _$CatalogCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -66,25 +64,16 @@ class _$ChatCopyWithImpl<$Res, $Val extends Chat>
   @override
   $Res call({
     Object? id = null,
-    Object? username = null,
-    Object? data = null,
     Object? createdAt = null,
     Object? modifiedAt = freezed,
-    Object? catalogs = freezed,
+    Object? name = freezed,
+    Object? description = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      data: null == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as String,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -93,61 +82,56 @@ class _$ChatCopyWithImpl<$Res, $Val extends Chat>
           ? _value.modifiedAt
           : modifiedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      catalogs: freezed == catalogs
-          ? _value.catalogs
-          : catalogs // ignore: cast_nullable_to_non_nullable
-              as List<Catalog>?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$ChatImplCopyWith<$Res> implements $ChatCopyWith<$Res> {
-  factory _$$ChatImplCopyWith(
-          _$ChatImpl value, $Res Function(_$ChatImpl) then) =
-      __$$ChatImplCopyWithImpl<$Res>;
+abstract class _$$CatalogImplCopyWith<$Res> implements $CatalogCopyWith<$Res> {
+  factory _$$CatalogImplCopyWith(
+          _$CatalogImpl value, $Res Function(_$CatalogImpl) then) =
+      __$$CatalogImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String id,
-      String username,
-      String data,
       @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
       DateTime createdAt,
       @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
       DateTime? modifiedAt,
-      List<Catalog>? catalogs});
+      String? name,
+      String? description});
 }
 
 /// @nodoc
-class __$$ChatImplCopyWithImpl<$Res>
-    extends _$ChatCopyWithImpl<$Res, _$ChatImpl>
-    implements _$$ChatImplCopyWith<$Res> {
-  __$$ChatImplCopyWithImpl(_$ChatImpl _value, $Res Function(_$ChatImpl) _then)
+class __$$CatalogImplCopyWithImpl<$Res>
+    extends _$CatalogCopyWithImpl<$Res, _$CatalogImpl>
+    implements _$$CatalogImplCopyWith<$Res> {
+  __$$CatalogImplCopyWithImpl(
+      _$CatalogImpl _value, $Res Function(_$CatalogImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
-    Object? username = null,
-    Object? data = null,
     Object? createdAt = null,
     Object? modifiedAt = freezed,
-    Object? catalogs = freezed,
+    Object? name = freezed,
+    Object? description = freezed,
   }) {
-    return _then(_$ChatImpl(
+    return _then(_$CatalogImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      data: null == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: null == createdAt
           ? _value.createdAt
@@ -157,10 +141,14 @@ class __$$ChatImplCopyWithImpl<$Res>
           ? _value.modifiedAt
           : modifiedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      catalogs: freezed == catalogs
-          ? _value._catalogs
-          : catalogs // ignore: cast_nullable_to_non_nullable
-              as List<Catalog>?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -168,27 +156,21 @@ class __$$ChatImplCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class _$ChatImpl implements _Chat {
-  _$ChatImpl(
+class _$CatalogImpl implements _Catalog {
+  _$CatalogImpl(
       {required this.id,
-      required this.username,
-      required this.data,
       @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
       required this.createdAt,
       @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
       this.modifiedAt,
-      final List<Catalog>? catalogs})
-      : _catalogs = catalogs;
+      this.name,
+      this.description});
 
-  factory _$ChatImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ChatImplFromJson(json);
+  factory _$CatalogImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CatalogImplFromJson(json);
 
   @override
   final String id;
-  @override
-  final String username;
-  @override
-  final String data;
 // @Default(DateTime(2024))
   @override
   @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
@@ -197,75 +179,64 @@ class _$ChatImpl implements _Chat {
   @override
   @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
   final DateTime? modifiedAt;
-  final List<Catalog>? _catalogs;
   @override
-  List<Catalog>? get catalogs {
-    final value = _catalogs;
-    if (value == null) return null;
-    if (_catalogs is EqualUnmodifiableListView) return _catalogs;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  final String? name;
+  @override
+  final String? description;
 
   @override
   String toString() {
-    return 'Chat(id: $id, username: $username, data: $data, createdAt: $createdAt, modifiedAt: $modifiedAt, catalogs: $catalogs)';
+    return 'Catalog(id: $id, createdAt: $createdAt, modifiedAt: $modifiedAt, name: $name, description: $description)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ChatImpl &&
+            other is _$CatalogImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.username, username) ||
-                other.username == username) &&
-            (identical(other.data, data) || other.data == data) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.modifiedAt, modifiedAt) ||
                 other.modifiedAt == modifiedAt) &&
-            const DeepCollectionEquality().equals(other._catalogs, _catalogs));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, username, data, createdAt,
-      modifiedAt, const DeepCollectionEquality().hash(_catalogs));
+  int get hashCode =>
+      Object.hash(runtimeType, id, createdAt, modifiedAt, name, description);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ChatImplCopyWith<_$ChatImpl> get copyWith =>
-      __$$ChatImplCopyWithImpl<_$ChatImpl>(this, _$identity);
+  _$$CatalogImplCopyWith<_$CatalogImpl> get copyWith =>
+      __$$CatalogImplCopyWithImpl<_$CatalogImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ChatImplToJson(
+    return _$$CatalogImplToJson(
       this,
     );
   }
 }
 
-abstract class _Chat implements Chat {
-  factory _Chat(
+abstract class _Catalog implements Catalog {
+  factory _Catalog(
       {required final String id,
-      required final String username,
-      required final String data,
       @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
       required final DateTime createdAt,
       @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
       final DateTime? modifiedAt,
-      final List<Catalog>? catalogs}) = _$ChatImpl;
+      final String? name,
+      final String? description}) = _$CatalogImpl;
 
-  factory _Chat.fromJson(Map<String, dynamic> json) = _$ChatImpl.fromJson;
+  factory _Catalog.fromJson(Map<String, dynamic> json) = _$CatalogImpl.fromJson;
 
   @override
   String get id;
-  @override
-  String get username;
-  @override
-  String get data;
   @override // @Default(DateTime(2024))
   @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
   DateTime get createdAt;
@@ -273,9 +244,11 @@ abstract class _Chat implements Chat {
   @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
   DateTime? get modifiedAt;
   @override
-  List<Catalog>? get catalogs;
+  String? get name;
+  @override
+  String? get description;
   @override
   @JsonKey(ignore: true)
-  _$$ChatImplCopyWith<_$ChatImpl> get copyWith =>
+  _$$CatalogImplCopyWith<_$CatalogImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

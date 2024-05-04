@@ -1,31 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'chat.dart';
+part of 'catalog.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ChatImpl _$$ChatImplFromJson(Map<String, dynamic> json) => _$ChatImpl(
+_$CatalogImpl _$$CatalogImplFromJson(Map<String, dynamic> json) =>
+    _$CatalogImpl(
       id: json['id'] as String,
-      username: json['username'] as String,
-      data: json['data'] as String,
       createdAt: json['createdAt'] == null
           ? getDefaultDateTime()
           : fromDateTimeJson(json['createdAt']),
       modifiedAt: json['modifiedAt'] == null
           ? getDefaultDateTime()
           : fromDateTimeJson(json['modifiedAt']),
-      catalogs: (json['catalogs'] as List<dynamic>?)
-          ?.map((e) => Catalog.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      name: json['name'] as String?,
+      description: json['description'] as String?,
     );
 
-Map<String, dynamic> _$$ChatImplToJson(_$ChatImpl instance) {
+Map<String, dynamic> _$$CatalogImplToJson(_$CatalogImpl instance) {
   final val = <String, dynamic>{
     'id': instance.id,
-    'username': instance.username,
-    'data': instance.data,
     'createdAt': instance.createdAt.toIso8601String(),
   };
 
@@ -36,6 +32,7 @@ Map<String, dynamic> _$$ChatImplToJson(_$ChatImpl instance) {
   }
 
   writeNotNull('modifiedAt', instance.modifiedAt?.toIso8601String());
-  writeNotNull('catalogs', instance.catalogs?.map((e) => e.toJson()).toList());
+  writeNotNull('name', instance.name);
+  writeNotNull('description', instance.description);
   return val;
 }

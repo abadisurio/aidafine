@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:aidafine/app/themes/text_theme.dart';
 import 'package:aidafine/engine/engine.dart';
+import 'package:aidafine/screens/room/view/widgets/bubble_carousel.dart';
 
 import 'package:flutter/material.dart';
 
@@ -24,30 +25,38 @@ class BubbleAnswer extends StatelessWidget {
       curve: Curves.easeOutCirc,
       clipBehavior: Clip.antiAlias,
       duration: const Duration(milliseconds: 300),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: MarkdownBody(
-          // extensionSet: md.ExtensionSet(
-          //   md.ExtensionSet.gitHubFlavored.blockSyntaxes,
-          //   <md.InlineSyntax>[
-          //     md.EmojiSyntax(),
-          //     ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes,
-          //   ],
-          // ),
-          data: chat.data,
-          styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
-            p: TextStyleTheme(context).bodyMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 28,
-                  color: Theme.of(context).brightness == Brightness.light
-                      ? Colors.blue.shade800
-                      : Colors.blue.shade200,
-                ),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: MarkdownBody(
+              // extensionSet: md.ExtensionSet(
+              //   md.ExtensionSet.gitHubFlavored.blockSyntaxes,
+              //   <md.InlineSyntax>[
+              //     md.EmojiSyntax(),
+              //     ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes,
+              //   ],
+              // ),
+              data: chat.data,
+              styleSheet:
+                  MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
+                p: TextStyleTheme(context).bodyMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28,
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.blue.shade800
+                          : Colors.blue.shade200,
+                    ),
+              ),
+              // builders: {
+              //   'p': ParagraphElementBuilder(),
+              // },
+            ),
           ),
-          // builders: {
-          //   'p': ParagraphElementBuilder(),
-          // },
-        ),
+          const SizedBox(height: 8),
+          if (chat.catalogs != null && chat.catalogs!.isNotEmpty)
+            BubbleCarousel(catalogs: chat.catalogs!),
+        ],
       ),
     );
   }

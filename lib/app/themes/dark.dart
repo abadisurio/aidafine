@@ -21,7 +21,19 @@ final darkTheme = ThemeData.dark().copyWith(
     ),
   ),
   canvasColor: Colors.black45,
-  textTheme: GoogleFonts.plusJakartaSansTextTheme(ThemeData.dark().textTheme),
+  textTheme: GoogleFonts.plusJakartaSansTextTheme(
+    ThemeData.dark().textTheme.copyWith(
+          titleLarge: const TextStyle(
+            fontWeight: FontWeight.w700,
+          ),
+          titleMedium: const TextStyle(
+            fontWeight: FontWeight.w700,
+          ),
+          titleSmall: const TextStyle(
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+  ),
   // scaffoldBackgroundColor: Colors.grey.shade900,
 );
 
