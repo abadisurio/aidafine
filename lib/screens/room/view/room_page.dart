@@ -23,11 +23,11 @@ class _RoomView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Aidafine'),
-      ),
-      body: const Stack(
+    return const Scaffold(
+      // appBar: AppBar(
+      //   title: const Text('Aidafine'),
+      // ),
+      body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
           // const _ListBubble(),
@@ -86,39 +86,37 @@ class _PromptInputState extends State<_PromptInput> {
     return Row(
       children: [
         Expanded(
-          child: Card(
-            child: BlocBuilder<RoomBloc, RoomState>(
-              buildWhen: (previous, current) {
-                return previous.isLoadingAnswer != current.isLoadingAnswer;
-              },
-              builder: (context, state) {
-                return TextFormField(
-                  // onTapOutside: (event) {
-                  // log('event $event');
-                  // FocusManager.instance.primaryFocus?.unfocus();
-                  // },
-                  focusNode: _inputFieldNode,
-                  maxLines: null,
-                  textAlignVertical: TextAlignVertical.center,
-                  // enabled: !state.isLoadingAnswer,
-                  controller: _promptInputController,
-                  cursorHeight: 28,
-                  cursorRadius: const Radius.circular(12),
-                  decoration: const InputDecoration(
-                    isDense: true,
-                    contentPadding: EdgeInsets.fromLTRB(8, 4, 8, 8),
-                    // suffix: !state.isLoadingAnswer
-                    //     ? null
-                    //     : const SizedBox.square(
-                    //         dimension: 12,
-                    //         child: CircularProgressIndicator(),
-                    //       ),
-                    border: InputBorder.none,
-                    hintText: 'Type something',
-                  ),
-                );
-              },
-            ),
+          child: BlocBuilder<RoomBloc, RoomState>(
+            buildWhen: (previous, current) {
+              return previous.isLoadingAnswer != current.isLoadingAnswer;
+            },
+            builder: (context, state) {
+              return TextFormField(
+                // onTapOutside: (event) {
+                // log('event $event');
+                // FocusManager.instance.primaryFocus?.unfocus();
+                // },
+                focusNode: _inputFieldNode,
+                maxLines: null,
+                textAlignVertical: TextAlignVertical.center,
+                // enabled: !state.isLoadingAnswer,
+                controller: _promptInputController,
+                cursorHeight: 28,
+                cursorRadius: const Radius.circular(12),
+                decoration: const InputDecoration(
+                  isDense: true,
+                  contentPadding: EdgeInsets.fromLTRB(8, 4, 8, 8),
+                  // suffix: !state.isLoadingAnswer
+                  //     ? null
+                  //     : const SizedBox.square(
+                  //         dimension: 12,
+                  //         child: CircularProgressIndicator(),
+                  //       ),
+                  border: InputBorder.none,
+                  hintText: 'Type something',
+                ),
+              );
+            },
           ),
         ),
         BlocBuilder<RoomBloc, RoomState>(

@@ -26,45 +26,55 @@ class BubbleCarousel extends StatelessWidget {
         },
         // physics: const BouncingScrollPhysics(),
         itemBuilder: (_, index) {
-          return Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              // color: Colors.red,
-              border: Border.all(
-                color: Theme.of(context).textTheme.bodyMedium?.color ??
-                    Colors.white,
+          return ClipPath(
+            clipper: const ShapeBorderClipper(
+              shape: ContinuousRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(50),
+                ),
+                side: BorderSide(),
               ),
             ),
-            height: size,
-            width: size,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Produk keuangaaan $index ',
-                  style: TextStyleTheme(context).titleLarge,
-                ),
-                const Text('Deskripsi lalalala hahaha haha'),
-                const Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(
-                      [
-                        Icons.monetization_on_outlined,
-                        Icons.food_bank_outlined,
-                        Icons.save_outlined,
-                      ][index % 3],
-                      size: 40,
-                    ),
-                    OutlinedButton(
-                      onPressed: () {},
-                      child: const Text('Lihat'),
-                    ),
-                  ],
-                ),
-              ],
+            child: Container(
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.black,
+                // border: Border.all(
+                //   color: Theme.of(context).textTheme.bodyMedium?.color ??
+                //       Colors.white,
+                // ),
+              ),
+              height: size,
+              width: size,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Produk keuangaaan $index ',
+                    style: TextStyleTheme(context).titleLarge,
+                  ),
+                  const Text('Deskripsi lalalala hahaha haha'),
+                  const Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(
+                        [
+                          Icons.monetization_on_outlined,
+                          Icons.food_bank_outlined,
+                          Icons.save_outlined,
+                        ][index % 3],
+                        size: 40,
+                      ),
+                      OutlinedButton(
+                        onPressed: () {},
+                        child: const Text('Lihat'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           );
         },

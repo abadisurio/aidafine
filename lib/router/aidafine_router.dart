@@ -17,6 +17,20 @@ class AidafineRouter extends _$AidafineRouter {
         AutoRoute(
           initial: true,
           guards: [AidafineGuard()],
+          page: MainRoute.page,
+          children: [
+            AutoRoute(
+              initial: true,
+              page: DashboardRoute.page,
+            ),
+            AutoRoute(
+              page: RoomRoute.page,
+            ),
+          ],
+        ),
+        AutoRoute(
+          // initial: true,
+          guards: [AidafineGuard()],
           page: RoomRoute.page,
         ),
         AutoRoute(
