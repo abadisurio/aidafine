@@ -1,4 +1,5 @@
 import 'package:aidafine/screens/room/room.dart';
+import 'package:aidafine/screens/room/view/widgets/recorder.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -23,30 +24,41 @@ class _RoomView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Aidafine'),
-      // ),
-      body: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          // const _ListBubble(),
-          AnimatedChatList(),
-          // Padding(
-          //   padding:  EdgeInsets.only(bottom: 100),
-          //   child: BubbleCarousel(
-          //     catalogs: [
+    return BlocListener<RoomBloc, RoomState>(
+      listener: (context, state) {
+        if (state.errorMessage != null) {
+          ScaffoldMessenger.of(context)
+            ..clearSnackBars()
+            ..showSnackBar(
+              SnackBar(content: Text(state.errorMessage!)),
+            );
+        }
+      },
+      child: const Scaffold(
+        // appBar: AppBar(
+        //   title: const Text('Aidafine'),
+        // ),
+        body: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            // const _ListBubble(),
+            AnimatedChatList(),
+            // Padding(
+            //   padding:  EdgeInsets.only(bottom: 100),
+            //   child: BubbleCarousel(
+            //     catalogs: [
 
-          //     ],
-          //   ),
-          // ),
-          SafeArea(
-            child: Padding(
-              padding: EdgeInsets.all(8),
-              child: _PromptInput(),
+            //     ],
+            //   ),
+            // ),
+            SafeArea(
+              child: Padding(
+                padding: EdgeInsets.all(8),
+                child: _PromptInput(),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -118,6 +130,11 @@ class _PromptInputState extends State<_PromptInput> {
               );
             },
           ),
+        ),
+        Recorder(
+          onStop: (path) {
+            context.read<RoomBloc>().add(VoicePrompt(path));
+          },
         ),
         BlocBuilder<RoomBloc, RoomState>(
           buildWhen: (previous, current) {

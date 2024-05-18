@@ -20,6 +20,7 @@ _$RoomStateImpl _$$RoomStateImplFromJson(Map<String, dynamic> json) =>
       answerStreaming: json['answerStreaming'] == null
           ? null
           : Chat.fromJson(json['answerStreaming'] as Map<String, dynamic>),
+      errorMessage: json['errorMessage'] as String?,
     );
 
 Map<String, dynamic> _$$RoomStateImplToJson(_$RoomStateImpl instance) =>
@@ -29,4 +30,5 @@ Map<String, dynamic> _$$RoomStateImplToJson(_$RoomStateImpl instance) =>
       'isLoadingAnswer': instance.isLoadingAnswer,
       'isGeneratingAnswer': instance.isGeneratingAnswer,
       'answerStreaming': instance.answerStreaming?.toJson(),
+      'errorMessage': instance.errorMessage,
     };

@@ -25,6 +25,7 @@ mixin _$RoomState {
   bool get isLoadingAnswer => throw _privateConstructorUsedError;
   bool get isGeneratingAnswer => throw _privateConstructorUsedError;
   Chat? get answerStreaming => throw _privateConstructorUsedError;
+  String? get errorMessage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +43,8 @@ abstract class $RoomStateCopyWith<$Res> {
       List<Chat> chats,
       bool isLoadingAnswer,
       bool isGeneratingAnswer,
-      Chat? answerStreaming});
+      Chat? answerStreaming,
+      String? errorMessage});
 
   $PilotCopyWith<$Res>? get user;
   $ChatCopyWith<$Res>? get answerStreaming;
@@ -66,6 +68,7 @@ class _$RoomStateCopyWithImpl<$Res, $Val extends RoomState>
     Object? isLoadingAnswer = null,
     Object? isGeneratingAnswer = null,
     Object? answerStreaming = freezed,
+    Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
       user: freezed == user
@@ -88,6 +91,10 @@ class _$RoomStateCopyWithImpl<$Res, $Val extends RoomState>
           ? _value.answerStreaming
           : answerStreaming // ignore: cast_nullable_to_non_nullable
               as Chat?,
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -129,7 +136,8 @@ abstract class _$$RoomStateImplCopyWith<$Res>
       List<Chat> chats,
       bool isLoadingAnswer,
       bool isGeneratingAnswer,
-      Chat? answerStreaming});
+      Chat? answerStreaming,
+      String? errorMessage});
 
   @override
   $PilotCopyWith<$Res>? get user;
@@ -153,6 +161,7 @@ class __$$RoomStateImplCopyWithImpl<$Res>
     Object? isLoadingAnswer = null,
     Object? isGeneratingAnswer = null,
     Object? answerStreaming = freezed,
+    Object? errorMessage = freezed,
   }) {
     return _then(_$RoomStateImpl(
       user: freezed == user
@@ -175,6 +184,10 @@ class __$$RoomStateImplCopyWithImpl<$Res>
           ? _value.answerStreaming
           : answerStreaming // ignore: cast_nullable_to_non_nullable
               as Chat?,
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -188,7 +201,8 @@ class _$RoomStateImpl extends _RoomState {
       final List<Chat> chats = const [],
       this.isLoadingAnswer = false,
       this.isGeneratingAnswer = false,
-      this.answerStreaming})
+      this.answerStreaming,
+      this.errorMessage})
       : _chats = chats,
         super._();
 
@@ -214,6 +228,8 @@ class _$RoomStateImpl extends _RoomState {
   final bool isGeneratingAnswer;
   @override
   final Chat? answerStreaming;
+  @override
+  final String? errorMessage;
 
   @override
   bool operator ==(Object other) {
@@ -227,7 +243,9 @@ class _$RoomStateImpl extends _RoomState {
             (identical(other.isGeneratingAnswer, isGeneratingAnswer) ||
                 other.isGeneratingAnswer == isGeneratingAnswer) &&
             (identical(other.answerStreaming, answerStreaming) ||
-                other.answerStreaming == answerStreaming));
+                other.answerStreaming == answerStreaming) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
   }
 
   @JsonKey(ignore: true)
@@ -238,7 +256,8 @@ class _$RoomStateImpl extends _RoomState {
       const DeepCollectionEquality().hash(_chats),
       isLoadingAnswer,
       isGeneratingAnswer,
-      answerStreaming);
+      answerStreaming,
+      errorMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -260,7 +279,8 @@ abstract class _RoomState extends RoomState {
       final List<Chat> chats,
       final bool isLoadingAnswer,
       final bool isGeneratingAnswer,
-      final Chat? answerStreaming}) = _$RoomStateImpl;
+      final Chat? answerStreaming,
+      final String? errorMessage}) = _$RoomStateImpl;
   const _RoomState._() : super._();
 
   factory _RoomState.fromJson(Map<String, dynamic> json) =
@@ -276,6 +296,8 @@ abstract class _RoomState extends RoomState {
   bool get isGeneratingAnswer;
   @override
   Chat? get answerStreaming;
+  @override
+  String? get errorMessage;
   @override
   @JsonKey(ignore: true)
   _$$RoomStateImplCopyWith<_$RoomStateImpl> get copyWith =>

@@ -9,6 +9,7 @@ class RoomState with _$RoomState {
     @Default(false) bool isLoadingAnswer,
     @Default(false) bool isGeneratingAnswer,
     Chat? answerStreaming,
+    String? errorMessage,
   }) = _RoomState;
 
   factory RoomState.fromJson(Map<String, dynamic> json) =>

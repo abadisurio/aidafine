@@ -99,7 +99,7 @@ class _BlocListener extends StatelessWidget {
             if (state.authState == AuthState.signedIn) {
               _appRouter
                 ..popUntilRoot()
-                ..replace(const RoomRoute());
+                ..replace(const MainRoute());
             } else {
               _appRouter
                 ..popUntilRoot()

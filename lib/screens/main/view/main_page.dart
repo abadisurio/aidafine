@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:aidafine/router/aidafine_router.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 @RoutePage()
 class MainPage extends StatelessWidget {
@@ -25,6 +22,7 @@ class _MainView extends StatelessWidget {
       routes: const [
         RoomRoute(),
         DashboardRoute(),
+        RoomRoute(),
       ],
       builder: (context, child, controller) {
         final tabsRouter = AutoTabsRouter.of(context);
@@ -37,79 +35,62 @@ class _MainView extends StatelessWidget {
           //   leading: const AutoLeadingButton(),
           // ),
           body: child,
-          // bottomNavigationBar: BottomNavigationBar(
-          //   showSelectedLabels: false,
-          //   // showUnselectedLabels: false,
-          //   currentIndex: tabsRouter.activeIndex,
-          //   onTap: tabsRouter.setActiveIndex,
-          //   items: const [
-          //     BottomNavigationBarItem(
-          //       label: 'Books',
-          //       icon: Icon(
-          //         Icons.home_outlined,
-          //       ),
-          //     ),
-          //     BottomNavigationBarItem(
-          //       label: 'Profile',
-          //       icon: Icon(
-          //         Icons.home_outlined,
-          //       ),
-          //     ),
-          //   ],
-          // ),
           bottomNavigationBar: Container(
-              height: 90,
-              color: Colors.black26,
-              padding: EdgeInsets.fromLTRB(
-                16,
-                16,
-                16,
-                MediaQuery.of(context).padding.bottom,
-              ),
-              child: ListView(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                children: [
-                  for (int i = 0; i < 2; i++)
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: Size.square(50),
-                          padding: EdgeInsets.symmetric(horizontal: 24),
-                          backgroundColor: Colors.black,
-                        ),
-                        child: AnimatedSize(
-                          alignment: Alignment.topLeft,
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeOutCirc,
-                          child: Row(
-                            children: [
-                              Icon([Icons.assistant, Icons.home][i]),
-                              if (tabsRouter.activeIndex != i)
-                                const SizedBox.shrink()
-                              else ...[
-                                const SizedBox(width: 8),
-                                Text(['Assistant', 'Home'][i]),
-                              ],
-                            ],
-                          ),
-                        ),
-                        onPressed: () => tabsRouter.setActiveIndex(i),
+            height: 90,
+            color: Colors.black26,
+            padding: EdgeInsets.fromLTRB(
+              8,
+              8,
+              8,
+              MediaQuery.of(context).padding.bottom + 8,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                for (int i = 0; i < 3; i++)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(40, 60),
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        backgroundColor: Colors.black,
                       ),
+                      child: AnimatedSize(
+                        alignment: Alignment.topLeft,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeOutCirc,
+                        child: Row(
+                          children: [
+                            Icon(
+                              [Icons.assistant, Icons.home, Icons.qr_code][i],
+                              size: 30,
+                            ),
+                            if (tabsRouter.activeIndex != i)
+                              const SizedBox.shrink()
+                            else ...[
+                              const SizedBox(width: 8),
+                              Text(['Assistant', 'Home', 'QRIS'][i]),
+                            ],
+                          ],
+                        ),
+                      ),
+                      onPressed: () => tabsRouter.setActiveIndex(i),
                     ),
-                  // const Spacer(),
-                  // ElevatedButton(
-                  //   style: ElevatedButton.styleFrom(
-                  //     minimumSize: Size.square(50),
-                  //     padding: EdgeInsets.symmetric(horizontal: 24),
-                  //     backgroundColor: Colors.black,
-                  //   ),
-                  //   child: const Text('QRIS'),
-                  //   onPressed: () {},
-                  // ),
-                ],
-              )),
+                  ),
+                // const Spacer(),
+                // ElevatedButton(
+                //   style: ElevatedButton.styleFrom(
+                //     minimumSize: Size.square(50),
+                //     padding: EdgeInsets.symmetric(horizontal: 24),
+                //     backgroundColor: Colors.black,
+                //   ),
+                //   child: const Text('QRIS'),
+                //   onPressed: () {},
+                // ),
+              ],
+            ),
+          ),
         );
       },
     );
