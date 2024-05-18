@@ -26,6 +26,7 @@ class BubbleAnswer extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       duration: const Duration(milliseconds: 300),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.all(16),
@@ -40,6 +41,7 @@ class BubbleAnswer extends StatelessWidget {
               data: chat.data,
               styleSheet:
                   MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
+                textAlign: WrapAlignment.start,
                 p: TextStyleTheme(context).bodyMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 28,
