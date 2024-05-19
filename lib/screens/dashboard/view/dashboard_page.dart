@@ -1,6 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-import 'dart:developer';
+import 'dart:io';
 
 import 'package:aidafine/app/themes/text_theme.dart';
 import 'package:auto_route/auto_route.dart';
@@ -61,7 +61,8 @@ class _DashboardBodyState extends State<_DashboardBody> {
       onRefresh: () async {
         await Future<void>.delayed(const Duration(seconds: 1));
       },
-      displacement: 140,
+      displacement: kToolbarHeight,
+      edgeOffset: Platform.isIOS ? 40 : 0,
       child: ListView(
         controller: _scrollController,
         physics: const AlwaysScrollableScrollPhysics(),
@@ -153,9 +154,7 @@ class _Shortcuts extends StatelessWidget {
             mainAxisCellCount: 1,
             child: ElevatedButton(
               style: buttonStyle,
-              onPressed: () {
-                log('tap');
-              },
+              onPressed: () {},
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -176,9 +175,7 @@ class _Shortcuts extends StatelessWidget {
             mainAxisCellCount: 1,
             child: ElevatedButton(
               style: buttonStyle,
-              onPressed: () {
-                log('tap');
-              },
+              onPressed: () {},
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -199,9 +196,7 @@ class _Shortcuts extends StatelessWidget {
             mainAxisCellCount: 1,
             child: ElevatedButton(
               style: buttonStyle,
-              onPressed: () {
-                log('tap');
-              },
+              onPressed: () {},
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -222,9 +217,7 @@ class _Shortcuts extends StatelessWidget {
             mainAxisCellCount: 1,
             child: ElevatedButton(
               style: buttonStyle,
-              onPressed: () {
-                log('tap');
-              },
+              onPressed: () {},
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -251,9 +244,7 @@ class _Shortcuts extends StatelessWidget {
                       : Colors.orange.shade700,
                 ),
               ),
-              onPressed: () {
-                log('tap');
-              },
+              onPressed: () {},
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -330,7 +321,7 @@ class _Shortcuts extends StatelessWidget {
     //           // minimumSize: const Size(60, 60),
     //         ),
     //         onPressed: () {
-    //           log('tap');
+    //
     //         },
     //         child: const Icon(Icons.ice_skating),
     //       ),

@@ -14,7 +14,8 @@ class AidafineRouter extends _$AidafineRouter {
 
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(
+        CustomRoute(
+          transitionsBuilder: TransitionsBuilders.noTransition,
           initial: true,
           guards: [AidafineGuard()],
           page: MainRoute.page,
@@ -32,6 +33,12 @@ class AidafineRouter extends _$AidafineRouter {
           // initial: true,
           guards: [AidafineGuard()],
           page: RoomRoute.page,
+        ),
+        CustomRoute(
+          // initial: true,
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+          guards: [AidafineGuard()],
+          page: QRISRoute.page,
         ),
         AutoRoute(
           page: SignInRoute.page,

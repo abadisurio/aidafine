@@ -1,6 +1,5 @@
 // ignore_for_file: comment_references
 
-import 'dart:developer';
 import 'package:aidafine/engine/engine.dart';
 import 'package:aidafine/screens/room/room.dart';
 import 'package:flutter/material.dart';
@@ -138,14 +137,14 @@ class _AnimatedChatListState extends State<AnimatedChatList> {
   //   }
   // }
 
-  void _onEndScroll(ScrollEndNotification event) {
-    log('event ${event.dragDetails}');
-    if (event.dragDetails != null && FocusScope.of(context).hasFocus) {
-      Future.delayed(const Duration(milliseconds: 300), () {
-        FocusScope.of(context).unfocus();
-      });
-    }
-  }
+  // void _onEndScroll(ScrollEndNotification event) {
+  //   log('event ${event.dragDetails}');
+  //   if (event.dragDetails != null && FocusScope.of(context).hasFocus) {
+  //     Future.delayed(const Duration(milliseconds: 300), () {
+  //       FocusScope.of(context).unfocus();
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +163,7 @@ class _AnimatedChatListState extends State<AnimatedChatList> {
           } else if (scrollNotification is ScrollUpdateNotification) {
             // _onUpdateScroll(scrollNotification);
           } else if (scrollNotification is ScrollEndNotification) {
-            _onEndScroll(scrollNotification);
+            // _onEndScroll(scrollNotification);
           }
           return true;
         },

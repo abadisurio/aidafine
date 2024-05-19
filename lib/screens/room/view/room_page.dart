@@ -34,7 +34,7 @@ class _RoomView extends StatelessWidget {
             );
         }
       },
-      child: const Scaffold(
+      child: Scaffold(
         // appBar: AppBar(
         //   title: const Text('Aidafine'),
         // ),
@@ -42,7 +42,10 @@ class _RoomView extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           children: [
             // const _ListBubble(),
-            AnimatedChatList(),
+            GestureDetector(
+              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+              child: const AnimatedChatList(),
+            ),
             // Padding(
             //   padding:  EdgeInsets.only(bottom: 100),
             //   child: BubbleCarousel(
@@ -51,7 +54,7 @@ class _RoomView extends StatelessWidget {
             //     ],
             //   ),
             // ),
-            SafeArea(
+            const SafeArea(
               child: Padding(
                 padding: EdgeInsets.all(8),
                 child: _PromptInput(),
@@ -105,8 +108,7 @@ class _PromptInputState extends State<_PromptInput> {
             builder: (context, state) {
               return TextFormField(
                 // onTapOutside: (event) {
-                // log('event $event');
-                // FocusManager.instance.primaryFocus?.unfocus();
+                //   FocusManager.instance.primaryFocus?.unfocus();
                 // },
                 focusNode: _inputFieldNode,
                 maxLines: null,

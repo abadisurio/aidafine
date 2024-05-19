@@ -27,6 +27,12 @@ abstract class _$AidafineRouter extends RootStackRouter {
         child: const MainPage(),
       );
     },
+    QRISRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const QRISPage(),
+      );
+    },
     RoomRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -66,6 +72,20 @@ class MainRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MainRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [QRISPage]
+class QRISRoute extends PageRouteInfo<void> {
+  const QRISRoute({List<PageRouteInfo>? children})
+      : super(
+          QRISRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'QRISRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

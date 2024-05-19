@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:aidafine/engine/engine.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -13,8 +11,8 @@ class FsUserApi implements UserDAO {
 
   @override
   Future<void> create({required Pilot user}) {
-    final doc = _firestore.doc(FirestorePaths.pilots);
-    log('doc ${doc.id}');
+    // final doc = _firestore.doc(FirestorePaths.pilots);
+
     throw UnimplementedError();
   }
 
@@ -36,7 +34,7 @@ class FsUserApi implements UserDAO {
       throw Exception('User not found');
     }
     final data = snapshot.docs.first.data();
-    log('data $data');
+
     return Pilot.fromJson({'id': snapshot.docs.first.id, ...data});
   }
   // abadisurio

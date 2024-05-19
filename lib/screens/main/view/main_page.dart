@@ -1,6 +1,16 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:aidafine/router/aidafine_router.dart';
+import 'package:aidafine/screens/screens.dart';
 import 'package:auto_route/auto_route.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+part './widgets/bottom_navbar.dart';
+part './widgets/qris_card.dart';
+part './widgets/overlay.dart';
 
 @RoutePage()
 class MainPage extends StatelessWidget {
@@ -17,82 +27,92 @@ class _MainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AutoTabsRouter.pageView(
-      physics: const BouncingScrollPhysics(),
-      routes: const [
-        RoomRoute(),
-        DashboardRoute(),
-        RoomRoute(),
-      ],
-      builder: (context, child, controller) {
-        final tabsRouter = AutoTabsRouter.of(context);
-        // log('tabsRouter ${tabsRouter.currentChild?.name}');
+    final pageController = PageController();
+    return Scaffold(
+      body: Stack(
+        children: [
+          _PageView(controller: pageController),
+          _Overlay(controller: pageController),
+          _QRISCard(controller: pageController),
+        ],
+      ),
+      bottomNavigationBar: _BottomNavbar(controller: pageController),
+    );
+  }
+}
 
-        // final tabsRouter = AutoTabsRouter.of(context);
-        return Scaffold(
-          // appBar: AppBar(
-          //   title: Text(context.topRoute.name),
-          //   leading: const AutoLeadingButton(),
-          // ),
-          body: child,
-          bottomNavigationBar: Container(
-            height: 90,
-            color: Colors.black26,
-            padding: EdgeInsets.fromLTRB(
-              8,
-              8,
-              8,
-              MediaQuery.of(context).padding.bottom + 8,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                for (int i = 0; i < 3; i++)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(40, 60),
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        backgroundColor: Colors.black,
-                      ),
-                      child: AnimatedSize(
-                        alignment: Alignment.topLeft,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeOutCirc,
-                        child: Row(
-                          children: [
-                            Icon(
-                              [Icons.assistant, Icons.home, Icons.qr_code][i],
-                              size: 30,
-                            ),
-                            if (tabsRouter.activeIndex != i)
-                              const SizedBox.shrink()
-                            else ...[
-                              const SizedBox(width: 8),
-                              Text(['Assistant', 'Home', 'QRIS'][i]),
-                            ],
-                          ],
-                        ),
-                      ),
-                      onPressed: () => tabsRouter.setActiveIndex(i),
-                    ),
-                  ),
-                // const Spacer(),
-                // ElevatedButton(
-                //   style: ElevatedButton.styleFrom(
-                //     minimumSize: Size.square(50),
-                //     padding: EdgeInsets.symmetric(horizontal: 24),
-                //     backgroundColor: Colors.black,
-                //   ),
-                //   child: const Text('QRIS'),
-                //   onPressed: () {},
-                // ),
-              ],
+class _PageView extends StatefulWidget {
+  const _PageView({required this.controller});
+
+  final PageController controller;
+
+  @override
+  State<_PageView> createState() => _PageViewState();
+}
+
+class _PageViewState extends State<_PageView> {
+  @override
+  Widget build(BuildContext context) {
+    return PageView(
+      controller: widget.controller,
+      physics: const BouncingScrollPhysics(),
+      children: const [
+        DashboardPage(),
+        RoomPage(),
+      ],
+    );
+  }
+}
+
+class QRISCardWidget extends StatelessWidget {
+  const QRISCardWidget({required this.size, super.key});
+
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Hero(
+      tag: _qrisCardKey,
+      child: ClipPath(
+        clipper: const ShapeBorderClipper(
+          shape: ContinuousRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(50),
             ),
           ),
-        );
-      },
+        ),
+        child: LayoutBuilder(
+          builder: (context, constraint) {
+            return AnimatedContainer(
+              duration: Durations.long4,
+              curve: Curves.easeOutCirc,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.red.shade800,
+              ),
+              height: _QRISCard.height,
+              width: _QRISCard.width,
+              child: Material(
+                type: MaterialType.transparency,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.qr_code, size: size),
+                    Text(
+                      'QRIS',
+                      style: TextStyle(
+                        fontSize: size / 2.5,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }
