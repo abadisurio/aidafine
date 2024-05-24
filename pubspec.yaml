@@ -12,6 +12,7 @@ dependencies:
   bloc: ^8.1.2
   cached_network_image: ^3.3.1
   cloud_firestore: ^4.17.2
+  emvqrcode: ^1.0.5
   firebase_auth: ^4.19.4
   firebase_core: ^2.30.1
   firebase_remote_config: ^4.4.4

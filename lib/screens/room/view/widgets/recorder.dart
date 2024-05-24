@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:math' as math;
 
 import 'package:aidafine/screens/room/view/widgets/platform/audio_recorder_platform.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,8 @@ class _RecorderState extends State<Recorder> with AudioRecorderMixin {
   late final AudioRecorder _audioRecorder;
   StreamSubscription<RecordState>? _recordSub;
   RecordState _recordState = RecordState.stop;
-  StreamSubscription<Amplitude>? _amplitudeSub;
+  Widget? _decibelWidget;
+
   // Amplitude? _amplitude;
 
   @override
@@ -27,14 +29,11 @@ class _RecorderState extends State<Recorder> with AudioRecorderMixin {
     _audioRecorder = AudioRecorder();
 
     _recordSub = _audioRecorder.onStateChanged().listen(_updateRecordState);
-
-    // _amplitudeSub = _audioRecorder
-    //     .onAmplitudeChanged(const Duration(milliseconds: 300))
-    //     .listen((amp) {
-    //   log('amp $amp');
-    //   setState(() => _amplitude = amp);
-    // });
-
+    setState(() {
+      _decibelWidget = _DecibleAnimation(
+        recorder: _audioRecorder,
+      );
+    });
     super.initState();
   }
 
@@ -147,7 +146,7 @@ class _RecorderState extends State<Recorder> with AudioRecorderMixin {
   void dispose() {
     _timer?.cancel();
     _recordSub?.cancel();
-    _amplitudeSub?.cancel();
+    // _amplitudeSub?.cancel();
     _audioRecorder.dispose();
     super.dispose();
   }
@@ -180,18 +179,24 @@ class _RecorderState extends State<Recorder> with AudioRecorderMixin {
       child: Material(
         // color: color,
         child: InkWell(
-          child: SizedBox(
-            width: 56,
-            height: 56,
-            child: AnimatedSwitcher(
-              transitionBuilder: (child, animation) {
-                return ScaleTransition(scale: animation, child: child);
-              },
-              switchInCurve: Curves.easeOut,
-              switchOutCurve: Curves.easeOut,
-              duration: const Duration(milliseconds: 200),
-              child: icon,
-            ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (_decibelWidget != null) _decibelWidget!,
+              SizedBox(
+                width: 56,
+                height: 56,
+                child: AnimatedSwitcher(
+                  transitionBuilder: (child, animation) {
+                    return ScaleTransition(scale: animation, child: child);
+                  },
+                  switchInCurve: Curves.easeOut,
+                  switchOutCurve: Curves.easeOut,
+                  duration: const Duration(milliseconds: 200),
+                  child: icon,
+                ),
+              ),
+            ],
           ),
           onTap: () {
             (_recordState != RecordState.stop) ? _stop() : _start();
@@ -264,5 +269,51 @@ class _RecorderState extends State<Recorder> with AudioRecorderMixin {
     _timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
       setState(() => _recordDuration++);
     });
+  }
+}
+
+class _DecibleAnimation extends StatefulWidget {
+  const _DecibleAnimation({required this.recorder});
+
+  final AudioRecorder recorder;
+
+  @override
+  State<_DecibleAnimation> createState() => _DecibleAnimationState();
+}
+
+class _DecibleAnimationState extends State<_DecibleAnimation> {
+  StreamSubscription<Amplitude>? _amplitudeSub;
+  double _decibel = 0;
+
+  @override
+  void initState() {
+    _amplitudeSub = widget.recorder
+        .onAmplitudeChanged(const Duration(milliseconds: 20))
+        .listen((amp) {
+      final db = 3.7 - 2 * (math.log(-amp.current) / math.ln10);
+      setState(() => _decibel = db * 10);
+    });
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: AnimatedContainer(
+        duration: Durations.short1,
+        curve: Curves.easeIn,
+        height: _decibel,
+        width: _decibel,
+        color: Colors.red,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _amplitudeSub?.cancel();
+    super.dispose();
   }
 }

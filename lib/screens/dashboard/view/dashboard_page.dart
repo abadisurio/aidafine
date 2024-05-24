@@ -1,5 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 
+import 'dart:async';
 import 'dart:io';
 
 import 'package:aidafine/app/themes/text_theme.dart';
@@ -7,6 +8,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -59,6 +61,7 @@ class _DashboardBodyState extends State<_DashboardBody> {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async {
+        unawaited(HapticFeedback.mediumImpact());
         await Future<void>.delayed(const Duration(seconds: 1));
       },
       displacement: kToolbarHeight,

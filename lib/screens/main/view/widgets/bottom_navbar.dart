@@ -17,10 +17,12 @@ class _BottomNavbarState extends State<_BottomNavbar> {
     widget.controller.addListener(() {
       final newPage = ((widget.controller.page ?? 0) + 0.5).toInt();
       if (newPage != _page) {
-        log('cekkk');
         setState(() {
           _page = newPage;
         });
+        if (_page != 1) {
+          FocusManager.instance.primaryFocus?.unfocus();
+        }
       }
     });
     super.initState();
@@ -39,32 +41,37 @@ class _BottomNavbarState extends State<_BottomNavbar> {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(40, 60),
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                backgroundColor: Colors.black,
-              ),
-              child: const Icon(Icons.qr_code, size: 30),
-              onPressed: () {
-                // context.router.push(const QRISRoute());
-                widget.controller.animateTo(
-                  -65,
-                  duration: Durations.short4,
-                  curve: Curves.easeInOut,
-                );
-              },
-            ),
-          ),
-          for (int i = 0; i < 2; i++)
-            Padding(
-              padding: EdgeInsets.only(right: i == 1 ? 0 : 8),
+          SizedBox(
+            height: 50,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(40, 60),
+                  // minimumSize: const Size(40, 60),
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  backgroundColor: Colors.black,
+                ),
+                child: const Icon(Icons.qr_code, size: 30),
+                onPressed: () {
+                  // context.router.push(const QRISRoute());
+                  widget.controller.animateTo(
+                    -65,
+                    duration: Durations.short4,
+                    curve: Curves.easeInOut,
+                  );
+                },
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 50,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  // minimumSize: const Size(40, 60),
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   backgroundColor: Colors.black,
                 ),
@@ -74,31 +81,67 @@ class _BottomNavbarState extends State<_BottomNavbar> {
                   curve: Curves.easeInOut,
                   child: Row(
                     children: [
-                      Icon(
-                        [Icons.home, Icons.assistant][i],
-                        size: 30,
-                      ),
-                      if (_page != i)
+                      const Icon(Icons.home, size: 30),
+                      if (_page != 0)
                         const SizedBox.shrink()
                       else ...[
                         const SizedBox(width: 8),
-                        Text(['Home', 'Assistant'][i]),
+                        const Text('Home'),
                       ],
                     ],
                   ),
                 ),
                 onPressed: () {
-                  // setState(() {
-                  //   _page = i;
-                  // });
                   widget.controller.animateToPage(
-                    i,
+                    0,
                     duration: Durations.medium2,
                     curve: Curves.easeInOut,
                   );
                 },
               ),
             ),
+          ),
+          SizedBox(
+            height: 50,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: GeminiVoiceButton(
+                onStop: (path) {
+                  context.read<GeminiVoiceBloc>().add(VoicePrompt(path));
+                },
+                button: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    // minimumSize: const Size(40, 60),
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    backgroundColor: Colors.black,
+                  ),
+                  child: AnimatedSize(
+                    alignment: Alignment.topLeft,
+                    duration: Durations.medium2,
+                    curve: Curves.easeInOut,
+                    child: Row(
+                      children: [
+                        const Icon(Icons.assistant, size: 30),
+                        if (_page != 1)
+                          const SizedBox.shrink()
+                        else ...[
+                          const SizedBox(width: 8),
+                          const Text('Assistant'),
+                        ],
+                      ],
+                    ),
+                  ),
+                  onPressed: () {
+                    widget.controller.animateToPage(
+                      1,
+                      duration: Durations.medium2,
+                      curve: Curves.easeInOut,
+                    );
+                  },
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

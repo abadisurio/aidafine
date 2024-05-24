@@ -41,7 +41,7 @@ class _QRISCardState extends State<_QRISCard> {
 
         _isOpeningPage = true;
         Future(() async {
-          await context.router.push(const QRISRoute());
+          await context.router.push(QRISRoute());
           await widget.controller.animateTo(
             0,
             duration: const Duration(milliseconds: 250),

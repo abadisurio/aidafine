@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:aidafine/router/auth_guard.dart';
 import 'package:aidafine/screens/screens.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 
 part 'aidafine_router.gr.dart';
 
@@ -39,6 +40,7 @@ class AidafineRouter extends _$AidafineRouter {
           transitionsBuilder: TransitionsBuilders.fadeIn,
           guards: [AidafineGuard()],
           page: QRISRoute.page,
+          path: '/pay-qris',
         ),
         AutoRoute(
           page: SignInRoute.page,

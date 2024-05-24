@@ -63,6 +63,9 @@ class _BlocProvider extends StatelessWidget {
           create: (_) => AppBloc(),
         ),
         BlocProvider(
+          create: (_) => GeminiVoiceBloc(),
+        ),
+        BlocProvider(
           create: (_) {
             final bloc = UserBloc(
               firebaseFirestore: _firestore,
@@ -104,6 +107,22 @@ class _BlocListener extends StatelessWidget {
               _appRouter
                 ..popUntilRoot()
                 ..replace(const SignInRoute());
+            }
+          },
+        ),
+        BlocListener<GeminiVoiceBloc, GeminiVoiceState>(
+          listenWhen: (prev, curr) {
+            return prev.isGeneratingAnswer && !curr.isGeneratingAnswer;
+          },
+          listener: (context, state) {
+            if (state.pushNamedRoute != null) {
+              switch (state.pushNamedRoute!) {
+                case QRISRoute.name:
+                  _appRouter.push(
+                    QRISRoute(amount: state.data as int?),
+                  );
+                default:
+              }
             }
           },
         ),

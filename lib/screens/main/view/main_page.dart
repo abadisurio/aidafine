@@ -1,12 +1,15 @@
 import 'dart:async';
-import 'dart:developer';
 
+import 'package:aidafine/app/themes/text_theme.dart';
 import 'package:aidafine/router/aidafine_router.dart';
-import 'package:aidafine/screens/screens.dart';
+import 'package:aidafine/screens/screens.dart' hide VoicePrompt;
+import 'package:aidafine/shared/blocs/gemini_bloc/gemini_bloc.dart';
+import 'package:aidafine/shared/widgets/widgets.dart';
 import 'package:auto_route/auto_route.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part './widgets/bottom_navbar.dart';
 part './widgets/qris_card.dart';
@@ -34,6 +37,47 @@ class _MainView extends StatelessWidget {
           _PageView(controller: pageController),
           _Overlay(controller: pageController),
           _QRISCard(controller: pageController),
+          BlocConsumer<GeminiVoiceBloc, GeminiVoiceState>(
+            listenWhen: (prev, curr) {
+              return curr.errorMessage != null;
+            },
+            listener: (context, state) {
+              if (state.errorMessage != null) {
+                ScaffoldMessenger.of(context)
+                  ..clearSnackBars()
+                  ..showSnackBar(
+                    SnackBar(content: Text(state.errorMessage!)),
+                  );
+              }
+            },
+            buildWhen: (prev, curr) {
+              return prev.isGeneratingAnswer != curr.isGeneratingAnswer;
+            },
+            builder: (context, state) {
+              if (state.isGeneratingAnswer) {
+                return ColoredBox(
+                  color: Colors.black87,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox.square(
+                          dimension: 120,
+                          child: CircularProgressIndicator(),
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          'Tunggu sebentar',
+                          style: TextStyleTheme(context).titleMedium,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }
+              return const SizedBox.shrink();
+            },
+          ),
         ],
       ),
       bottomNavigationBar: _BottomNavbar(controller: pageController),
