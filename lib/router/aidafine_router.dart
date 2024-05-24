@@ -42,6 +42,22 @@ class AidafineRouter extends _$AidafineRouter {
           page: QRISRoute.page,
           path: '/pay-qris',
         ),
+        CustomRoute(
+          // initial: true,
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+          guards: [AidafineGuard()],
+          page: GenieRoute.page,
+          path: '/genie',
+          opaque: false,
+        ),
+        CustomRoute(
+          // initial: true,
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+          guards: [AidafineGuard()],
+          opaque: false,
+          page: GenieResultRoute.page,
+          path: '/genie-result',
+        ),
         AutoRoute(
           page: SignInRoute.page,
         ),

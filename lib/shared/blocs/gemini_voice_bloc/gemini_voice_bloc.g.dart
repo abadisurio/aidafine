@@ -1,13 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'gemini_bloc.dart';
+part of 'gemini_voice_bloc.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GeminiStateImpl _$$GeminiStateImplFromJson(Map<String, dynamic> json) =>
-    _$GeminiStateImpl(
+_$GeminiVoiceStateImpl _$$GeminiVoiceStateImplFromJson(
+        Map<String, dynamic> json) =>
+    _$GeminiVoiceStateImpl(
       pushNamedRoute: json['pushNamedRoute'] as String?,
       data: json['data'],
       dataMap: json['dataMap'] as Map<String, dynamic>?,
@@ -16,7 +17,8 @@ _$GeminiStateImpl _$$GeminiStateImplFromJson(Map<String, dynamic> json) =>
       errorMessage: json['errorMessage'] as String?,
     );
 
-Map<String, dynamic> _$$GeminiStateImplToJson(_$GeminiStateImpl instance) =>
+Map<String, dynamic> _$$GeminiVoiceStateImplToJson(
+        _$GeminiVoiceStateImpl instance) =>
     <String, dynamic>{
       'pushNamedRoute': instance.pushNamedRoute,
       'data': instance.data,

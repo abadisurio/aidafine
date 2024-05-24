@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'gemini_bloc.dart';
+part of 'gemini_voice_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-GeminiState _$GeminiStateFromJson(Map<String, dynamic> json) {
-  return _GeminiState.fromJson(json);
+GeminiVoiceState _$GeminiVoiceStateFromJson(Map<String, dynamic> json) {
+  return _GeminiVoiceState.fromJson(json);
 }
 
 /// @nodoc
-mixin _$GeminiState {
+mixin _$GeminiVoiceState {
   String? get pushNamedRoute => throw _privateConstructorUsedError;
   Object? get data => throw _privateConstructorUsedError;
   Map<String, Object?>? get dataMap => throw _privateConstructorUsedError;
@@ -29,15 +29,15 @@ mixin _$GeminiState {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GeminiStateCopyWith<GeminiState> get copyWith =>
+  $GeminiVoiceStateCopyWith<GeminiVoiceState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GeminiStateCopyWith<$Res> {
-  factory $GeminiStateCopyWith(
-          GeminiState value, $Res Function(GeminiState) then) =
-      _$GeminiStateCopyWithImpl<$Res, GeminiState>;
+abstract class $GeminiVoiceStateCopyWith<$Res> {
+  factory $GeminiVoiceStateCopyWith(
+          GeminiVoiceState value, $Res Function(GeminiVoiceState) then) =
+      _$GeminiVoiceStateCopyWithImpl<$Res, GeminiVoiceState>;
   @useResult
   $Res call(
       {String? pushNamedRoute,
@@ -49,9 +49,9 @@ abstract class $GeminiStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GeminiStateCopyWithImpl<$Res, $Val extends GeminiState>
-    implements $GeminiStateCopyWith<$Res> {
-  _$GeminiStateCopyWithImpl(this._value, this._then);
+class _$GeminiVoiceStateCopyWithImpl<$Res, $Val extends GeminiVoiceState>
+    implements $GeminiVoiceStateCopyWith<$Res> {
+  _$GeminiVoiceStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -95,11 +95,11 @@ class _$GeminiStateCopyWithImpl<$Res, $Val extends GeminiState>
 }
 
 /// @nodoc
-abstract class _$$GeminiStateImplCopyWith<$Res>
-    implements $GeminiStateCopyWith<$Res> {
-  factory _$$GeminiStateImplCopyWith(
-          _$GeminiStateImpl value, $Res Function(_$GeminiStateImpl) then) =
-      __$$GeminiStateImplCopyWithImpl<$Res>;
+abstract class _$$GeminiVoiceStateImplCopyWith<$Res>
+    implements $GeminiVoiceStateCopyWith<$Res> {
+  factory _$$GeminiVoiceStateImplCopyWith(_$GeminiVoiceStateImpl value,
+          $Res Function(_$GeminiVoiceStateImpl) then) =
+      __$$GeminiVoiceStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -112,11 +112,11 @@ abstract class _$$GeminiStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$GeminiStateImplCopyWithImpl<$Res>
-    extends _$GeminiStateCopyWithImpl<$Res, _$GeminiStateImpl>
-    implements _$$GeminiStateImplCopyWith<$Res> {
-  __$$GeminiStateImplCopyWithImpl(
-      _$GeminiStateImpl _value, $Res Function(_$GeminiStateImpl) _then)
+class __$$GeminiVoiceStateImplCopyWithImpl<$Res>
+    extends _$GeminiVoiceStateCopyWithImpl<$Res, _$GeminiVoiceStateImpl>
+    implements _$$GeminiVoiceStateImplCopyWith<$Res> {
+  __$$GeminiVoiceStateImplCopyWithImpl(_$GeminiVoiceStateImpl _value,
+      $Res Function(_$GeminiVoiceStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -129,7 +129,7 @@ class __$$GeminiStateImplCopyWithImpl<$Res>
     Object? isGeneratingAnswer = null,
     Object? errorMessage = freezed,
   }) {
-    return _then(_$GeminiStateImpl(
+    return _then(_$GeminiVoiceStateImpl(
       pushNamedRoute: freezed == pushNamedRoute
           ? _value.pushNamedRoute
           : pushNamedRoute // ignore: cast_nullable_to_non_nullable
@@ -158,8 +158,8 @@ class __$$GeminiStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$GeminiStateImpl extends _GeminiState {
-  const _$GeminiStateImpl(
+class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
+  const _$GeminiVoiceStateImpl(
       {this.pushNamedRoute,
       this.data,
       final Map<String, Object?>? dataMap,
@@ -169,8 +169,8 @@ class _$GeminiStateImpl extends _GeminiState {
       : _dataMap = dataMap,
         super._();
 
-  factory _$GeminiStateImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GeminiStateImplFromJson(json);
+  factory _$GeminiVoiceStateImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GeminiVoiceStateImplFromJson(json);
 
   @override
   final String? pushNamedRoute;
@@ -197,14 +197,14 @@ class _$GeminiStateImpl extends _GeminiState {
 
   @override
   String toString() {
-    return 'GeminiState(pushNamedRoute: $pushNamedRoute, data: $data, dataMap: $dataMap, isLoadingAnswer: $isLoadingAnswer, isGeneratingAnswer: $isGeneratingAnswer, errorMessage: $errorMessage)';
+    return 'GeminiVoiceState(pushNamedRoute: $pushNamedRoute, data: $data, dataMap: $dataMap, isLoadingAnswer: $isLoadingAnswer, isGeneratingAnswer: $isGeneratingAnswer, errorMessage: $errorMessage)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GeminiStateImpl &&
+            other is _$GeminiVoiceStateImpl &&
             (identical(other.pushNamedRoute, pushNamedRoute) ||
                 other.pushNamedRoute == pushNamedRoute) &&
             const DeepCollectionEquality().equals(other.data, data) &&
@@ -231,29 +231,30 @@ class _$GeminiStateImpl extends _GeminiState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$GeminiStateImplCopyWith<_$GeminiStateImpl> get copyWith =>
-      __$$GeminiStateImplCopyWithImpl<_$GeminiStateImpl>(this, _$identity);
+  _$$GeminiVoiceStateImplCopyWith<_$GeminiVoiceStateImpl> get copyWith =>
+      __$$GeminiVoiceStateImplCopyWithImpl<_$GeminiVoiceStateImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$GeminiStateImplToJson(
+    return _$$GeminiVoiceStateImplToJson(
       this,
     );
   }
 }
 
-abstract class _GeminiState extends GeminiState {
-  const factory _GeminiState(
+abstract class _GeminiVoiceState extends GeminiVoiceState {
+  const factory _GeminiVoiceState(
       {final String? pushNamedRoute,
       final Object? data,
       final Map<String, Object?>? dataMap,
       final bool isLoadingAnswer,
       final bool isGeneratingAnswer,
-      final String? errorMessage}) = _$GeminiStateImpl;
-  const _GeminiState._() : super._();
+      final String? errorMessage}) = _$GeminiVoiceStateImpl;
+  const _GeminiVoiceState._() : super._();
 
-  factory _GeminiState.fromJson(Map<String, dynamic> json) =
-      _$GeminiStateImpl.fromJson;
+  factory _GeminiVoiceState.fromJson(Map<String, dynamic> json) =
+      _$GeminiVoiceStateImpl.fromJson;
 
   @override
   String? get pushNamedRoute;
@@ -269,6 +270,6 @@ abstract class _GeminiState extends GeminiState {
   String? get errorMessage;
   @override
   @JsonKey(ignore: true)
-  _$$GeminiStateImplCopyWith<_$GeminiStateImpl> get copyWith =>
+  _$$GeminiVoiceStateImplCopyWith<_$GeminiVoiceStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

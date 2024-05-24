@@ -21,6 +21,22 @@ abstract class _$AidafineRouter extends RootStackRouter {
         child: const DashboardPage(),
       );
     },
+    GenieRoute.name: (routeData) {
+      return AutoRoutePage<String?>(
+        routeData: routeData,
+        child: const GeniePage(),
+      );
+    },
+    GenieResultRoute.name: (routeData) {
+      final args = routeData.argsAs<GenieResultRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: GenieResultPage(
+          prompt: args.prompt,
+          key: args.key,
+        ),
+      );
+    },
     MainRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -65,6 +81,58 @@ class DashboardRoute extends PageRouteInfo<void> {
   static const String name = 'DashboardRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [GeniePage]
+class GenieRoute extends PageRouteInfo<void> {
+  const GenieRoute({List<PageRouteInfo>? children})
+      : super(
+          GenieRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'GenieRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [GenieResultPage]
+class GenieResultRoute extends PageRouteInfo<GenieResultRouteArgs> {
+  GenieResultRoute({
+    required String prompt,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          GenieResultRoute.name,
+          args: GenieResultRouteArgs(
+            prompt: prompt,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'GenieResultRoute';
+
+  static const PageInfo<GenieResultRouteArgs> page =
+      PageInfo<GenieResultRouteArgs>(name);
+}
+
+class GenieResultRouteArgs {
+  const GenieResultRouteArgs({
+    required this.prompt,
+    this.key,
+  });
+
+  final String prompt;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'GenieResultRouteArgs{prompt: $prompt, key: $key}';
+  }
 }
 
 /// generated route for

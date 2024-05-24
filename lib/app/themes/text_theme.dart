@@ -21,7 +21,7 @@ class TextStyleTheme {
         fontWeight: FontWeight.w700,
       );
   TextStyle? get bodyLarge => _textTheme.bodyLarge;
-  TextStyle? get bodyMedium => _textTheme.bodyMedium;
+  TextStyle? get bodyMedium => _textTheme.bodyMedium?.copyWith(fontSize: 24);
   TextStyle? get bodySmall => _textTheme.bodySmall;
   TextStyle? get labelLarge => _textTheme.labelLarge;
   TextStyle? get labelMedium => _textTheme.labelMedium;

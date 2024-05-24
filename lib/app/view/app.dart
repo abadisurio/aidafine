@@ -63,6 +63,9 @@ class _BlocProvider extends StatelessWidget {
           create: (_) => AppBloc(),
         ),
         BlocProvider(
+          create: (_) => GeminiBloc(),
+        ),
+        BlocProvider(
           create: (_) => GeminiVoiceBloc(),
         ),
         BlocProvider(
@@ -111,6 +114,22 @@ class _BlocListener extends StatelessWidget {
           },
         ),
         BlocListener<GeminiVoiceBloc, GeminiVoiceState>(
+          listenWhen: (prev, curr) {
+            return prev.isGeneratingAnswer && !curr.isGeneratingAnswer;
+          },
+          listener: (context, state) {
+            if (state.pushNamedRoute != null) {
+              switch (state.pushNamedRoute!) {
+                case QRISRoute.name:
+                  _appRouter.push(
+                    QRISRoute(amount: int.tryParse('${state.data}')),
+                  );
+                default:
+              }
+            }
+          },
+        ),
+        BlocListener<GeminiBloc, GeminiState>(
           listenWhen: (prev, curr) {
             return prev.isGeneratingAnswer && !curr.isGeneratingAnswer;
           },

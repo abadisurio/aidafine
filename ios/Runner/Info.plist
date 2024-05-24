@@ -67,5 +67,7 @@
 	<true/>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Some message to describe why you need this permission</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Some voice need to be detected as a text</string>
 </dict>
 </plist>

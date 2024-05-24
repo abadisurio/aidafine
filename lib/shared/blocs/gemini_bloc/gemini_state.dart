@@ -1,19 +1,19 @@
 part of 'gemini_bloc.dart';
 
 @freezed
-class GeminiVoiceState with _$GeminiVoiceState {
+class GeminiState with _$GeminiState {
   @JsonSerializable(explicitToJson: true)
-  const factory GeminiVoiceState({
+  const factory GeminiState({
     String? pushNamedRoute,
     Object? data,
     Map<String, Object?>? dataMap,
     @Default(false) bool isLoadingAnswer,
     @Default(false) bool isGeneratingAnswer,
     String? errorMessage,
-  }) = _GeminiVoiceState;
+  }) = _GeminiState;
 
-  factory GeminiVoiceState.fromJson(Map<String, dynamic> json) =>
-      _$GeminiVoiceStateFromJson(json);
+  factory GeminiState.fromJson(Map<String, dynamic> json) =>
+      _$GeminiStateFromJson(json);
 
-  const GeminiVoiceState._();
+  const GeminiState._();
 }

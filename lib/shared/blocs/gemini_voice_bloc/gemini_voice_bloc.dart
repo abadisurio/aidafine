@@ -1,20 +1,21 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:aidafine/engine/engine.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
-part 'gemini_event.dart';
-part 'gemini_state.dart';
-part 'gemini_bloc.freezed.dart';
-part 'gemini_bloc.g.dart';
+part 'gemini_voice_event.dart';
+part 'gemini_voice_state.dart';
+part 'gemini_voice_bloc.freezed.dart';
+part 'gemini_voice_bloc.g.dart';
 
-class GeminiBloc extends Bloc<GeminiEvent, GeminiState> {
-  GeminiBloc() : super(const GeminiState()) {
-    on<Prompt>(_onPrompt);
+class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
+  GeminiVoiceBloc() : super(const GeminiVoiceState()) {
+    on<VoicePrompt>(_onVoicePrompt);
     _initialize();
   }
 
@@ -61,9 +62,9 @@ They're likely using bahasa indonesia.
     }
   }
 
-  Future<void> _onPrompt(
-    Prompt event,
-    Emitter<GeminiState> emit,
+  Future<void> _onVoicePrompt(
+    VoicePrompt event,
+    Emitter<GeminiVoiceState> emit,
   ) async {
     if (state.isLoadingAnswer) return;
 
@@ -78,9 +79,11 @@ They're likely using bahasa indonesia.
     Object? data;
     Map<String, Object?>? dataMap;
 
+    final file = File(event.path);
+    final fileBytes = await file.readAsBytes();
     try {
       final response =
-          await _chatSession.sendMessage(Content.text(event.prompt));
+          await _chatSession.sendMessage(Content.data('audio/m4a', fileBytes));
 
       final functionCalls = response.functionCalls.toList();
 
@@ -105,7 +108,6 @@ They're likely using bahasa indonesia.
           data = result['amount'];
         }
       }
-
       emit(
         state.copyWith(
           isLoadingAnswer: false,
@@ -141,13 +143,13 @@ Future<Map<String, Object?>> _payWithQRIS(
 
 final _payWithQRISTool = FunctionDeclaration(
   'payWithQRIS',
-  'Check if a user wants to pay with or without mentioned amount',
+  'Check if a user wants to pay with QRIS with or without mentioned amount',
   Schema(
     SchemaType.object,
     properties: {
       'isPayingWithQRIS': Schema(
         SchemaType.boolean,
-        description: '''Is the user wants to pay?''',
+        description: '''Is the user wants to pay with QRIS?''',
       ),
       'amount': Schema(
         SchemaType.number,

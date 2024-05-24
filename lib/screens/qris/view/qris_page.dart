@@ -1,9 +1,8 @@
-import 'dart:developer';
+// ignore_for_file: lines_longer_than_80_chars
 
 import 'package:aidafine/app/themes/text_theme.dart';
 import 'package:aidafine/screens/main/main.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:emvqrcode/emvqrcode.dart';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -34,10 +33,10 @@ class _QRISViewState extends State<_QRISView> {
   String? amount;
   @override
   void initState() {
-    const emvqr =
-        '''00020101021240530013ID.CO.BCA.WWW0118936000141577135652021057713565255204482953033605405500005802ID5918ABADI SURYO SETIYO6013Jakarta Pusat61051031062470804DMCT9935000200012557713565250017163042364086304655C''';
-    final emvdecode = EMVMPM.decode(emvqr);
-    log('emvdecode ${emvdecode.toJson()}');
+    // const emvqr =
+    //     '''00020101021240530013ID.CO.BCA.WWW0118936000141577135652021057713565255204482953033605405500005802ID5918ABADI SURYO SETIYO6013Jakarta Pusat61051031062470804DMCT9935000200012557713565250017163042364086304655C''';
+    // final emvdecode = EMVMPM.decode(emvqr);
+    // log('emvdecode ${emvdecode.toJson()}');
 
     if (widget.amount != null) {
       final format = NumberFormat.currency(

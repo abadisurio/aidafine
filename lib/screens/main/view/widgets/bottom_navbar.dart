@@ -28,6 +28,14 @@ class _BottomNavbarState extends State<_BottomNavbar> {
     super.initState();
   }
 
+  Future<void> _openGenie() async {
+    unawaited(HapticFeedback.mediumImpact());
+    final result = await context.router.push<String?>(const GenieRoute());
+    if (mounted && result != null) {
+      await context.router.push(GenieResultRoute(prompt: result));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -105,43 +113,80 @@ class _BottomNavbarState extends State<_BottomNavbar> {
             height: 50,
             child: Padding(
               padding: const EdgeInsets.only(right: 8),
-              child: GeminiVoiceButton(
-                onStop: (path) {
-                  context.read<GeminiVoiceBloc>().add(VoicePrompt(path));
-                },
-                button: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    // minimumSize: const Size(40, 60),
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    backgroundColor: Colors.black,
-                  ),
-                  child: AnimatedSize(
-                    alignment: Alignment.topLeft,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  // minimumSize: const Size(40, 60),
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  backgroundColor: Colors.black,
+                ),
+                onLongPress: _openGenie,
+                onPressed: () {
+                  widget.controller.animateToPage(
+                    1,
                     duration: Durations.medium2,
                     curve: Curves.easeInOut,
-                    child: Row(
-                      children: [
-                        const Icon(Icons.assistant, size: 30),
-                        if (_page != 1)
-                          const SizedBox.shrink()
-                        else ...[
-                          const SizedBox(width: 8),
-                          const Text('Assistant'),
-                        ],
+                  );
+                },
+                child: AnimatedSize(
+                  alignment: Alignment.topLeft,
+                  duration: Durations.medium2,
+                  curve: Curves.easeInOut,
+                  child: Row(
+                    children: [
+                      const Icon(Icons.assistant, size: 30),
+                      if (_page != 1)
+                        const SizedBox.shrink()
+                      else ...[
+                        const SizedBox(width: 8),
+                        const Text('Assistant'),
                       ],
-                    ),
+                    ],
                   ),
-                  onPressed: () {
-                    widget.controller.animateToPage(
-                      1,
-                      duration: Durations.medium2,
-                      curve: Curves.easeInOut,
-                    );
-                  },
                 ),
               ),
             ),
           ),
+          // SizedBox(
+          //   height: 50,
+          //   child: Padding(
+          //     padding: const EdgeInsets.only(right: 8),
+          //     child: GeminiVoiceButton(
+          //       onStop: (path) {
+          //         context.read<GeminiVoiceBloc>().add(VoicePrompt(path));
+          //       },
+          //       button: ElevatedButton(
+          //         style: ElevatedButton.styleFrom(
+          //           // minimumSize: const Size(40, 60),
+          //           padding: const EdgeInsets.symmetric(horizontal: 24),
+          //           backgroundColor: Colors.black,
+          //         ),
+          //         child: AnimatedSize(
+          //           alignment: Alignment.topLeft,
+          //           duration: Durations.medium2,
+          //           curve: Curves.easeInOut,
+          //           child: Row(
+          //             children: [
+          //               const Icon(Icons.assistant, size: 30),
+          //               if (_page != 1)
+          //                 const SizedBox.shrink()
+          //               else ...[
+          //                 const SizedBox(width: 8),
+          //                 const Text('Assistant'),
+          //               ],
+          //             ],
+          //           ),
+          //         ),
+          //         onPressed: () {
+          //           widget.controller.animateToPage(
+          //             1,
+          //             duration: Durations.medium2,
+          //             curve: Curves.easeInOut,
+          //           );
+          //         },
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

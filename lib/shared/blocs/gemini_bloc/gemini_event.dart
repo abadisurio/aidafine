@@ -4,7 +4,7 @@ class GeminiEvent {
   const GeminiEvent();
 }
 
-class VoicePrompt extends GeminiEvent {
-  const VoicePrompt(this.path);
-  final String path;
+class Prompt extends GeminiEvent {
+  const Prompt(this.prompt);
+  final String prompt;
 }
