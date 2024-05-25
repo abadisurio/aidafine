@@ -23,58 +23,21 @@ class _Shortcuts extends StatelessWidget {
       // fontSize: 12,
     );
     return Padding(
-      padding: const EdgeInsets.all(12),
+      padding: EdgeInsets.fromLTRB(
+        12,
+        12 + MediaQuery.of(context).padding.top,
+        12,
+        12,
+      ),
       child: StaggeredGrid.count(
         crossAxisCount: 4,
         mainAxisSpacing: 12,
         crossAxisSpacing: 12,
         children: [
-          StaggeredGridTile.count(
+          const StaggeredGridTile.count(
             crossAxisCellCount: 2,
             mainAxisCellCount: 2,
-            child: ClipPath(
-              clipper: const ShapeBorderClipper(
-                shape: ContinuousRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(50),
-                  ),
-                ),
-              ),
-              child: Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: brigthness == Brightness.light
-                      ? Colors.indigo.shade400
-                      : Colors.indigo.shade700,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Align(
-                      alignment: Alignment.topRight,
-                      child: CircleAvatar(
-                        radius: 30,
-                        backgroundImage: CachedNetworkImageProvider(
-                          '''https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&h=60''',
-                        ),
-                      ),
-                    ),
-                    const Spacer(),
-                    Text(
-                      'abadisurio',
-                      style: TextStyleTheme(context).titleMedium,
-                    ),
-                    FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        'Rp1.512.123.000',
-                        style: TextStyleTheme(context).titleLarge,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            child: SizedBox(),
           ),
           StaggeredGridTile.count(
             crossAxisCellCount: 1,
