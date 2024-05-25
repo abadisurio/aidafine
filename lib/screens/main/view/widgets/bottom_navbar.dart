@@ -32,6 +32,7 @@ class _BottomNavbarState extends State<_BottomNavbar> {
     unawaited(HapticFeedback.mediumImpact());
     final result = await context.router.push<String?>(const GenieRoute());
     if (mounted && result != null) {
+      log('GenieResult $result');
       await context.router.push(GenieResultRoute(prompt: result));
     }
   }

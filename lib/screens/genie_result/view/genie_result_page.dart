@@ -54,14 +54,14 @@ class _GenieResultViewState extends State<_GenieResultView> {
             }
           },
         ),
-        BlocListener<GeminiVoiceBloc, GeminiVoiceState>(
-          listenWhen: (prev, curr) {
-            return prev.data != curr.data || curr.dataMap != curr.dataMap;
-          },
-          listener: (context, state) {
-            context.router.maybePop();
-          },
-        ),
+        // BlocListener<GeminiVoiceBloc, GeminiVoiceState>(
+        //   listenWhen: (prev, curr) {
+        //     return prev.data != curr.data || curr.dataMap != curr.dataMap;
+        //   },
+        //   listener: (context, state) {
+        //     context.router.maybePop();
+        //   },
+        // ),
       ],
       child: BlocBuilder<GeminiVoiceBloc, GeminiVoiceState>(
         buildWhen: (prev, curr) {

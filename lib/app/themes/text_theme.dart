@@ -20,9 +20,17 @@ class TextStyleTheme {
   TextStyle? get titleSmall => _textTheme.titleSmall?.copyWith(
         fontWeight: FontWeight.w700,
       );
-  TextStyle? get bodyLarge => _textTheme.bodyLarge;
-  TextStyle? get bodyMedium => _textTheme.bodyMedium?.copyWith(fontSize: 24);
-  TextStyle? get bodySmall => _textTheme.bodySmall;
+  TextStyle? get bodyLarge => _textTheme.bodyLarge?.copyWith(
+        fontWeight: FontWeight.w700,
+        fontSize: 24,
+      );
+  TextStyle? get bodyMedium => _textTheme.bodyMedium?.copyWith(
+        fontWeight: FontWeight.w700,
+      );
+  TextStyle? get bodySmall => _textTheme.bodySmall?.copyWith(
+        fontWeight: FontWeight.w700,
+        fontSize: 10,
+      );
   TextStyle? get labelLarge => _textTheme.labelLarge;
   TextStyle? get labelMedium => _textTheme.labelMedium;
   TextStyle? get labelSmall => _textTheme.labelSmall;

@@ -35,7 +35,7 @@ final darkTheme = ThemeData.dark().copyWith(
         ),
   ),
   scaffoldBackgroundColor:
-      HSLColor.fromColor(Colors.grey).withLightness(0.1).toColor(),
+      HSLColor.fromColor(Colors.grey).withLightness(0.01).toColor(),
 );
 
 final circleButtonStyle = ElevatedButton.styleFrom(

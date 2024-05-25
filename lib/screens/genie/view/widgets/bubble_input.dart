@@ -38,8 +38,12 @@ class _BubbleInputState extends State<_BubbleInput> {
     // }
 
     await _speechToText.listen(
-      localeId: 'id-ID',
+      // localeId: 'id-ID',
       onResult: _onSpeechResult,
+      listenOptions: SpeechListenOptions(
+        onDevice: true,
+        listenMode: ListenMode.search,
+      ),
     );
 
     _isListening = _speechToText.isListening;
