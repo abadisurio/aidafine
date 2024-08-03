@@ -128,7 +128,7 @@ class _Shortcuts extends StatelessWidget {
             mainAxisCellCount: 1,
             child: ElevatedButton(
               style: buttonStyle.copyWith(
-                backgroundColor: MaterialStatePropertyAll(
+                backgroundColor: WidgetStatePropertyAll(
                   brigthness == Brightness.light
                       ? Colors.orange.shade500
                       : Colors.orange.shade700,

@@ -7,15 +7,14 @@ final lightTheme = ThemeData.light().copyWith(
   dividerColor: Colors.indigo.shade100,
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
     ),
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
     ),
   ),
-  textTheme:
-      GoogleFonts.plusJakartaSansTextTheme(TextStyleTheme.lightTextTheme),
+  textTheme: GoogleFonts.plusJakartaSansTextTheme(ThemeData().textTheme),
   canvasColor: const Color.fromARGB(255, 129, 139, 195),
 );

@@ -1,7 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:aidafine/app/themes/text_theme.dart';

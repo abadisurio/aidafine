@@ -21,7 +21,7 @@ class _ResponsiveProfileState extends State<_ResponsiveProfile> {
         setState(() {
           _offset = widget.scrollController.offset;
         });
-        log('_offset $_offset');
+        // log('_offset $_offset');
       }
     });
     super.initState();
@@ -29,6 +29,7 @@ class _ResponsiveProfileState extends State<_ResponsiveProfile> {
 
   @override
   Widget build(BuildContext context) {
+    // log('debug _offset / _screenWidth ${_offset * 2 / _screenWidth}');
     return Align(
       alignment: Alignment.topLeft,
       // child: ColoredBox(
@@ -40,13 +41,12 @@ class _ResponsiveProfileState extends State<_ResponsiveProfile> {
         child: DecoratedBox(
           decoration: BoxDecoration(
             boxShadow: [
+              // if (_offset > 0)
               BoxShadow(
-                blurRadius: _offset < 1
-                    ? 0
-                    : _offset < _screenWidth / 2
-                        ? 20
-                        : 30,
-                blurStyle: BlurStyle.solid,
+                color: Colors.black
+                    .withOpacity((_offset * 2 / _screenWidth).clamp(0, 1)),
+                blurRadius: 20,
+                // blurStyle: BlurStyle.solid,
                 // spreadRadius: -12,
               ),
             ],
@@ -96,7 +96,7 @@ class _ResponsiveProfileState extends State<_ResponsiveProfile> {
                             children: [
                               Text(
                                 'Rp1.523.000',
-                                style: TextStyleTheme(context).titleLarge,
+                                style: TextStyleTheme(context).titleSmall,
                               ),
                               const SizedBox(width: 16),
                               InkWell(

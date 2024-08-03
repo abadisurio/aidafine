@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "180032486130",
+    "project_id": "aidafine-eternalenterprise",
+    "storage_bucket": "aidafine-eternalenterprise.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:180032486130:android:aebeba6a47e6894ce9ee6b",
+        "android_client_info": {
+          "package_name": "com.eternalenterprise.aidafine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "180032486130-uu58m817j0io5kdju53ffn58kgluagaf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eternalenterprise.aidafine",
+            "certificate_hash": "2306141ca25bdb7ba69fe6209ffb31e8d715bb40"
+          }
+        },
+        {
+          "client_id": "180032486130-ocbv1a9be012el5c7lt9n44er60i37oa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7JLLE2Sk2xxsbxNwlF59aSzHFFPIFZWE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "180032486130-ocbv1a9be012el5c7lt9n44er60i37oa.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "180032486130-b060kn398ilglc31viuq55ntf3a40vbo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.eternalenterprise.aidafine.aidafine"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:180032486130:android:060b5f764026af9de9ee6b",
+        "android_client_info": {
+          "package_name": "com.eternalenterprise.aidafine.stg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "180032486130-hunq20f6fh6isdeilgcpjcesdrsli3cb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eternalenterprise.aidafine.stg",
+            "certificate_hash": "2306141ca25bdb7ba69fe6209ffb31e8d715bb40"
+          }
+        },
+        {
+          "client_id": "180032486130-ocbv1a9be012el5c7lt9n44er60i37oa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7JLLE2Sk2xxsbxNwlF59aSzHFFPIFZWE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "180032486130-ocbv1a9be012el5c7lt9n44er60i37oa.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "180032486130-b060kn398ilglc31viuq55ntf3a40vbo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.eternalenterprise.aidafine.aidafine"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

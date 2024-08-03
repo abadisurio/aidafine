@@ -50,25 +50,25 @@ class _AnimatedChatListState extends State<AnimatedChatList> {
             fixChat = state.answerStreaming!;
           } else {
             fixChat = chat;
-            // fixChat = chat.copyWith(
-            //   catalogs: [
-            //     Catalog(
-            //       id: '0',
-            //       name: 'Produk keuangaaan 0',
-            //       createdAt: DateTime.now(),
-            //     ),
-            //     Catalog(
-            //       id: '1',
-            //       name: 'Produk keuangaaan 1',
-            //       createdAt: DateTime.now(),
-            //     ),
-            //     Catalog(
-            //       id: '12',
-            //       name: 'Produk keuangaaan 1',
-            //       createdAt: DateTime.now(),
-            //     ),
-            //   ],
-            // );
+            fixChat = chat.copyWith(
+              catalogs: [
+                Catalog(
+                  id: '0',
+                  name: 'Produk keuangaaan 0',
+                  createdAt: DateTime.now(),
+                ),
+                Catalog(
+                  id: '1',
+                  name: 'Produk keuangaaan 1',
+                  createdAt: DateTime.now(),
+                ),
+                Catalog(
+                  id: '12',
+                  name: 'Produk keuangaaan 1',
+                  createdAt: DateTime.now(),
+                ),
+              ],
+            );
           }
 
           return SizeTransition(

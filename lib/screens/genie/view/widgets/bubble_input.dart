@@ -36,18 +36,21 @@ class _BubbleInputState extends State<_BubbleInput> {
     // for (final element in locales) {
     //   log('locales ${element.localeId} ${element.name}');
     // }
+    try {
+      await _speechToText.listen(
+        // localeId: 'id-ID',
+        onResult: _onSpeechResult,
+        listenOptions: SpeechListenOptions(
+          onDevice: true,
+          listenMode: ListenMode.search,
+        ),
+      );
 
-    await _speechToText.listen(
-      // localeId: 'id-ID',
-      onResult: _onSpeechResult,
-      listenOptions: SpeechListenOptions(
-        onDevice: true,
-        listenMode: ListenMode.search,
-      ),
-    );
-
-    _isListening = _speechToText.isListening;
-    setState(() {});
+      _isListening = _speechToText.isListening;
+      setState(() {});
+    } on ListenFailedException catch (e) {
+      log('ListenFailedException: ${e.details} ${e.message}');
+    }
   }
 
   /// Manually stop the active speech recognition session

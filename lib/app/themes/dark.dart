@@ -7,30 +7,33 @@ final darkTheme = ThemeData.dark().copyWith(
   dividerColor: Colors.indigo.shade100,
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
     ),
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
     ),
   ),
   iconButtonTheme: IconButtonThemeData(
     style: ButtonStyle(
-      iconColor: MaterialStateProperty.all<Color>(Colors.white),
+      iconColor: WidgetStateProperty.all<Color>(Colors.white),
     ),
   ),
   canvasColor: Colors.black45,
   textTheme: GoogleFonts.plusJakartaSansTextTheme(
     ThemeData.dark().textTheme.copyWith(
-          titleLarge: const TextStyle(
+          titleLarge: TextStyle(
             fontWeight: FontWeight.w700,
+            color: Colors.grey.shade100,
           ),
-          titleMedium: const TextStyle(
+          titleMedium: TextStyle(
             fontWeight: FontWeight.w700,
+            color: Colors.grey.shade100,
           ),
-          titleSmall: const TextStyle(
+          titleSmall: TextStyle(
             fontWeight: FontWeight.w700,
+            color: Colors.grey.shade100,
           ),
         ),
   ),

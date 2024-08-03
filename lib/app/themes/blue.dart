@@ -7,17 +7,17 @@ final blueTheme = ThemeData.dark().copyWith(
   dividerColor: Colors.indigo.shade100,
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
     ),
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
     ),
   ),
   iconButtonTheme: IconButtonThemeData(
     style: ButtonStyle(
-      iconColor: MaterialStateProperty.all<Color>(Colors.white),
+      iconColor: WidgetStateProperty.all<Color>(Colors.white),
     ),
   ),
   canvasColor: Colors.blue,

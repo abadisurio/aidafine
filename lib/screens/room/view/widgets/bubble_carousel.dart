@@ -39,7 +39,7 @@ class BubbleCarousel extends StatelessWidget {
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                color: Colors.black,
+                color: Colors.grey.shade900,
                 // border: Border.all(
                 //   color: Theme.of(context).textTheme.bodyMedium?.color ??
                 //       Colors.white,
@@ -51,25 +51,25 @@ class BubbleCarousel extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Produk keuangaaan $index ',
+                    'Blood Corn Pad 30cm',
                     style: TextStyleTheme(context).titleLarge,
                   ),
-                  const Text('Deskripsi lalalala hahaha haha'),
+                  const Text('Description of a product'),
                   const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Icon(
                         [
-                          Icons.monetization_on_outlined,
-                          Icons.food_bank_outlined,
-                          Icons.save_outlined,
+                          Icons.health_and_safety_outlined,
+                          Icons.health_and_safety_outlined,
+                          Icons.health_and_safety_outlined,
                         ][index % 3],
                         size: 40,
                       ),
                       OutlinedButton(
                         onPressed: () {},
-                        child: const Text('Lihat'),
+                        child: const Text('See more'),
                       ),
                     ],
                   ),
