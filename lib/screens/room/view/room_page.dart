@@ -1,5 +1,5 @@
 import 'package:aidafine/screens/room/room.dart';
-import 'package:aidafine/screens/room/view/widgets/recorder.dart';
+// import 'package:aidafine/screens/room/view/widgets/recorder.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -133,11 +133,11 @@ class _PromptInputState extends State<_PromptInput> {
             },
           ),
         ),
-        Recorder(
-          onStop: (path) {
-            context.read<RoomBloc>().add(VoicePrompt(path));
-          },
-        ),
+        // Recorder(
+        //   onStop: (path) {
+        //     context.read<RoomBloc>().add(VoicePrompt(path));
+        //   },
+        // ),
         BlocBuilder<RoomBloc, RoomState>(
           buildWhen: (previous, current) {
             return previous.isLoadingAnswer != current.isLoadingAnswer;

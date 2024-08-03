@@ -19,7 +19,7 @@ class _BubbleInputState extends State<_BubbleInput> {
     Future(() async {
       await _initSpeech();
       if (_speechEnabled) {
-        await _startListening();
+        _startListening();
       }
     });
   }
@@ -31,22 +31,23 @@ class _BubbleInputState extends State<_BubbleInput> {
   }
 
   /// Each time to start a speech recognition session
-  Future<void> _startListening() async {
+  void _startListening() {
     // final locales = await _speechToText.locales();
     // for (final element in locales) {
     //   log('locales ${element.localeId} ${element.name}');
     // }
+    log('debug _speechEnabled $_speechEnabled');
     try {
-      await _speechToText.listen(
-        // localeId: 'id-ID',
+      _speechToText.listen(
+        localeId: 'id-ID',
         onResult: _onSpeechResult,
         listenOptions: SpeechListenOptions(
-          onDevice: true,
+          // onDevice: true,
           listenMode: ListenMode.search,
         ),
       );
 
-      _isListening = _speechToText.isListening;
+      // _isListening = _speechToText.isListening;
       setState(() {});
     } on ListenFailedException catch (e) {
       log('ListenFailedException: ${e.details} ${e.message}');
@@ -70,6 +71,7 @@ class _BubbleInputState extends State<_BubbleInput> {
   /// the platform returns recognized words.
   void _onSpeechResult(SpeechRecognitionResult result) {
     final recognizedWords = result.recognizedWords.split(' ');
+    log('debug _onSpeechResult $recognizedWords');
     if (mounted) {
       setState(() {
         _words = recognizedWords;
@@ -95,7 +97,7 @@ class _BubbleInputState extends State<_BubbleInput> {
   @override
   Widget build(BuildContext context) {
     log('debug _isListening $_isListening');
-    // log('debug _words $_words ');
+    log('debug _words $_words ');
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),

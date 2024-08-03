@@ -151,6 +151,19 @@ class _BlocListener extends StatelessWidget {
   }
 }
 
+// class _Overlays extends StatelessWidget {
+//   const _Overlays({required this.child});
+
+//   final Widget child;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Stack(children: [
+//       child,
+//     ],);
+//   }
+// }
+
 final _app = MaterialApp.router(
   localizationsDelegates: AppLocalizations.localizationsDelegates,
   supportedLocales: AppLocalizations.supportedLocales,
