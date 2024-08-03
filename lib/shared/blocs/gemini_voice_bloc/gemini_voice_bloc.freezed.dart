@@ -14,20 +14,16 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-GeminiVoiceState _$GeminiVoiceStateFromJson(Map<String, dynamic> json) {
-  return _GeminiVoiceState.fromJson(json);
-}
-
 /// @nodoc
 mixin _$GeminiVoiceState {
   String? get pushNamedRoute => throw _privateConstructorUsedError;
   Object? get data => throw _privateConstructorUsedError;
   Map<String, Object?>? get dataMap => throw _privateConstructorUsedError;
   bool get isLoadingAnswer => throw _privateConstructorUsedError;
+  bool get showGenieWidget => throw _privateConstructorUsedError;
   bool get isGeneratingAnswer => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $GeminiVoiceStateCopyWith<GeminiVoiceState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -44,6 +40,7 @@ abstract class $GeminiVoiceStateCopyWith<$Res> {
       Object? data,
       Map<String, Object?>? dataMap,
       bool isLoadingAnswer,
+      bool showGenieWidget,
       bool isGeneratingAnswer,
       String? errorMessage});
 }
@@ -65,6 +62,7 @@ class _$GeminiVoiceStateCopyWithImpl<$Res, $Val extends GeminiVoiceState>
     Object? data = freezed,
     Object? dataMap = freezed,
     Object? isLoadingAnswer = null,
+    Object? showGenieWidget = null,
     Object? isGeneratingAnswer = null,
     Object? errorMessage = freezed,
   }) {
@@ -81,6 +79,10 @@ class _$GeminiVoiceStateCopyWithImpl<$Res, $Val extends GeminiVoiceState>
       isLoadingAnswer: null == isLoadingAnswer
           ? _value.isLoadingAnswer
           : isLoadingAnswer // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showGenieWidget: null == showGenieWidget
+          ? _value.showGenieWidget
+          : showGenieWidget // ignore: cast_nullable_to_non_nullable
               as bool,
       isGeneratingAnswer: null == isGeneratingAnswer
           ? _value.isGeneratingAnswer
@@ -107,6 +109,7 @@ abstract class _$$GeminiVoiceStateImplCopyWith<$Res>
       Object? data,
       Map<String, Object?>? dataMap,
       bool isLoadingAnswer,
+      bool showGenieWidget,
       bool isGeneratingAnswer,
       String? errorMessage});
 }
@@ -126,6 +129,7 @@ class __$$GeminiVoiceStateImplCopyWithImpl<$Res>
     Object? data = freezed,
     Object? dataMap = freezed,
     Object? isLoadingAnswer = null,
+    Object? showGenieWidget = null,
     Object? isGeneratingAnswer = null,
     Object? errorMessage = freezed,
   }) {
@@ -143,6 +147,10 @@ class __$$GeminiVoiceStateImplCopyWithImpl<$Res>
           ? _value.isLoadingAnswer
           : isLoadingAnswer // ignore: cast_nullable_to_non_nullable
               as bool,
+      showGenieWidget: null == showGenieWidget
+          ? _value.showGenieWidget
+          : showGenieWidget // ignore: cast_nullable_to_non_nullable
+              as bool,
       isGeneratingAnswer: null == isGeneratingAnswer
           ? _value.isGeneratingAnswer
           : isGeneratingAnswer // ignore: cast_nullable_to_non_nullable
@@ -157,20 +165,17 @@ class __$$GeminiVoiceStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-@JsonSerializable(explicitToJson: true)
 class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
   const _$GeminiVoiceStateImpl(
       {this.pushNamedRoute,
       this.data,
       final Map<String, Object?>? dataMap,
       this.isLoadingAnswer = false,
+      this.showGenieWidget = false,
       this.isGeneratingAnswer = false,
       this.errorMessage})
       : _dataMap = dataMap,
         super._();
-
-  factory _$GeminiVoiceStateImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GeminiVoiceStateImplFromJson(json);
 
   @override
   final String? pushNamedRoute;
@@ -191,13 +196,16 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
   final bool isLoadingAnswer;
   @override
   @JsonKey()
+  final bool showGenieWidget;
+  @override
+  @JsonKey()
   final bool isGeneratingAnswer;
   @override
   final String? errorMessage;
 
   @override
   String toString() {
-    return 'GeminiVoiceState(pushNamedRoute: $pushNamedRoute, data: $data, dataMap: $dataMap, isLoadingAnswer: $isLoadingAnswer, isGeneratingAnswer: $isGeneratingAnswer, errorMessage: $errorMessage)';
+    return 'GeminiVoiceState(pushNamedRoute: $pushNamedRoute, data: $data, dataMap: $dataMap, isLoadingAnswer: $isLoadingAnswer, showGenieWidget: $showGenieWidget, isGeneratingAnswer: $isGeneratingAnswer, errorMessage: $errorMessage)';
   }
 
   @override
@@ -211,13 +219,14 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
             const DeepCollectionEquality().equals(other._dataMap, _dataMap) &&
             (identical(other.isLoadingAnswer, isLoadingAnswer) ||
                 other.isLoadingAnswer == isLoadingAnswer) &&
+            (identical(other.showGenieWidget, showGenieWidget) ||
+                other.showGenieWidget == showGenieWidget) &&
             (identical(other.isGeneratingAnswer, isGeneratingAnswer) ||
                 other.isGeneratingAnswer == isGeneratingAnswer) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -225,6 +234,7 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
       const DeepCollectionEquality().hash(data),
       const DeepCollectionEquality().hash(_dataMap),
       isLoadingAnswer,
+      showGenieWidget,
       isGeneratingAnswer,
       errorMessage);
 
@@ -234,13 +244,6 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
   _$$GeminiVoiceStateImplCopyWith<_$GeminiVoiceStateImpl> get copyWith =>
       __$$GeminiVoiceStateImplCopyWithImpl<_$GeminiVoiceStateImpl>(
           this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$GeminiVoiceStateImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _GeminiVoiceState extends GeminiVoiceState {
@@ -249,12 +252,10 @@ abstract class _GeminiVoiceState extends GeminiVoiceState {
       final Object? data,
       final Map<String, Object?>? dataMap,
       final bool isLoadingAnswer,
+      final bool showGenieWidget,
       final bool isGeneratingAnswer,
       final String? errorMessage}) = _$GeminiVoiceStateImpl;
   const _GeminiVoiceState._() : super._();
-
-  factory _GeminiVoiceState.fromJson(Map<String, dynamic> json) =
-      _$GeminiVoiceStateImpl.fromJson;
 
   @override
   String? get pushNamedRoute;
@@ -264,6 +265,8 @@ abstract class _GeminiVoiceState extends GeminiVoiceState {
   Map<String, Object?>? get dataMap;
   @override
   bool get isLoadingAnswer;
+  @override
+  bool get showGenieWidget;
   @override
   bool get isGeneratingAnswer;
   @override

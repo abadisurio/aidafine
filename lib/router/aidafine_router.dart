@@ -16,47 +16,54 @@ class AidafineRouter extends _$AidafineRouter {
   @override
   List<AutoRoute> get routes => [
         CustomRoute(
-          transitionsBuilder: TransitionsBuilders.noTransition,
           initial: true,
-          guards: [AidafineGuard()],
-          page: MainRoute.page,
+          page: RootRoute.page,
           children: [
-            AutoRoute(
+            CustomRoute(
+              transitionsBuilder: TransitionsBuilders.noTransition,
               initial: true,
-              page: DashboardRoute.page,
+              guards: [AidafineGuard()],
+              page: MainRoute.page,
+              children: [
+                AutoRoute(
+                  initial: true,
+                  page: DashboardRoute.page,
+                ),
+                AutoRoute(
+                  page: RoomRoute.page,
+                ),
+              ],
             ),
             AutoRoute(
+              // initial: true,
+              guards: [AidafineGuard()],
               page: RoomRoute.page,
             ),
+            CustomRoute(
+              // initial: true,
+              transitionsBuilder: TransitionsBuilders.fadeIn,
+              guards: [AidafineGuard()],
+              page: QRISRoute.page,
+              path: 'pay-qris',
+            ),
+            CustomRoute(
+              // initial: true,
+              transitionsBuilder: TransitionsBuilders.fadeIn,
+              guards: [AidafineGuard()],
+              page: GenieRoute.page,
+              path: 'genie',
+              opaque: false,
+            ),
+            CustomRoute(
+              // initial: true,
+              transitionsBuilder: TransitionsBuilders.fadeIn,
+              guards: [AidafineGuard()],
+              opaque: false,
+              page: GenieResultRoute.page,
+              path: 'genie-result',
+              barrierDismissible: false,
+            ),
           ],
-        ),
-        AutoRoute(
-          // initial: true,
-          guards: [AidafineGuard()],
-          page: RoomRoute.page,
-        ),
-        CustomRoute(
-          // initial: true,
-          transitionsBuilder: TransitionsBuilders.fadeIn,
-          guards: [AidafineGuard()],
-          page: QRISRoute.page,
-          path: '/pay-qris',
-        ),
-        CustomRoute(
-          // initial: true,
-          transitionsBuilder: TransitionsBuilders.fadeIn,
-          guards: [AidafineGuard()],
-          page: GenieRoute.page,
-          path: '/genie',
-          opaque: false,
-        ),
-        CustomRoute(
-          // initial: true,
-          transitionsBuilder: TransitionsBuilders.fadeIn,
-          guards: [AidafineGuard()],
-          opaque: false,
-          page: GenieResultRoute.page,
-          path: '/genie-result',
         ),
         AutoRoute(
           page: SignInRoute.page,

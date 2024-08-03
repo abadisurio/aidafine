@@ -15,20 +15,28 @@ _$RoomStateImpl _$$RoomStateImplFromJson(Map<String, dynamic> json) =>
               ?.map((e) => Chat.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
-      isLoadingAnswer: json['isLoadingAnswer'] as bool? ?? false,
-      isGeneratingAnswer: json['isGeneratingAnswer'] as bool? ?? false,
-      answerStreaming: json['answerStreaming'] == null
+      isLoadingAnswer: json['is_loading_answer'] as bool? ?? false,
+      isGeneratingAnswer: json['is_generating_answer'] as bool? ?? false,
+      answerStreaming: json['answer_streaming'] == null
           ? null
-          : Chat.fromJson(json['answerStreaming'] as Map<String, dynamic>),
-      errorMessage: json['errorMessage'] as String?,
+          : Chat.fromJson(json['answer_streaming'] as Map<String, dynamic>),
+      errorMessage: json['error_message'] as String?,
     );
 
-Map<String, dynamic> _$$RoomStateImplToJson(_$RoomStateImpl instance) =>
-    <String, dynamic>{
-      'user': instance.user?.toJson(),
-      'chats': instance.chats.map((e) => e.toJson()).toList(),
-      'isLoadingAnswer': instance.isLoadingAnswer,
-      'isGeneratingAnswer': instance.isGeneratingAnswer,
-      'answerStreaming': instance.answerStreaming?.toJson(),
-      'errorMessage': instance.errorMessage,
-    };
+Map<String, dynamic> _$$RoomStateImplToJson(_$RoomStateImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('user', instance.user?.toJson());
+  val['chats'] = instance.chats.map((e) => e.toJson()).toList();
+  val['is_loading_answer'] = instance.isLoadingAnswer;
+  val['is_generating_answer'] = instance.isGeneratingAnswer;
+  writeNotNull('answer_streaming', instance.answerStreaming?.toJson());
+  writeNotNull('error_message', instance.errorMessage);
+  return val;
+}

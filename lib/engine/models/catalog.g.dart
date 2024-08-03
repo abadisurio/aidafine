@@ -9,12 +9,12 @@ part of 'catalog.dart';
 _$CatalogImpl _$$CatalogImplFromJson(Map<String, dynamic> json) =>
     _$CatalogImpl(
       id: json['id'] as String,
-      createdAt: json['createdAt'] == null
+      createdAt: json['created_at'] == null
           ? getDefaultDateTime()
-          : fromDateTimeJson(json['createdAt']),
-      modifiedAt: json['modifiedAt'] == null
+          : fromDateTimeJson(json['created_at']),
+      modifiedAt: json['modified_at'] == null
           ? getDefaultDateTime()
-          : fromDateTimeJson(json['modifiedAt']),
+          : fromDateTimeJson(json['modified_at']),
       name: json['name'] as String?,
       description: json['description'] as String?,
     );
@@ -22,7 +22,7 @@ _$CatalogImpl _$$CatalogImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$CatalogImplToJson(_$CatalogImpl instance) {
   final val = <String, dynamic>{
     'id': instance.id,
-    'createdAt': instance.createdAt.toIso8601String(),
+    'created_at': instance.createdAt.toIso8601String(),
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -31,7 +31,7 @@ Map<String, dynamic> _$$CatalogImplToJson(_$CatalogImpl instance) {
     }
   }
 
-  writeNotNull('modifiedAt', instance.modifiedAt?.toIso8601String());
+  writeNotNull('modified_at', instance.modifiedAt?.toIso8601String());
   writeNotNull('name', instance.name);
   writeNotNull('description', instance.description);
   return val;

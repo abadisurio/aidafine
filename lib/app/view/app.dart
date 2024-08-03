@@ -171,3 +171,40 @@ final _app = MaterialApp.router(
   theme: lightTheme,
   darkTheme: darkTheme,
 );
+
+extension BuildContextEntension<T> on BuildContext {
+  double get screenWidth => MediaQuery.of(this).size.width;
+
+  double get screenHeight => MediaQuery.of(this).size.height;
+
+  EdgeInsets get screenPadding => MediaQuery.of(this).viewPadding;
+
+  Size get size => MediaQuery.of(this).size;
+
+  TextTheme get textTheme => Theme.of(this).textTheme;
+}
+
+extension ColorBrightness on Color {
+  Color darken([double amount = .1]) {
+    assert(amount >= 0 && amount <= 1, 'Amount must be between 0 and 1');
+
+    final hsl = HSLColor.fromColor(this);
+    final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
+
+    return hslDark.toColor();
+  }
+
+  Color lighten([double amount = .1]) {
+    assert(amount >= 0 && amount <= 1, 'Amount must be between 0 and 1');
+
+    final hsl = HSLColor.fromColor(this);
+    final hslLight =
+        hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
+
+    return hslLight.toColor();
+  }
+
+  Brightness get getTextColorTheme {
+    return (computeLuminance() > 0.179) ? Brightness.light : Brightness.dark;
+  }
+}

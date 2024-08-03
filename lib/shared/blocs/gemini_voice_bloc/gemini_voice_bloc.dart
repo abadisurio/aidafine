@@ -11,11 +11,11 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 part 'gemini_voice_event.dart';
 part 'gemini_voice_state.dart';
 part 'gemini_voice_bloc.freezed.dart';
-part 'gemini_voice_bloc.g.dart';
 
 class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
   GeminiVoiceBloc() : super(const GeminiVoiceState()) {
     on<VoicePrompt>(_onVoicePrompt);
+    on<ToggleShowGenieWidget>(_onToggleShowGenieWidget);
     _initialize();
   }
 
@@ -60,6 +60,13 @@ They're likely using bahasa indonesia.
     } catch (e) {
       log('error $e');
     }
+  }
+
+  Future<void> _onToggleShowGenieWidget(
+    ToggleShowGenieWidget event,
+    Emitter<GeminiVoiceState> emit,
+  ) async {
+    emit(state.copyWith(showGenieWidget: !state.showGenieWidget));
   }
 
   Future<void> _onVoicePrompt(

@@ -9,21 +9,21 @@ part of 'pilot.dart';
 _$PilotImpl _$$PilotImplFromJson(Map<String, dynamic> json) => _$PilotImpl(
       id: json['id'] as String,
       username: json['username'] as String,
-      createdAt: json['createdAt'] == null
+      createdAt: json['created_at'] == null
           ? getDefaultDateTime()
-          : fromDateTimeJson(json['createdAt']),
-      modifiedAt: json['modifiedAt'] == null
+          : fromDateTimeJson(json['created_at']),
+      modifiedAt: json['modified_at'] == null
           ? getDefaultDateTime()
-          : fromDateTimeJson(json['modifiedAt']),
-      photoUrl: json['photoUrl'] as String?,
-      fcmToken: json['fcmToken'] as String?,
+          : fromDateTimeJson(json['modified_at']),
+      photoUrl: json['photo_url'] as String?,
+      fcmToken: json['fcm_token'] as String?,
     );
 
 Map<String, dynamic> _$$PilotImplToJson(_$PilotImpl instance) {
   final val = <String, dynamic>{
     'id': instance.id,
     'username': instance.username,
-    'createdAt': instance.createdAt.toIso8601String(),
+    'created_at': instance.createdAt.toIso8601String(),
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -32,8 +32,8 @@ Map<String, dynamic> _$$PilotImplToJson(_$PilotImpl instance) {
     }
   }
 
-  writeNotNull('modifiedAt', instance.modifiedAt?.toIso8601String());
-  writeNotNull('photoUrl', instance.photoUrl);
-  writeNotNull('fcmToken', instance.fcmToken);
+  writeNotNull('modified_at', instance.modifiedAt?.toIso8601String());
+  writeNotNull('photo_url', instance.photoUrl);
+  writeNotNull('fcm_token', instance.fcmToken);
   return val;
 }

@@ -60,6 +60,12 @@ abstract class _$AidafineRouter extends RootStackRouter {
         child: const RoomPage(),
       );
     },
+    RootRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RootPage(),
+      );
+    },
     SignInRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -196,6 +202,20 @@ class RoomRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'RoomRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RootPage]
+class RootRoute extends PageRouteInfo<void> {
+  const RootRoute({List<PageRouteInfo>? children})
+      : super(
+          RootRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RootRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

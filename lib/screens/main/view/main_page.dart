@@ -1,13 +1,14 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:aidafine/router/aidafine_router.dart';
 import 'package:aidafine/screens/screens.dart' hide VoicePrompt;
+import 'package:aidafine/shared/blocs/blocs.dart';
 
 import 'package:auto_route/auto_route.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part './widgets/bottom_navbar.dart';
 part './widgets/qris_card.dart';

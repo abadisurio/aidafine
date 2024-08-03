@@ -30,11 +30,12 @@ class _BottomNavbarState extends State<_BottomNavbar> {
 
   Future<void> _openGenie() async {
     unawaited(HapticFeedback.mediumImpact());
-    final result = await context.router.push<String?>(const GenieRoute());
-    if (mounted && result != null) {
-      log('GenieResult $result');
-      await context.router.push(GenieResultRoute(prompt: result));
-    }
+    context.read<GeminiVoiceBloc>().add(const ToggleShowGenieWidget());
+    // final result = await context.router.push<String?>(const GenieRoute());
+    // if (mounted && result != null) {
+    //   log('GenieResult $result');
+    //   await context.router.push(GenieResultRoute(prompt: result));
+    // }
   }
 
   @override
