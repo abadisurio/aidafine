@@ -45,66 +45,69 @@ class _FavoritePayment extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 final isPinned = index < 3;
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: SizedBox(
-                    width: _FavoritePayment.radius * 2,
-                    child: Column(
-                      children: [
-                        SizedBox.square(
-                          dimension: _FavoritePayment.radius * 2,
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              ClipPath(
-                                clipper: const ShapeBorderClipper(
-                                  shape: ContinuousRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(50),
-                                    ),
-                                  ),
-                                ),
-                                child: ElevatedButton(
-                                  style: buttonStyle,
-                                  onPressed: () {},
-                                  // child: CachedNetworkImage(
-                                  //   imageUrl: 'https://picsum.photos/id/$index/100/100',
-                                  //   fit: BoxFit.contain,
-                                  // ),
-                                  child: const Icon(
-                                    Icons.paypal,
-                                    color: Colors.white,
-                                    size: _FavoritePayment.radius,
-                                  ),
-                                ),
-                              ),
-                              if (isPinned)
-                                Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: Transform.rotate(
-                                    angle: 0.8,
-                                    child: const CircleAvatar(
-                                      radius: 12,
-                                      child: Icon(
-                                        Icons.push_pin_rounded,
-                                        size: 16,
+                return TapDownScaller(
+                  scale: 0.88,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: SizedBox(
+                      width: _FavoritePayment.radius * 2,
+                      child: Column(
+                        children: [
+                          SizedBox.square(
+                            dimension: _FavoritePayment.radius * 2,
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                ClipPath(
+                                  clipper: const ShapeBorderClipper(
+                                    shape: ContinuousRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(50),
                                       ),
                                     ),
                                   ),
+                                  child: ElevatedButton(
+                                    style: buttonStyle,
+                                    onPressed: () {},
+                                    // child: CachedNetworkImage(
+                                    //   imageUrl: 'https://picsum.photos/id/$index/100/100',
+                                    //   fit: BoxFit.contain,
+                                    // ),
+                                    child: const Icon(
+                                      Icons.paypal,
+                                      color: Colors.white,
+                                      size: _FavoritePayment.radius,
+                                    ),
+                                  ),
                                 ),
-                            ],
-                          ),
-                        ),
-                        const Expanded(
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(
-                              'Second Media',
-                              overflow: TextOverflow.ellipsis,
+                                if (isPinned)
+                                  Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: Transform.rotate(
+                                      angle: 0.8,
+                                      child: const CircleAvatar(
+                                        radius: 12,
+                                        child: Icon(
+                                          Icons.push_pin_rounded,
+                                          size: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                              ],
                             ),
                           ),
-                        ),
-                      ],
+                          const Expanded(
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                'Firstmedia',
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );

@@ -43,9 +43,12 @@ class _ResponsiveProfileState extends State<_ResponsiveProfile> {
             boxShadow: [
               // if (_offset > 0)
               BoxShadow(
-                color: Colors.black
+                color: (MediaQuery.of(context).platformBrightness ==
+                            Brightness.dark
+                        ? Colors.black
+                        : Colors.white)
                     .withOpacity((_offset * 2 / _screenWidth).clamp(0, 1)),
-                blurRadius: 20,
+                blurRadius: 15,
                 // blurStyle: BlurStyle.solid,
                 // spreadRadius: -12,
               ),
@@ -60,7 +63,7 @@ class _ResponsiveProfileState extends State<_ResponsiveProfile> {
               ),
             ),
             child: Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(12),
               height: _screenWidth / 2 -
                   18 -
                   _offset.clamp(0, _screenWidth / 2 - 6) / 2,
@@ -70,45 +73,37 @@ class _ResponsiveProfileState extends State<_ResponsiveProfile> {
               child: Stack(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Align(
+                  Align(
                     alignment: Alignment.topRight,
-                    child: CircleAvatar(
-                      radius: 30,
-                      backgroundImage: CachedNetworkImageProvider(
-                        '''https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&h=60''',
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        maxWidth: 55,
+                        maxHeight: 55,
+                      ),
+                      child: ClipOval(
+                        child: CachedNetworkImage(
+                          imageUrl: 'https://i.pravatar.cc/70',
+                        ),
                       ),
                     ),
                   ),
                   // const Spacer(),
                   Align(
                     alignment: Alignment.bottomLeft,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'eternal',
-                          style: TextStyleTheme(context).titleMedium,
-                        ),
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Row(
-                            children: [
-                              Text(
-                                'Rp1.523.000',
-                                style: TextStyleTheme(context).titleSmall,
-                              ),
-                              const SizedBox(width: 16),
-                              InkWell(
-                                onTap: () {},
-                                child: const Icon(
-                                  Icons.remove_red_eye_outlined,
-                                ),
-                              ),
-                            ],
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Abadi Suryo',
+                            style: TextStyleTheme(context).titleLarge,
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 4),
+                          const _BalanceVisibility(balance: 5437628),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -117,6 +112,58 @@ class _ResponsiveProfileState extends State<_ResponsiveProfile> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _BalanceVisibility extends StatefulWidget {
+  const _BalanceVisibility({this.balance = 0});
+
+  final double balance;
+
+  @override
+  State<_BalanceVisibility> createState() => _BalanceVisibilityState();
+}
+
+class _BalanceVisibilityState extends State<_BalanceVisibility> {
+  final bool _isVisible = true;
+  @override
+  Widget build(BuildContext context) {
+    final balance = appCurrencyFormat.format(widget.balance);
+    return Row(
+      children: [
+        AnimatedSize(
+          duration: const Duration(milliseconds: 300),
+          alignment: Alignment.centerLeft,
+          curve: Curves.easeInOutCirc,
+          child: Row(
+            children: [
+              if (_isVisible)
+                Text(
+                  balance,
+                  style: TextStyleTheme(context).titleMedium,
+                )
+              else
+                Text(
+                  'Rp ••••••',
+                  style: TextStyleTheme(context).titleMedium,
+                ),
+            ],
+          ),
+        ),
+        const SizedBox(width: 8),
+        // InkWell(
+        //   onTap: () {
+        //     setState(() {
+        //       _isVisible = !_isVisible;
+        //     });
+        //   },
+        //   child: const Icon(
+        //     Icons.remove_red_eye_outlined,
+        //     size: 18,
+        //   ),
+        // ),
+      ],
     );
   }
 }

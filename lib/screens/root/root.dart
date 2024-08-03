@@ -11,7 +11,7 @@ class RootPage extends StatelessWidget {
     return Stack(
       children: [
         AutoRouter(navigatorObservers: () => []),
-        const GenieWidget(),
+        const GenieWidgetContainer(),
       ],
     );
   }

@@ -20,8 +20,10 @@ class _Shortcuts extends StatelessWidget {
     );
     const labelStyle = TextStyle(
       fontWeight: FontWeight.w700,
-      // fontSize: 12,
+      fontSize: 12,
     );
+    // final labelStyle =
+    //     context.textTheme.labelSmall?.copyWith(color: Colors.grey.shade900);
     return Padding(
       padding: EdgeInsets.fromLTRB(
         12,
@@ -50,7 +52,7 @@ class _Shortcuts extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.outbond_outlined,
-                    size: 40,
+                    // size: 40,
                   ),
                   Text(
                     'Transfer',
@@ -71,7 +73,7 @@ class _Shortcuts extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.wallet,
-                    size: 40,
+                    // size: 40,
                   ),
                   Text(
                     'E-wallet',
@@ -92,7 +94,7 @@ class _Shortcuts extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.shopping_cart_outlined,
-                    size: 40,
+                    // size: 40,
                   ),
                   Text(
                     'Bayar',
@@ -113,7 +115,7 @@ class _Shortcuts extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.history,
-                    size: 40,
+                    // size: 40,
                   ),
                   Text(
                     'Riwayat',
@@ -141,7 +143,7 @@ class _Shortcuts extends StatelessWidget {
                   Flexible(
                     child: Icon(
                       Icons.trending_up,
-                      size: 40,
+                      // size: 40,
                       color: brigthness == Brightness.light
                           ? Colors.black
                           : Colors.white,

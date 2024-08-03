@@ -3,7 +3,9 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:aidafine/app/app.dart';
 import 'package:aidafine/app/themes/text_theme.dart';
+import 'package:aidafine/shared/widgets/widgets.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 

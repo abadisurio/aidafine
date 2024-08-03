@@ -8,10 +8,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 final _appRouter = AidafineRouter();
 final _firestore = FirebaseFirestore.instance;
 final _fbAuth = FirebaseAuth.instance;
+
+final appCurrencyFormat = NumberFormat.currency(
+  locale: 'id_ID',
+  name: 'Rp',
+  decimalDigits: 0,
+);
 
 class App extends StatelessWidget {
   const App({super.key});

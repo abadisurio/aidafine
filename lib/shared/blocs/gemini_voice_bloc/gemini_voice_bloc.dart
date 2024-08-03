@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:aidafine/engine/engine.dart';
 import 'package:bloc/bloc.dart';
+import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
@@ -62,11 +63,15 @@ They're likely using bahasa indonesia.
     }
   }
 
-  Future<void> _onToggleShowGenieWidget(
+  void _onToggleShowGenieWidget(
     ToggleShowGenieWidget event,
     Emitter<GeminiVoiceState> emit,
-  ) async {
-    emit(state.copyWith(showGenieWidget: !state.showGenieWidget));
+  ) {
+    log('debug event.isShown ${event.isShown}');
+    if (event.isShown) {
+      HapticFeedback.heavyImpact();
+    }
+    emit(state.copyWith(showGenieWidget: event.isShown));
   }
 
   Future<void> _onVoicePrompt(
