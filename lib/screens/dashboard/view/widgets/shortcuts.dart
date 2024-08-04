@@ -136,7 +136,9 @@ class _Shortcuts extends StatelessWidget {
                       : Colors.orange.shade700,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                context.router.push(QRISRoute());
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

@@ -129,7 +129,7 @@ class _BlocListener extends StatelessWidget {
               switch (state.pushNamedRoute!) {
                 case QRISRoute.name:
                   _appRouter.push(
-                    QRISRoute(amount: int.tryParse('${state.data}')),
+                    QRISRoute(amount: double.tryParse('${state.data}')),
                   );
                 default:
               }
@@ -145,7 +145,7 @@ class _BlocListener extends StatelessWidget {
               switch (state.pushNamedRoute!) {
                 case QRISRoute.name:
                   _appRouter.push(
-                    QRISRoute(amount: state.data as int?),
+                    QRISRoute(amount: double.tryParse('${state.data}')),
                   );
                 default:
               }

@@ -69,5 +69,7 @@
 	<string>Some message to describe why you need this permission</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Some voice need to be detected as a text</string>
+	<key>NSCameraUsageDescription</key>
+	<string>your usage description here</string>
 </dict>
 </plist>

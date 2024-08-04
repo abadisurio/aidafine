@@ -26,6 +26,9 @@ class AidafineRouter extends _$AidafineRouter {
               page: MainRoute.page,
               children: [
                 AutoRoute(
+                  page: QRISRoute.page,
+                ),
+                AutoRoute(
                   initial: true,
                   page: DashboardRoute.page,
                 ),

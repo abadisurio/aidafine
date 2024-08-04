@@ -144,27 +144,50 @@ class __GlowOverlayState extends State<_GlowOverlay> {
           sigmaY: 25,
           tileMode: TileMode.decal,
         ),
-        child: Align(
-          alignment: Alignment.topCenter,
-          child: Transform.scale(
-            scale: 1.5,
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              // width: 10,
-              height: context.screenPadding.top + kToolbarHeight / 1.5,
-              // height: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                gradient: LinearGradient(
-                  colors: [
-                    // Colors.red.withOpacity(0.8),
-                    Colors.blue.withOpacity(0.8),
-                    Colors.red.withOpacity(0.8),
-                    Colors.blue.withOpacity(0.8),
-                  ],
+        child: Transform.scale(
+          scale: 1.1,
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // const Text('text'),
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                // width: 10,
+                // height: 100,
+                height: context.screenPadding.top + kToolbarHeight * 1.5,
+                // height: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  gradient: LinearGradient(
+                    colors: [
+                      // Colors.red.withOpacity(0.8),
+                      Colors.blue.withOpacity(0.8),
+                      Colors.red.withOpacity(0.8),
+                      Colors.blue.withOpacity(0.8),
+                    ],
+                  ),
                 ),
               ),
-            ),
+              // const Spacer(),
+              // AnimatedContainer(
+              //   duration: const Duration(milliseconds: 300),
+              //   // width: 10,
+              //   // height: 100,
+              //   height: context.screenPadding.top + kToolbarHeight,
+              //   // height: double.infinity,
+              //   decoration: BoxDecoration(
+              //     color: Colors.white,
+              //     gradient: LinearGradient(
+              //       colors: [
+              //         // Colors.red.withOpacity(0.8),
+              //         Colors.blue.withOpacity(0.8),
+              //         Colors.red.withOpacity(0.8),
+              //         Colors.blue.withOpacity(0.8),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+            ],
           ),
         ),
       ),

@@ -11,6 +11,7 @@ dependencies:
   auto_route_generator: ^7.3.2
   bloc: ^8.1.2
   cached_network_image: ^3.3.1
+  camera: ^0.11.0+1
   cloud_firestore: ^4.17.2
   emvqrcode: ^1.0.5
   firebase_auth: ^4.19.4

@@ -49,8 +49,8 @@ abstract class _$AidafineRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: QRISPage(
-          key: args.key,
           amount: args.amount,
+          key: args.key,
         ),
       );
     },
@@ -159,14 +159,14 @@ class MainRoute extends PageRouteInfo<void> {
 /// [QRISPage]
 class QRISRoute extends PageRouteInfo<QRISRouteArgs> {
   QRISRoute({
+    double? amount,
     Key? key,
-    int? amount,
     List<PageRouteInfo>? children,
   }) : super(
           QRISRoute.name,
           args: QRISRouteArgs(
-            key: key,
             amount: amount,
+            key: key,
           ),
           initialChildren: children,
         );
@@ -178,17 +178,17 @@ class QRISRoute extends PageRouteInfo<QRISRouteArgs> {
 
 class QRISRouteArgs {
   const QRISRouteArgs({
-    this.key,
     this.amount,
+    this.key,
   });
+
+  final double? amount;
 
   final Key? key;
 
-  final int? amount;
-
   @override
   String toString() {
-    return 'QRISRouteArgs{key: $key, amount: $amount}';
+    return 'QRISRouteArgs{amount: $amount, key: $key}';
   }
 }
 

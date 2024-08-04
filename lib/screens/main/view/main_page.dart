@@ -1,7 +1,6 @@
 import 'dart:async';
-
+import 'package:aidafine/app/view/app.dart';
 import 'package:aidafine/router/aidafine_router.dart';
-import 'package:aidafine/screens/screens.dart' hide VoicePrompt;
 import 'package:aidafine/shared/blocs/blocs.dart';
 
 import 'package:auto_route/auto_route.dart';
@@ -29,39 +28,73 @@ class _MainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pageController = PageController();
-    return Scaffold(
-      body: Stack(
-        children: [
-          _PageView(controller: pageController),
-          _Overlay(controller: pageController),
-          _QRISCard(controller: pageController),
-        ],
-      ),
-      bottomNavigationBar: _BottomNavbar(controller: pageController),
-    );
+    return const _PageView();
   }
 }
 
 class _PageView extends StatefulWidget {
-  const _PageView({required this.controller});
-
-  final PageController controller;
+  const _PageView();
 
   @override
   State<_PageView> createState() => _PageViewState();
 }
 
 class _PageViewState extends State<_PageView> {
+  int _activeIndex = 1;
+  double _bottomPadding = 0;
+  PageController? _pageController;
+
+  void _listener() {
+    final offset = _pageController?.offset ?? 0;
+    if (offset > 0 && offset < context.screenWidth * 2) {
+      final offset2 =
+          (context.screenWidth - offset).abs() / context.screenWidth;
+      // log('debug offset $offset2');
+      setState(() {
+        _bottomPadding = offset2 * _BottomNavbar.height;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      controller: widget.controller,
+    return AutoTabsRouter.pageView(
+      // homeIndex: 1,
       physics: const BouncingScrollPhysics(),
-      children: const [
-        DashboardPage(),
-        RoomPage(),
+      routes: [
+        QRISRoute(),
+        const DashboardRoute(),
+        const RoomRoute(),
       ],
+      builder: (context, child, pageController) {
+        // log('debug pageController.offset ${pageController.offset}');
+        // log('debug context.screenWidth ${context.screenWidth}');
+        final tabRouter = AutoTabsRouter.of(context);
+        if (!pageController.hasClients ||
+            _activeIndex != tabRouter.activeIndex) {
+          _pageController?.removeListener(_listener);
+          _pageController = pageController;
+          _pageController?.addListener(_listener);
+        }
+        _activeIndex = tabRouter.activeIndex;
+        return Scaffold(
+          body: Stack(
+            children: [
+              Container(
+                // duration: Durations.long4,
+                // curve: Curves.easeOutCirc,
+                padding: EdgeInsets.only(bottom: _bottomPadding),
+                // child: child,
+                child: child,
+              ),
+              const Align(
+                alignment: Alignment.bottomCenter,
+                child: _BottomNavbar(),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
