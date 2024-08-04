@@ -185,6 +185,7 @@ extension BuildContextEntension<T> on BuildContext {
   double get screenHeight => MediaQuery.of(this).size.height;
 
   EdgeInsets get screenPadding => MediaQuery.of(this).viewPadding;
+  EdgeInsets get screenInset => MediaQuery.of(this).viewInsets;
 
   Size get size => MediaQuery.of(this).size;
 

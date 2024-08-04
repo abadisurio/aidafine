@@ -15,7 +15,7 @@ class _FavoriteTransfer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(14, 0, 14, 16),
             child: Text(
-              'Transfer Favorit',
+              'Transfer',
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
@@ -29,7 +29,7 @@ class _FavoriteTransfer extends StatelessWidget {
               itemBuilder: (context, index) {
                 final isPinned = index < 2;
                 return TapDownScaller(
-                  scale: 0.88,
+                  // scale: 0.88,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 16),
                     child: SizedBox(

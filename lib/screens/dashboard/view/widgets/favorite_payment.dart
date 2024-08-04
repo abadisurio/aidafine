@@ -32,7 +32,7 @@ class _FavoritePayment extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(14, 0, 14, 16),
             child: Text(
-              'Pembayaran Favorit',
+              'Pembayaran',
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
@@ -46,7 +46,7 @@ class _FavoritePayment extends StatelessWidget {
               itemBuilder: (context, index) {
                 final isPinned = index < 3;
                 return TapDownScaller(
-                  scale: 0.88,
+                  // scale: 0.88,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: SizedBox(
