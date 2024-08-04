@@ -43,7 +43,7 @@ class _TapDownScallerState extends State<TapDownScaller> {
       },
       child: AnimatedScale(
         duration: Durations.short1,
-        scale: _isTapDown ? (widget.scale ?? 0.97) : 1,
+        scale: _isTapDown ? (widget.scale ?? 0.93) : 1,
         child: widget.child,
       ),
     );
