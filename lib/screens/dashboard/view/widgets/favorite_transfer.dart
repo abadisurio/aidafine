@@ -102,7 +102,7 @@ class _FavoriteTransfer extends StatelessWidget {
                             child: FittedBox(
                               fit: BoxFit.scaleDown,
                               child: Text(
-                                'Haidar Zamzam',
+                                'John Doe',
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),

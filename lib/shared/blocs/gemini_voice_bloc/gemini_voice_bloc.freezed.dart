@@ -18,10 +18,13 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$GeminiVoiceState {
   String? get pushNamedRoute => throw _privateConstructorUsedError;
   Object? get data => throw _privateConstructorUsedError;
+  List<String>? get recognizedWords => throw _privateConstructorUsedError;
   Map<String, Object?>? get dataMap => throw _privateConstructorUsedError;
   bool get isLoadingAnswer => throw _privateConstructorUsedError;
   bool get showGenieWidget => throw _privateConstructorUsedError;
   bool get isGeneratingAnswer => throw _privateConstructorUsedError;
+  bool get isListening => throw _privateConstructorUsedError;
+  bool get isReloading => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -38,10 +41,13 @@ abstract class $GeminiVoiceStateCopyWith<$Res> {
   $Res call(
       {String? pushNamedRoute,
       Object? data,
+      List<String>? recognizedWords,
       Map<String, Object?>? dataMap,
       bool isLoadingAnswer,
       bool showGenieWidget,
       bool isGeneratingAnswer,
+      bool isListening,
+      bool isReloading,
       String? errorMessage});
 }
 
@@ -60,10 +66,13 @@ class _$GeminiVoiceStateCopyWithImpl<$Res, $Val extends GeminiVoiceState>
   $Res call({
     Object? pushNamedRoute = freezed,
     Object? data = freezed,
+    Object? recognizedWords = freezed,
     Object? dataMap = freezed,
     Object? isLoadingAnswer = null,
     Object? showGenieWidget = null,
     Object? isGeneratingAnswer = null,
+    Object? isListening = null,
+    Object? isReloading = null,
     Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
@@ -72,6 +81,10 @@ class _$GeminiVoiceStateCopyWithImpl<$Res, $Val extends GeminiVoiceState>
           : pushNamedRoute // ignore: cast_nullable_to_non_nullable
               as String?,
       data: freezed == data ? _value.data : data,
+      recognizedWords: freezed == recognizedWords
+          ? _value.recognizedWords
+          : recognizedWords // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       dataMap: freezed == dataMap
           ? _value.dataMap
           : dataMap // ignore: cast_nullable_to_non_nullable
@@ -87,6 +100,14 @@ class _$GeminiVoiceStateCopyWithImpl<$Res, $Val extends GeminiVoiceState>
       isGeneratingAnswer: null == isGeneratingAnswer
           ? _value.isGeneratingAnswer
           : isGeneratingAnswer // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isListening: null == isListening
+          ? _value.isListening
+          : isListening // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isReloading: null == isReloading
+          ? _value.isReloading
+          : isReloading // ignore: cast_nullable_to_non_nullable
               as bool,
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
@@ -107,10 +128,13 @@ abstract class _$$GeminiVoiceStateImplCopyWith<$Res>
   $Res call(
       {String? pushNamedRoute,
       Object? data,
+      List<String>? recognizedWords,
       Map<String, Object?>? dataMap,
       bool isLoadingAnswer,
       bool showGenieWidget,
       bool isGeneratingAnswer,
+      bool isListening,
+      bool isReloading,
       String? errorMessage});
 }
 
@@ -127,10 +151,13 @@ class __$$GeminiVoiceStateImplCopyWithImpl<$Res>
   $Res call({
     Object? pushNamedRoute = freezed,
     Object? data = freezed,
+    Object? recognizedWords = freezed,
     Object? dataMap = freezed,
     Object? isLoadingAnswer = null,
     Object? showGenieWidget = null,
     Object? isGeneratingAnswer = null,
+    Object? isListening = null,
+    Object? isReloading = null,
     Object? errorMessage = freezed,
   }) {
     return _then(_$GeminiVoiceStateImpl(
@@ -139,6 +166,10 @@ class __$$GeminiVoiceStateImplCopyWithImpl<$Res>
           : pushNamedRoute // ignore: cast_nullable_to_non_nullable
               as String?,
       data: freezed == data ? _value.data : data,
+      recognizedWords: freezed == recognizedWords
+          ? _value._recognizedWords
+          : recognizedWords // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       dataMap: freezed == dataMap
           ? _value._dataMap
           : dataMap // ignore: cast_nullable_to_non_nullable
@@ -155,6 +186,14 @@ class __$$GeminiVoiceStateImplCopyWithImpl<$Res>
           ? _value.isGeneratingAnswer
           : isGeneratingAnswer // ignore: cast_nullable_to_non_nullable
               as bool,
+      isListening: null == isListening
+          ? _value.isListening
+          : isListening // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isReloading: null == isReloading
+          ? _value.isReloading
+          : isReloading // ignore: cast_nullable_to_non_nullable
+              as bool,
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -169,18 +208,32 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
   const _$GeminiVoiceStateImpl(
       {this.pushNamedRoute,
       this.data,
+      final List<String>? recognizedWords,
       final Map<String, Object?>? dataMap,
       this.isLoadingAnswer = false,
       this.showGenieWidget = false,
       this.isGeneratingAnswer = false,
+      this.isListening = false,
+      this.isReloading = false,
       this.errorMessage})
-      : _dataMap = dataMap,
+      : _recognizedWords = recognizedWords,
+        _dataMap = dataMap,
         super._();
 
   @override
   final String? pushNamedRoute;
   @override
   final Object? data;
+  final List<String>? _recognizedWords;
+  @override
+  List<String>? get recognizedWords {
+    final value = _recognizedWords;
+    if (value == null) return null;
+    if (_recognizedWords is EqualUnmodifiableListView) return _recognizedWords;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   final Map<String, Object?>? _dataMap;
   @override
   Map<String, Object?>? get dataMap {
@@ -201,12 +254,13 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
   @JsonKey()
   final bool isGeneratingAnswer;
   @override
-  final String? errorMessage;
-
+  @JsonKey()
+  final bool isListening;
   @override
-  String toString() {
-    return 'GeminiVoiceState(pushNamedRoute: $pushNamedRoute, data: $data, dataMap: $dataMap, isLoadingAnswer: $isLoadingAnswer, showGenieWidget: $showGenieWidget, isGeneratingAnswer: $isGeneratingAnswer, errorMessage: $errorMessage)';
-  }
+  @JsonKey()
+  final bool isReloading;
+  @override
+  final String? errorMessage;
 
   @override
   bool operator ==(Object other) {
@@ -216,6 +270,8 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
             (identical(other.pushNamedRoute, pushNamedRoute) ||
                 other.pushNamedRoute == pushNamedRoute) &&
             const DeepCollectionEquality().equals(other.data, data) &&
+            const DeepCollectionEquality()
+                .equals(other._recognizedWords, _recognizedWords) &&
             const DeepCollectionEquality().equals(other._dataMap, _dataMap) &&
             (identical(other.isLoadingAnswer, isLoadingAnswer) ||
                 other.isLoadingAnswer == isLoadingAnswer) &&
@@ -223,6 +279,10 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
                 other.showGenieWidget == showGenieWidget) &&
             (identical(other.isGeneratingAnswer, isGeneratingAnswer) ||
                 other.isGeneratingAnswer == isGeneratingAnswer) &&
+            (identical(other.isListening, isListening) ||
+                other.isListening == isListening) &&
+            (identical(other.isReloading, isReloading) ||
+                other.isReloading == isReloading) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
@@ -232,10 +292,13 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
       runtimeType,
       pushNamedRoute,
       const DeepCollectionEquality().hash(data),
+      const DeepCollectionEquality().hash(_recognizedWords),
       const DeepCollectionEquality().hash(_dataMap),
       isLoadingAnswer,
       showGenieWidget,
       isGeneratingAnswer,
+      isListening,
+      isReloading,
       errorMessage);
 
   @JsonKey(ignore: true)
@@ -250,10 +313,13 @@ abstract class _GeminiVoiceState extends GeminiVoiceState {
   const factory _GeminiVoiceState(
       {final String? pushNamedRoute,
       final Object? data,
+      final List<String>? recognizedWords,
       final Map<String, Object?>? dataMap,
       final bool isLoadingAnswer,
       final bool showGenieWidget,
       final bool isGeneratingAnswer,
+      final bool isListening,
+      final bool isReloading,
       final String? errorMessage}) = _$GeminiVoiceStateImpl;
   const _GeminiVoiceState._() : super._();
 
@@ -262,6 +328,8 @@ abstract class _GeminiVoiceState extends GeminiVoiceState {
   @override
   Object? get data;
   @override
+  List<String>? get recognizedWords;
+  @override
   Map<String, Object?>? get dataMap;
   @override
   bool get isLoadingAnswer;
@@ -269,6 +337,10 @@ abstract class _GeminiVoiceState extends GeminiVoiceState {
   bool get showGenieWidget;
   @override
   bool get isGeneratingAnswer;
+  @override
+  bool get isListening;
+  @override
+  bool get isReloading;
   @override
   String? get errorMessage;
   @override
