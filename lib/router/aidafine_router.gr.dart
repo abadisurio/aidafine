@@ -15,6 +15,12 @@ abstract class _$AidafineRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    AppPreferencesRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AppPreferencesPage(),
+      );
+    },
     DashboardRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -73,6 +79,20 @@ abstract class _$AidafineRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [AppPreferencesPage]
+class AppPreferencesRoute extends PageRouteInfo<void> {
+  const AppPreferencesRoute({List<PageRouteInfo>? children})
+      : super(
+          AppPreferencesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AppPreferencesRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

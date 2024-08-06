@@ -38,9 +38,12 @@ class AidafineRouter extends _$AidafineRouter {
               ],
             ),
             AutoRoute(
-              // initial: true,
               guards: [AidafineGuard()],
               page: RoomRoute.page,
+            ),
+            AutoRoute(
+              guards: [AidafineGuard()],
+              page: AppPreferencesRoute.page,
             ),
             CustomRoute(
               // initial: true,

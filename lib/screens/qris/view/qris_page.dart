@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:aidafine/router/aidafine_router.dart';
 import 'package:aidafine/screens/qris/qris.dart';
+import 'package:aidafine/shared/blocs/app_preferences_bloc.dart';
 import 'package:aidafine/shared/blocs/blocs.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -39,6 +40,26 @@ class _QRISPageState extends State<QRISPage> {
         setState(() {
           _isLanded = tabRouter.activeIndex == 0;
         });
+
+        final callGenieWhenOpenQRIS = (context
+                .read<AppPreferencesBloc>()
+                .state
+                .preferences[PreferenceID.callGenieWhenOpenQRIS]
+                ?.value as bool?) ??
+            AppPreferencesState
+                .defaultValues
+                .preferences[PreferenceID.callGenieWhenOpenQRIS]!
+                .value! as bool;
+        if (callGenieWhenOpenQRIS) {
+          if (_isLanded) {
+            context.read<GeminiVoiceBloc>().add(const ToggleShowGenieWidget());
+          } else {
+            context.read<GeminiVoiceBloc>().add(
+                  const ToggleShowGenieWidget(isShown: false),
+                );
+          }
+        }
+
         if (!_isLanded) {
           _cameraBloc.add(const DisposeCamera());
         }
@@ -141,87 +162,6 @@ class _QRISCameraViewState extends State<_QRISCameraView> {
         ),
       ),
     );
-    // return Material(
-    //   color: Theme.of(context).scaffoldBackgroundColor,
-    //   child: Stack(
-    //     children: [
-    //       const Center(child: QRISCardWidget(size: 64)),
-    //       AnimatedOpacity(
-    //         opacity: _isMounted ? 1 : 0,
-    //         duration: Durations.medium2,
-    //         curve: Curves.easeInOut,
-    //         child: Scaffold(
-    //           appBar: AppBar(
-    //             centerTitle: true,
-    //             title: const Text('QRIS'),
-    //             leading: IconButton(
-    //               onPressed: () => context.router.maybePop(),
-    //               icon: const Icon(Icons.close),
-    //             ),
-    //           ),
-    //           body: Center(
-    //             child: AspectRatio(
-    //               aspectRatio: 1,
-    //               child: Padding(
-    //                 padding: const EdgeInsets.all(32),
-    //                 child: Container(
-    //                   decoration: BoxDecoration(
-    //                     borderRadius: BorderRadius.circular(32),
-    //                     color: Colors.black,
-    //                   ),
-    //                   // height: 300,
-    //                   // width: 300,
-    //                   child: Column(
-    //                     mainAxisAlignment: MainAxisAlignment.center,
-    //                     children: [
-    //                       const Icon(
-    //                         Icons.qr_code,
-    //                         size: 120,
-    //                       ),
-    //                       Text(
-    //                         'ceritanya kamera',
-    //                         style: TextStyleTheme(context).titleLarge,
-    //                       ),
-    //                     ],
-    //                   ),
-    //                 ),
-    //               ),
-    //             ),
-    //           ),
-    //         ),
-    //       ),
-    //       SafeArea(
-    //         child: Padding(
-    //           padding: const EdgeInsets.only(top: kToolbarHeight),
-    //           child: Column(
-    //             crossAxisAlignment: CrossAxisAlignment.stretch,
-    //             children: [
-    //               AnimatedSize(
-    //                 duration: Durations.medium2,
-    //                 curve: Curves.easeOutCirc,
-    //                 child: !_isMounted || amount == null
-    //                     ? const SizedBox.shrink()
-    //                     : Padding(
-    //                         padding: const EdgeInsets.all(16),
-    //                         child: Card(
-    //                           child: Padding(
-    //                             padding: const EdgeInsets.all(16),
-    //                             child: Text(
-    //                               'Tagihan terdeteksi: $amount',
-    //                               style: TextStyleTheme(context).titleMedium,
-    //                             ),
-    //                           ),
-    //                         ),
-    //                       ),
-    //               ),
-    //               const Spacer(),
-    //             ],
-    //           ),
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 }
 
@@ -249,25 +189,6 @@ class _TopSection extends StatelessWidget {
               },
               child: const Icon(Icons.close),
             ),
-            // Expanded(
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(16),
-            //     child: BlocBuilder<QRISBloc, QRISState>(
-            //       buildWhen: (_, __) => false,
-            //       builder: (context, state) {
-            //         return Text(
-            //           state.album.name,
-            //           style: const TextStyle(
-            //             color: Colors.white,
-            //             fontSize: 24,
-            //           ),
-            //           maxLines: 2,
-            //           overflow: TextOverflow.ellipsis,
-            //         );
-            //       },
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),

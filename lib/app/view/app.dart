@@ -3,6 +3,7 @@ import 'package:aidafine/app/themes/themes.dart';
 import 'package:aidafine/engine/engine.dart';
 import 'package:aidafine/l10n/l10n.dart';
 import 'package:aidafine/router/aidafine_router.dart';
+import 'package:aidafine/shared/blocs/app_preferences_bloc.dart';
 import 'package:aidafine/shared/blocs/blocs.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -68,6 +69,9 @@ class _BlocProvider extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (_) => AppBloc(),
+        ),
+        BlocProvider(
+          create: (_) => AppPreferencesBloc(),
         ),
         BlocProvider(
           create: (_) => GeminiBloc(),

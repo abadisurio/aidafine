@@ -1,3 +1,4 @@
+export 'app_preferences/app_preferences.dart';
 export 'dashboard/dashboard.dart';
 export 'genie/genie.dart';
 export 'genie_result/genie_result.dart';

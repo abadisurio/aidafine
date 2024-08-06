@@ -81,8 +81,20 @@ class _ResponsiveProfileState extends State<_ResponsiveProfile> {
                         maxHeight: 55,
                       ),
                       child: ClipOval(
-                        child: CachedNetworkImage(
-                          imageUrl: 'https://i.pravatar.cc/70',
+                        child: Material(
+                          child: Ink.image(
+                            image: const CachedNetworkImageProvider(
+                              'https://i.pravatar.cc/70',
+                            ),
+                            fit: BoxFit.cover,
+                            child: InkWell(
+                              onTap: () {
+                                context.router
+                                    .push(const AppPreferencesRoute());
+                              },
+                              child: const SizedBox.expand(),
+                            ),
+                          ),
                         ),
                       ),
                     ),
