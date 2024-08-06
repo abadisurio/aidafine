@@ -19,14 +19,14 @@ class _BottomNavbarState extends State<_BottomNavbar> {
 
   Future<void> _openGenie() async {
     unawaited(HapticFeedback.mediumImpact());
-    context.read<GeminiVoiceBloc>().add(const ToggleShowGenieWidget());
+    context
+        .read<GeminiVoiceBloc>()
+        .add(const ToggleShowGenieWidget(showSpokenWords: true));
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: _BottomNavbar.height,
-      // color: Theme.of(context).scaffoldBackgroundColor,
       padding: EdgeInsets.fromLTRB(
         8,
         8,
@@ -38,24 +38,21 @@ class _BottomNavbarState extends State<_BottomNavbar> {
         children: [
           ElevatedButton(
             onPressed: () {
-              _tabRouter.setActiveIndex(0);
-              // _tabRouter.navigate(QRISRoute());
+              _tabRouter.navigate(QRISRoute());
             },
             child: const Text('QRIS'),
           ),
           const SizedBox(width: 8),
           ElevatedButton(
             onPressed: () {
-              _tabRouter.setActiveIndex(1);
-              // _tabRouter.navigate(const DashboardRoute());
+              _tabRouter.navigate(const DashboardRoute());
             },
             child: const Text('Home'),
           ),
           const SizedBox(width: 8),
           ElevatedButton(
             onPressed: () {
-              _tabRouter.setActiveIndex(2);
-              // _tabRouter.navigate(const RoomRoute());
+              _tabRouter.navigate(const RoomRoute());
             },
             onLongPress: _openGenie,
             child: const Text('Genie'),

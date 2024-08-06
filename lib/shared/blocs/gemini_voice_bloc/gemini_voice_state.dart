@@ -9,6 +9,7 @@ class GeminiVoiceState with _$GeminiVoiceState {
     Map<String, Object?>? dataMap,
     @Default(false) bool isLoadingAnswer,
     @Default(false) bool showGenieWidget,
+    @Default(false) bool showSpokenWords,
     @Default(false) bool isGeneratingAnswer,
     @Default(false) bool isListening,
     @Default(false) bool isReloading,

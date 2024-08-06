@@ -5,8 +5,12 @@ class GeminiVoiceEvent {
 }
 
 class ToggleShowGenieWidget extends GeminiVoiceEvent {
-  const ToggleShowGenieWidget({this.isShown = true});
+  const ToggleShowGenieWidget({
+    this.isShown = true,
+    this.showSpokenWords = false,
+  });
   final bool isShown;
+  final bool showSpokenWords;
 }
 
 class VoicePrompt extends GeminiVoiceEvent {

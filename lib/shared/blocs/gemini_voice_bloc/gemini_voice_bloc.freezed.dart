@@ -22,6 +22,7 @@ mixin _$GeminiVoiceState {
   Map<String, Object?>? get dataMap => throw _privateConstructorUsedError;
   bool get isLoadingAnswer => throw _privateConstructorUsedError;
   bool get showGenieWidget => throw _privateConstructorUsedError;
+  bool get showSpokenWords => throw _privateConstructorUsedError;
   bool get isGeneratingAnswer => throw _privateConstructorUsedError;
   bool get isListening => throw _privateConstructorUsedError;
   bool get isReloading => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $GeminiVoiceStateCopyWith<$Res> {
       Map<String, Object?>? dataMap,
       bool isLoadingAnswer,
       bool showGenieWidget,
+      bool showSpokenWords,
       bool isGeneratingAnswer,
       bool isListening,
       bool isReloading,
@@ -70,6 +72,7 @@ class _$GeminiVoiceStateCopyWithImpl<$Res, $Val extends GeminiVoiceState>
     Object? dataMap = freezed,
     Object? isLoadingAnswer = null,
     Object? showGenieWidget = null,
+    Object? showSpokenWords = null,
     Object? isGeneratingAnswer = null,
     Object? isListening = null,
     Object? isReloading = null,
@@ -96,6 +99,10 @@ class _$GeminiVoiceStateCopyWithImpl<$Res, $Val extends GeminiVoiceState>
       showGenieWidget: null == showGenieWidget
           ? _value.showGenieWidget
           : showGenieWidget // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showSpokenWords: null == showSpokenWords
+          ? _value.showSpokenWords
+          : showSpokenWords // ignore: cast_nullable_to_non_nullable
               as bool,
       isGeneratingAnswer: null == isGeneratingAnswer
           ? _value.isGeneratingAnswer
@@ -132,6 +139,7 @@ abstract class _$$GeminiVoiceStateImplCopyWith<$Res>
       Map<String, Object?>? dataMap,
       bool isLoadingAnswer,
       bool showGenieWidget,
+      bool showSpokenWords,
       bool isGeneratingAnswer,
       bool isListening,
       bool isReloading,
@@ -155,6 +163,7 @@ class __$$GeminiVoiceStateImplCopyWithImpl<$Res>
     Object? dataMap = freezed,
     Object? isLoadingAnswer = null,
     Object? showGenieWidget = null,
+    Object? showSpokenWords = null,
     Object? isGeneratingAnswer = null,
     Object? isListening = null,
     Object? isReloading = null,
@@ -181,6 +190,10 @@ class __$$GeminiVoiceStateImplCopyWithImpl<$Res>
       showGenieWidget: null == showGenieWidget
           ? _value.showGenieWidget
           : showGenieWidget // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showSpokenWords: null == showSpokenWords
+          ? _value.showSpokenWords
+          : showSpokenWords // ignore: cast_nullable_to_non_nullable
               as bool,
       isGeneratingAnswer: null == isGeneratingAnswer
           ? _value.isGeneratingAnswer
@@ -212,6 +225,7 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
       final Map<String, Object?>? dataMap,
       this.isLoadingAnswer = false,
       this.showGenieWidget = false,
+      this.showSpokenWords = false,
       this.isGeneratingAnswer = false,
       this.isListening = false,
       this.isReloading = false,
@@ -252,6 +266,9 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
   final bool showGenieWidget;
   @override
   @JsonKey()
+  final bool showSpokenWords;
+  @override
+  @JsonKey()
   final bool isGeneratingAnswer;
   @override
   @JsonKey()
@@ -277,6 +294,8 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
                 other.isLoadingAnswer == isLoadingAnswer) &&
             (identical(other.showGenieWidget, showGenieWidget) ||
                 other.showGenieWidget == showGenieWidget) &&
+            (identical(other.showSpokenWords, showSpokenWords) ||
+                other.showSpokenWords == showSpokenWords) &&
             (identical(other.isGeneratingAnswer, isGeneratingAnswer) ||
                 other.isGeneratingAnswer == isGeneratingAnswer) &&
             (identical(other.isListening, isListening) ||
@@ -296,6 +315,7 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
       const DeepCollectionEquality().hash(_dataMap),
       isLoadingAnswer,
       showGenieWidget,
+      showSpokenWords,
       isGeneratingAnswer,
       isListening,
       isReloading,
@@ -317,6 +337,7 @@ abstract class _GeminiVoiceState extends GeminiVoiceState {
       final Map<String, Object?>? dataMap,
       final bool isLoadingAnswer,
       final bool showGenieWidget,
+      final bool showSpokenWords,
       final bool isGeneratingAnswer,
       final bool isListening,
       final bool isReloading,
@@ -335,6 +356,8 @@ abstract class _GeminiVoiceState extends GeminiVoiceState {
   bool get isLoadingAnswer;
   @override
   bool get showGenieWidget;
+  @override
+  bool get showSpokenWords;
   @override
   bool get isGeneratingAnswer;
   @override

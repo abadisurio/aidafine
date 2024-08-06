@@ -1,18 +1,10 @@
 import 'dart:async';
-import 'dart:developer';
-
-import 'package:aidafine/app/themes/text_theme.dart';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-// import 'package:record/record.dart';
-import 'package:speech_to_text/speech_recognition_result.dart';
-import 'package:speech_to_text/speech_to_text.dart';
-
 part 'widgets/marble.dart';
 // part 'widgets/animated_marble.dart';
-part 'widgets/bubble_input.dart';
+// part 'widgets/bubble_input.dart';
 
 @RoutePage<String?>()
 class GeniePage extends StatelessWidget {

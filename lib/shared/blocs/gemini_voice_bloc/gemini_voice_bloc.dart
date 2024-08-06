@@ -16,6 +16,7 @@ import 'package:speech_to_text/speech_to_text.dart';
 
 part 'gemini_voice_event.dart';
 part 'gemini_voice_state.dart';
+part 'gemini_voice_tools.dart';
 part 'gemini_voice_bloc.freezed.dart';
 
 class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
@@ -45,16 +46,6 @@ class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
 
     try {
       if (key == null) throw Exception('gemini api key not found');
-      // _recorder = AudioRecorder();
-      // _vertexAI = FirebaseVertexAI.instance.generativeModel(
-      //   model: 'gemini-1.5-flash-latest',
-      //   tools: [
-      //     Tool(functionDeclarations: [_amountTool]),
-      //   ],
-      //   systemInstruction: Content.system(
-      //     'Use Bahasa Indonesia and its localization to interact',
-      //   ),
-      // );
       _vertexAI = GenerativeModel(
         model: 'gemini-1.5-flash-latest',
         apiKey: key,
@@ -72,6 +63,7 @@ class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
 Listen for the user intent when making a transaction within the app.
 Is it want to pay, tranfer, or seeing the balance.
 They're likely using bahasa indonesia.
+Use Bahasa Indonesia and its localization to interact.
 ''',
         ),
       );
@@ -90,6 +82,7 @@ They're likely using bahasa indonesia.
         showGenieWidget: event.isShown,
         isListening: event.isShown,
         recognizedWords: null,
+        showSpokenWords: event.showSpokenWords,
       ),
     );
     if (event.isShown) {
@@ -172,7 +165,6 @@ They're likely using bahasa indonesia.
     UpdateRecognizedWords event,
     Emitter<GeminiVoiceState> emit,
   ) {
-    // _existingWords.addAll(event.recognizedWords);
     emit(
       state.copyWith(
         recognizedWords: [
@@ -200,7 +192,6 @@ They're likely using bahasa indonesia.
     if (_speechEnabled) {
       log('debug _speechEnabled $_speechEnabled');
     }
-    // await Future<void>.delayed(const Duration(seconds: 1));
     emit(state.copyWith(isReloading: false));
   }
 
@@ -208,36 +199,15 @@ They're likely using bahasa indonesia.
     ListenDebouncer event,
     Emitter<GeminiVoiceState> emit,
   ) {
-    // log('debug isListening ${event.isListening}');
-    // emit(state.copyWith(isListening: event.isListening));
     if (!event.isListening) {
       add(const ToggleShowGenieWidget(isShown: false));
     }
   }
 
-  // Future<void> _onVoicePrompt(
-  //   VoicePrompt event,
-  //   Emitter<GeminiVoiceState> emit,
-  // ) async {
-  //   if (_speechEnabled) {
-  //     _startListening();
-  //   }
-  // }
-
   Future<void> _startListening() async {
     // final locales = await _speechToText.locales();
     // for (final element in locales) {
     //   log('locales ${element.localeId} ${element.name}');
-    // }
-    // log('debug _speechEnabled $_speechEnabled');
-    // if (!_speechEnabled) {
-    //   return;
-    // } else {
-    // }
-    // log('debug 2 state.isReloading ${state.isReloading}');
-    // if (state.isReloading) {
-    // ignore: avoid_redundant_argument_values
-    // add(const ReloadVoiceListener(isReloading: false));
     // }
     add(const ListenDebouncer());
     _speechEnabled = await _speechToText.initialize();
@@ -257,10 +227,6 @@ They're likely using bahasa indonesia.
           },
         ),
       );
-
-      // add(ListenDebouncer(isListening: _speechToText.isListening));
-      // _isListening = _speechToText.isListening;
-      // setState(() {});
     } on ListenFailedException catch (e) {
       log('ListenFailedException: ${e.details} ${e.message}');
     }
@@ -272,7 +238,6 @@ They're likely using bahasa indonesia.
   /// listen method.
   Future<void> _stopListening() async {
     await _speechToText.stop();
-    // _existingWords = [];
     _speechEnabled = false;
   }
 
@@ -291,108 +256,4 @@ They're likely using bahasa indonesia.
       add(const ReloadVoiceListener());
     }
   }
-
-  // @override
-  // void dispose() {
-  //   _speechToText.cancel();
-  // }
 }
-
-Future<Map<String, Object?>> _payWithQRIS(
-  Map<String, Object?> arguments,
-) async {
-  return {
-    'isPayingWithQRIS': arguments['isPayingWithQRIS'],
-    'amount': arguments['amount'],
-  };
-  // This hypothetical API returns a JSON such as:
-  // {"base":"USD","date":"2024-04-17","rates":{"SEK": 10.99}}
-}
-
-final _payWithQRISTool = FunctionDeclaration(
-  'payWithQRIS',
-  'Check if a user wants to pay with QRIS with or without mentioned amount',
-  Schema(
-    SchemaType.object,
-    properties: {
-      'isPayingWithQRIS': Schema(
-        SchemaType.boolean,
-        description: '''Is the user wants to pay with QRIS?''',
-      ),
-      'amount': Schema(
-        SchemaType.number,
-        description: '''The number mentioned in the sentence''',
-      ),
-    },
-    requiredProperties: ['isPayingWithQRIS'],
-  ),
-);
-Future<Map<String, Object?>> _transfer(
-  Map<String, Object?> arguments,
-) async {
-  return {
-    'isInitiatingTransfer': arguments['isInitiatingTransfer'],
-    'name': arguments['name'],
-    'amount': arguments['amount'],
-  };
-  // This hypothetical API returns a JSON such as:
-  // {"base":"USD","date":"2024-04-17","rates":{"SEK": 10.99}}
-}
-
-final _transferTool = FunctionDeclaration(
-  'transfer',
-  'Check if a user wants to pay with QRIS with or without mentioned amount',
-  Schema(
-    SchemaType.object,
-    properties: {
-      'isInitiatingTransfer': Schema(
-        SchemaType.boolean,
-        description: '''Is the user wants to make a transfer with someone''',
-      ),
-      'name': Schema(
-        SchemaType.string,
-        description: '''The name of the person mentioned in the sentence''',
-      ),
-      'amount': Schema(
-        SchemaType.number,
-        description: '''The number mentioned in the sentence''',
-      ),
-    },
-    requiredProperties: ['isPayingWithQRIS', 'name'],
-  ),
-);
-Future<Map<String, Object?>> _payWithOnline(
-  Map<String, Object?> arguments,
-) async {
-  return {
-    'isOnlinePaying': arguments['isOnlinePaying'],
-    'channel': arguments['channel'],
-    'amount': arguments['amount'],
-  };
-  // This hypothetical API returns a JSON such as:
-  // {"base":"USD","date":"2024-04-17","rates":{"SEK": 10.99}}
-}
-
-final _payWithOnlineTool = FunctionDeclaration(
-  'payWithOnline',
-  'Check if a user wants to pay with online payment through indonesian bills with or without mentioned amount',
-  Schema(
-    SchemaType.object,
-    properties: {
-      'isOnlinePaying': Schema(
-        SchemaType.boolean,
-        description:
-            '''Is the user wants to make a payment with built in channels for online payment bills''',
-      ),
-      'channel': Schema(
-        SchemaType.string,
-        description: '''The name of the channel mentioned in the sentence''',
-      ),
-      'amount': Schema(
-        SchemaType.number,
-        description: '''The number mentioned in the sentence''',
-      ),
-    },
-    requiredProperties: ['isOnlinePaying', 'channel'],
-  ),
-);

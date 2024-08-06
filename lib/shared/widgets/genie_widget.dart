@@ -171,43 +171,55 @@ class _GenieWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(4, 8, 4, 8),
-                child: BlocBuilder<GeminiVoiceBloc, GeminiVoiceState>(
-                  buildWhen: (previous, current) {
-                    return previous.recognizedWords != current.recognizedWords;
-                  },
-                  builder: (context, state) {
-                    final words = state.recognizedWords;
-                    log('debug state.isReloading ${state.isReloading}');
-                    return AnimatedSwitcher(
-                      duration: Durations.medium1,
-                      transitionBuilder: (child, animation) {
-                        return FadeTransition(
-                          opacity: animation,
-                          child: SizedBox(
-                            width: double.infinity,
-                            child: child,
-                          ),
+              BlocBuilder<GeminiVoiceBloc, GeminiVoiceState>(
+                buildWhen: (previous, current) {
+                  return previous.showSpokenWords != current.showSpokenWords;
+                },
+                builder: (context, state) {
+                  log('debug state.showSpokenWords ${state.showSpokenWords}');
+                  if (!state.showSpokenWords) {
+                    return const SizedBox.shrink();
+                  }
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(4, 8, 4, 8),
+                    child: BlocBuilder<GeminiVoiceBloc, GeminiVoiceState>(
+                      buildWhen: (previous, current) {
+                        return previous.recognizedWords !=
+                            current.recognizedWords;
+                      },
+                      builder: (context, state) {
+                        final words = state.recognizedWords;
+                        log('debug state.isReloading ${state.isReloading}');
+                        return AnimatedSwitcher(
+                          duration: Durations.medium1,
+                          transitionBuilder: (child, animation) {
+                            return FadeTransition(
+                              opacity: animation,
+                              child: SizedBox(
+                                width: double.infinity,
+                                child: child,
+                              ),
+                            );
+                          },
+                          // sizeCurve: Curves.easeOutCirc,
+                          // // alignment: Alignment.center,
+                          // firstChild: const SizedBox.shrink(),
+                          // secondChild: const _EmptyRecognizedWords(),
+                          child: words == null || words.isEmpty
+                              ? const _NullRecognizedWords()
+                              : Wrap(
+                                  children: [
+                                    for (var i = 0; i < (words.length); i++)
+                                      WordAnimator(
+                                        word: words[i],
+                                      ),
+                                  ],
+                                ),
                         );
                       },
-                      // sizeCurve: Curves.easeOutCirc,
-                      // // alignment: Alignment.center,
-                      // firstChild: const SizedBox.shrink(),
-                      // secondChild: const _EmptyRecognizedWords(),
-                      child: words == null || words.isEmpty
-                          ? const _NullRecognizedWords()
-                          : Wrap(
-                              children: [
-                                for (var i = 0; i < (words.length); i++)
-                                  WordAnimator(
-                                    word: words[i],
-                                  ),
-                              ],
-                            ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
             ],
           ),
