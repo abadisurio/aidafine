@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:aidafine/engine/models/models.dart';
 import 'package:aidafine/router/auth_guard.dart';
 import 'package:aidafine/screens/screens.dart';
 import 'package:auto_route/auto_route.dart';
@@ -40,6 +41,12 @@ class AidafineRouter extends _$AidafineRouter {
             AutoRoute(
               guards: [AidafineGuard()],
               page: RoomRoute.page,
+            ),
+            CustomRoute(
+              guards: [AidafineGuard()],
+              page: BillSummarizerRoute.page,
+              opaque: false,
+              transitionsBuilder: TransitionsBuilders.fadeIn,
             ),
             AutoRoute(
               guards: [AidafineGuard()],

@@ -14,8 +14,8 @@ class ToggleShowGenieWidget extends GeminiVoiceEvent {
 }
 
 class VoicePrompt extends GeminiVoiceEvent {
-  const VoicePrompt(this.path);
-  final String path;
+  const VoicePrompt({required this.spokenWords});
+  final String spokenWords;
 }
 
 class UpdateRecognizedWords extends GeminiVoiceEvent {

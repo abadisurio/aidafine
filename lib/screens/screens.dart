@@ -1,4 +1,5 @@
 export 'app_preferences/app_preferences.dart';
+export 'bill_summarizer/bill_summarizer.dart';
 export 'dashboard/dashboard.dart';
 export 'genie/genie.dart';
 export 'genie_result/genie_result.dart';

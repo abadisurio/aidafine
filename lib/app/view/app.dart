@@ -5,6 +5,7 @@ import 'package:aidafine/l10n/l10n.dart';
 import 'package:aidafine/router/aidafine_router.dart';
 import 'package:aidafine/shared/blocs/app_preferences_bloc.dart';
 import 'package:aidafine/shared/blocs/blocs.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -129,14 +130,36 @@ class _BlocListener extends StatelessWidget {
             return prev.isGeneratingAnswer && !curr.isGeneratingAnswer;
           },
           listener: (context, state) {
-            if (state.pushNamedRoute != null) {
-              switch (state.pushNamedRoute!) {
+            final response = state.response;
+            if (response != null) {
+              // log('debug response.data ${data}');
+              late PageRouteInfo route;
+              switch (response.pushNamedRoute) {
                 case QRISRoute.name:
-                  _appRouter.push(
-                    QRISRoute(amount: double.tryParse('${state.data}')),
+                  route = QRISRoute(
+                    amount: double.tryParse('${response.data}'),
+                  );
+                case BillSummarizerRoute.name:
+                  route = BillSummarizerRoute(
+                    billSummary: response.data as BillSummary,
                   );
                 default:
               }
+              _appRouter.push(route);
+            }
+          },
+        ),
+        BlocListener<GeminiVoiceBloc, GeminiVoiceState>(
+          listenWhen: (prev, curr) {
+            return prev.errorMessage != curr.errorMessage;
+          },
+          listener: (context, state) {
+            if (state.errorMessage != null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.errorMessage!),
+                ),
+              );
             }
           },
         ),
@@ -218,5 +241,19 @@ extension ColorBrightness on Color {
 
   Brightness get getTextColorTheme {
     return (computeLuminance() > 0.179) ? Brightness.light : Brightness.dark;
+  }
+}
+
+extension StringExtension on String {
+  String toTitleCase() {
+    if (trim().isEmpty) {
+      return '';
+    }
+    return split(' ')
+        .map(
+          (word) =>
+              '${word[0].toUpperCase()}${word.substring(1).toLowerCase()}',
+        )
+        .join(' ');
   }
 }

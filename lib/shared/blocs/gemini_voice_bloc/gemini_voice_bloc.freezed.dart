@@ -16,10 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$GeminiVoiceState {
-  String? get pushNamedRoute => throw _privateConstructorUsedError;
-  Object? get data => throw _privateConstructorUsedError;
   List<String>? get recognizedWords => throw _privateConstructorUsedError;
-  Map<String, Object?>? get dataMap => throw _privateConstructorUsedError;
+  GenieRespose<dynamic>? get response => throw _privateConstructorUsedError;
   bool get isLoadingAnswer => throw _privateConstructorUsedError;
   bool get showGenieWidget => throw _privateConstructorUsedError;
   bool get showSpokenWords => throw _privateConstructorUsedError;
@@ -40,10 +38,8 @@ abstract class $GeminiVoiceStateCopyWith<$Res> {
       _$GeminiVoiceStateCopyWithImpl<$Res, GeminiVoiceState>;
   @useResult
   $Res call(
-      {String? pushNamedRoute,
-      Object? data,
-      List<String>? recognizedWords,
-      Map<String, Object?>? dataMap,
+      {List<String>? recognizedWords,
+      GenieRespose<dynamic>? response,
       bool isLoadingAnswer,
       bool showGenieWidget,
       bool showSpokenWords,
@@ -51,6 +47,8 @@ abstract class $GeminiVoiceStateCopyWith<$Res> {
       bool isListening,
       bool isReloading,
       String? errorMessage});
+
+  $GenieResposeCopyWith<dynamic, $Res>? get response;
 }
 
 /// @nodoc
@@ -66,10 +64,8 @@ class _$GeminiVoiceStateCopyWithImpl<$Res, $Val extends GeminiVoiceState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pushNamedRoute = freezed,
-    Object? data = freezed,
     Object? recognizedWords = freezed,
-    Object? dataMap = freezed,
+    Object? response = freezed,
     Object? isLoadingAnswer = null,
     Object? showGenieWidget = null,
     Object? showSpokenWords = null,
@@ -79,19 +75,14 @@ class _$GeminiVoiceStateCopyWithImpl<$Res, $Val extends GeminiVoiceState>
     Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
-      pushNamedRoute: freezed == pushNamedRoute
-          ? _value.pushNamedRoute
-          : pushNamedRoute // ignore: cast_nullable_to_non_nullable
-              as String?,
-      data: freezed == data ? _value.data : data,
       recognizedWords: freezed == recognizedWords
           ? _value.recognizedWords
           : recognizedWords // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      dataMap: freezed == dataMap
-          ? _value.dataMap
-          : dataMap // ignore: cast_nullable_to_non_nullable
-              as Map<String, Object?>?,
+      response: freezed == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as GenieRespose<dynamic>?,
       isLoadingAnswer: null == isLoadingAnswer
           ? _value.isLoadingAnswer
           : isLoadingAnswer // ignore: cast_nullable_to_non_nullable
@@ -122,6 +113,18 @@ class _$GeminiVoiceStateCopyWithImpl<$Res, $Val extends GeminiVoiceState>
               as String?,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $GenieResposeCopyWith<dynamic, $Res>? get response {
+    if (_value.response == null) {
+      return null;
+    }
+
+    return $GenieResposeCopyWith<dynamic, $Res>(_value.response!, (value) {
+      return _then(_value.copyWith(response: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -133,10 +136,8 @@ abstract class _$$GeminiVoiceStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? pushNamedRoute,
-      Object? data,
-      List<String>? recognizedWords,
-      Map<String, Object?>? dataMap,
+      {List<String>? recognizedWords,
+      GenieRespose<dynamic>? response,
       bool isLoadingAnswer,
       bool showGenieWidget,
       bool showSpokenWords,
@@ -144,6 +145,9 @@ abstract class _$$GeminiVoiceStateImplCopyWith<$Res>
       bool isListening,
       bool isReloading,
       String? errorMessage});
+
+  @override
+  $GenieResposeCopyWith<dynamic, $Res>? get response;
 }
 
 /// @nodoc
@@ -157,10 +161,8 @@ class __$$GeminiVoiceStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pushNamedRoute = freezed,
-    Object? data = freezed,
     Object? recognizedWords = freezed,
-    Object? dataMap = freezed,
+    Object? response = freezed,
     Object? isLoadingAnswer = null,
     Object? showGenieWidget = null,
     Object? showSpokenWords = null,
@@ -170,19 +172,14 @@ class __$$GeminiVoiceStateImplCopyWithImpl<$Res>
     Object? errorMessage = freezed,
   }) {
     return _then(_$GeminiVoiceStateImpl(
-      pushNamedRoute: freezed == pushNamedRoute
-          ? _value.pushNamedRoute
-          : pushNamedRoute // ignore: cast_nullable_to_non_nullable
-              as String?,
-      data: freezed == data ? _value.data : data,
       recognizedWords: freezed == recognizedWords
           ? _value._recognizedWords
           : recognizedWords // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      dataMap: freezed == dataMap
-          ? _value._dataMap
-          : dataMap // ignore: cast_nullable_to_non_nullable
-              as Map<String, Object?>?,
+      response: freezed == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as GenieRespose<dynamic>?,
       isLoadingAnswer: null == isLoadingAnswer
           ? _value.isLoadingAnswer
           : isLoadingAnswer // ignore: cast_nullable_to_non_nullable
@@ -219,10 +216,8 @@ class __$$GeminiVoiceStateImplCopyWithImpl<$Res>
 
 class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
   const _$GeminiVoiceStateImpl(
-      {this.pushNamedRoute,
-      this.data,
-      final List<String>? recognizedWords,
-      final Map<String, Object?>? dataMap,
+      {final List<String>? recognizedWords,
+      this.response,
       this.isLoadingAnswer = false,
       this.showGenieWidget = false,
       this.showSpokenWords = false,
@@ -231,13 +226,8 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
       this.isReloading = false,
       this.errorMessage})
       : _recognizedWords = recognizedWords,
-        _dataMap = dataMap,
         super._();
 
-  @override
-  final String? pushNamedRoute;
-  @override
-  final Object? data;
   final List<String>? _recognizedWords;
   @override
   List<String>? get recognizedWords {
@@ -248,16 +238,8 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
     return EqualUnmodifiableListView(value);
   }
 
-  final Map<String, Object?>? _dataMap;
   @override
-  Map<String, Object?>? get dataMap {
-    final value = _dataMap;
-    if (value == null) return null;
-    if (_dataMap is EqualUnmodifiableMapView) return _dataMap;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
-
+  final GenieRespose<dynamic>? response;
   @override
   @JsonKey()
   final bool isLoadingAnswer;
@@ -284,12 +266,10 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GeminiVoiceStateImpl &&
-            (identical(other.pushNamedRoute, pushNamedRoute) ||
-                other.pushNamedRoute == pushNamedRoute) &&
-            const DeepCollectionEquality().equals(other.data, data) &&
             const DeepCollectionEquality()
                 .equals(other._recognizedWords, _recognizedWords) &&
-            const DeepCollectionEquality().equals(other._dataMap, _dataMap) &&
+            (identical(other.response, response) ||
+                other.response == response) &&
             (identical(other.isLoadingAnswer, isLoadingAnswer) ||
                 other.isLoadingAnswer == isLoadingAnswer) &&
             (identical(other.showGenieWidget, showGenieWidget) ||
@@ -309,10 +289,8 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      pushNamedRoute,
-      const DeepCollectionEquality().hash(data),
       const DeepCollectionEquality().hash(_recognizedWords),
-      const DeepCollectionEquality().hash(_dataMap),
+      response,
       isLoadingAnswer,
       showGenieWidget,
       showSpokenWords,
@@ -331,10 +309,8 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
 
 abstract class _GeminiVoiceState extends GeminiVoiceState {
   const factory _GeminiVoiceState(
-      {final String? pushNamedRoute,
-      final Object? data,
-      final List<String>? recognizedWords,
-      final Map<String, Object?>? dataMap,
+      {final List<String>? recognizedWords,
+      final GenieRespose<dynamic>? response,
       final bool isLoadingAnswer,
       final bool showGenieWidget,
       final bool showSpokenWords,
@@ -345,13 +321,9 @@ abstract class _GeminiVoiceState extends GeminiVoiceState {
   const _GeminiVoiceState._() : super._();
 
   @override
-  String? get pushNamedRoute;
-  @override
-  Object? get data;
-  @override
   List<String>? get recognizedWords;
   @override
-  Map<String, Object?>? get dataMap;
+  GenieRespose<dynamic>? get response;
   @override
   bool get isLoadingAnswer;
   @override
@@ -369,5 +341,187 @@ abstract class _GeminiVoiceState extends GeminiVoiceState {
   @override
   @JsonKey(ignore: true)
   _$$GeminiVoiceStateImplCopyWith<_$GeminiVoiceStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$GenieRespose<T> {
+  T? get data => throw _privateConstructorUsedError;
+  String? get pushNamedRoute => throw _privateConstructorUsedError;
+  String? get message =>
+      throw _privateConstructorUsedError; // Map<String, Object?>? dataMap,
+  String? get errorMessage => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $GenieResposeCopyWith<T, GenieRespose<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $GenieResposeCopyWith<T, $Res> {
+  factory $GenieResposeCopyWith(
+          GenieRespose<T> value, $Res Function(GenieRespose<T>) then) =
+      _$GenieResposeCopyWithImpl<T, $Res, GenieRespose<T>>;
+  @useResult
+  $Res call(
+      {T? data, String? pushNamedRoute, String? message, String? errorMessage});
+}
+
+/// @nodoc
+class _$GenieResposeCopyWithImpl<T, $Res, $Val extends GenieRespose<T>>
+    implements $GenieResposeCopyWith<T, $Res> {
+  _$GenieResposeCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+    Object? pushNamedRoute = freezed,
+    Object? message = freezed,
+    Object? errorMessage = freezed,
+  }) {
+    return _then(_value.copyWith(
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as T?,
+      pushNamedRoute: freezed == pushNamedRoute
+          ? _value.pushNamedRoute
+          : pushNamedRoute // ignore: cast_nullable_to_non_nullable
+              as String?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$GenieResposeImplCopyWith<T, $Res>
+    implements $GenieResposeCopyWith<T, $Res> {
+  factory _$$GenieResposeImplCopyWith(_$GenieResposeImpl<T> value,
+          $Res Function(_$GenieResposeImpl<T>) then) =
+      __$$GenieResposeImplCopyWithImpl<T, $Res>;
+  @override
+  @useResult
+  $Res call(
+      {T? data, String? pushNamedRoute, String? message, String? errorMessage});
+}
+
+/// @nodoc
+class __$$GenieResposeImplCopyWithImpl<T, $Res>
+    extends _$GenieResposeCopyWithImpl<T, $Res, _$GenieResposeImpl<T>>
+    implements _$$GenieResposeImplCopyWith<T, $Res> {
+  __$$GenieResposeImplCopyWithImpl(
+      _$GenieResposeImpl<T> _value, $Res Function(_$GenieResposeImpl<T>) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+    Object? pushNamedRoute = freezed,
+    Object? message = freezed,
+    Object? errorMessage = freezed,
+  }) {
+    return _then(_$GenieResposeImpl<T>(
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as T?,
+      pushNamedRoute: freezed == pushNamedRoute
+          ? _value.pushNamedRoute
+          : pushNamedRoute // ignore: cast_nullable_to_non_nullable
+              as String?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GenieResposeImpl<T> implements _GenieRespose<T> {
+  const _$GenieResposeImpl(
+      {this.data, this.pushNamedRoute, this.message, this.errorMessage});
+
+  @override
+  final T? data;
+  @override
+  final String? pushNamedRoute;
+  @override
+  final String? message;
+// Map<String, Object?>? dataMap,
+  @override
+  final String? errorMessage;
+
+  @override
+  String toString() {
+    return 'GenieRespose<$T>(data: $data, pushNamedRoute: $pushNamedRoute, message: $message, errorMessage: $errorMessage)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GenieResposeImpl<T> &&
+            const DeepCollectionEquality().equals(other.data, data) &&
+            (identical(other.pushNamedRoute, pushNamedRoute) ||
+                other.pushNamedRoute == pushNamedRoute) &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(data),
+      pushNamedRoute,
+      message,
+      errorMessage);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GenieResposeImplCopyWith<T, _$GenieResposeImpl<T>> get copyWith =>
+      __$$GenieResposeImplCopyWithImpl<T, _$GenieResposeImpl<T>>(
+          this, _$identity);
+}
+
+abstract class _GenieRespose<T> implements GenieRespose<T> {
+  const factory _GenieRespose(
+      {final T? data,
+      final String? pushNamedRoute,
+      final String? message,
+      final String? errorMessage}) = _$GenieResposeImpl<T>;
+
+  @override
+  T? get data;
+  @override
+  String? get pushNamedRoute;
+  @override
+  String? get message;
+  @override // Map<String, Object?>? dataMap,
+  String? get errorMessage;
+  @override
+  @JsonKey(ignore: true)
+  _$$GenieResposeImplCopyWith<T, _$GenieResposeImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

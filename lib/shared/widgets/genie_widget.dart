@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:ui';
 
 import 'package:aidafine/app/app.dart';
@@ -112,118 +111,138 @@ class _GenieWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(25),
-      ),
-      // color: Colors.grey.shade800,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-        child: AnimatedSize(
-          alignment: Alignment.topCenter,
-          duration: Durations.medium3,
-          curve: Curves.easeOutCirc,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+    return AnimatedSize(
+      alignment: Alignment.topCenter,
+      duration: Durations.medium3,
+      child: BlocBuilder<GeminiVoiceBloc, GeminiVoiceState>(
+        buildWhen: (previous, current) {
+          return previous.response != current.response;
+        },
+        builder: (context, state) {
+          return Column(
             children: [
-              Row(
-                children: [
-                  const Text(
-                    '✨',
-                    style: TextStyle(fontSize: 24),
-                  ),
-                  const SizedBox(width: 8),
-                  BlocBuilder<GeminiVoiceBloc, GeminiVoiceState>(
-                    buildWhen: (previous, current) {
-                      return previous.isReloading != current.isReloading;
-                    },
-                    builder: (context, state) {
-                      return AnimatedCrossFade(
-                        sizeCurve: Curves.easeOutCirc,
-                        crossFadeState: !state.isReloading
-                            ? CrossFadeState.showFirst
-                            : CrossFadeState.showSecond,
-                        duration: Durations.short4,
-                        secondChild: Text(
-                          'Tahan sebentar',
-                          key: const Key('hold'),
-                          style: context.textTheme.titleMedium,
-                        ),
-                        firstChild: Text(
-                          'Mendengarkan',
-                          key: const Key('listening'),
-                          style: context.textTheme.titleMedium,
-                        ),
-                      );
-                    },
-                  ),
-                  const Spacer(),
-                  InkWell(
-                    onTap: () {
-                      context.read<GeminiVoiceBloc>().add(
-                            const ToggleShowGenieWidget(
-                              isShown: false,
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                // color: Colors.grey.shade800,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                  child: AnimatedSize(
+                    alignment: Alignment.topCenter,
+                    duration: Durations.medium3,
+                    curve: Curves.easeOutCirc,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Row(
+                          children: [
+                            const Text(
+                              '✨',
+                              style: TextStyle(fontSize: 24),
                             ),
-                          );
-                    },
-                    child: const Icon(Icons.close),
-                  ),
-                ],
-              ),
-              BlocBuilder<GeminiVoiceBloc, GeminiVoiceState>(
-                buildWhen: (previous, current) {
-                  return previous.showSpokenWords != current.showSpokenWords;
-                },
-                builder: (context, state) {
-                  log('debug state.showSpokenWords ${state.showSpokenWords}');
-                  if (!state.showSpokenWords) {
-                    return const SizedBox.shrink();
-                  }
-                  return Padding(
-                    padding: const EdgeInsets.fromLTRB(4, 8, 4, 8),
-                    child: BlocBuilder<GeminiVoiceBloc, GeminiVoiceState>(
-                      buildWhen: (previous, current) {
-                        return previous.recognizedWords !=
-                            current.recognizedWords;
-                      },
-                      builder: (context, state) {
-                        final words = state.recognizedWords;
-                        log('debug state.isReloading ${state.isReloading}');
-                        return AnimatedSwitcher(
-                          duration: Durations.medium1,
-                          transitionBuilder: (child, animation) {
-                            return FadeTransition(
-                              opacity: animation,
-                              child: SizedBox(
-                                width: double.infinity,
-                                child: child,
+                            const SizedBox(width: 8),
+                            BlocBuilder<GeminiVoiceBloc, GeminiVoiceState>(
+                              buildWhen: (previous, current) {
+                                return previous.isReloading !=
+                                    current.isReloading;
+                              },
+                              builder: (context, state) {
+                                return AnimatedCrossFade(
+                                  sizeCurve: Curves.easeOutCirc,
+                                  crossFadeState: !state.isReloading
+                                      ? CrossFadeState.showFirst
+                                      : CrossFadeState.showSecond,
+                                  duration: Durations.short4,
+                                  secondChild: Text(
+                                    'Tahan sebentar',
+                                    key: const Key('hold'),
+                                    style: context.textTheme.titleMedium,
+                                  ),
+                                  firstChild: Text(
+                                    'Mendengarkan',
+                                    key: const Key('listening'),
+                                    style: context.textTheme.titleMedium,
+                                  ),
+                                );
+                              },
+                            ),
+                            const Spacer(),
+                            InkWell(
+                              onTap: () {
+                                context.read<GeminiVoiceBloc>().add(
+                                      const ToggleShowGenieWidget(
+                                        isShown: false,
+                                      ),
+                                    );
+                              },
+                              child: const Icon(Icons.close),
+                            ),
+                          ],
+                        ),
+                        BlocBuilder<GeminiVoiceBloc, GeminiVoiceState>(
+                          buildWhen: (previous, current) {
+                            return previous.showSpokenWords !=
+                                current.showSpokenWords;
+                          },
+                          builder: (context, state) {
+                            if (!state.showSpokenWords) {
+                              return const SizedBox.shrink();
+                            }
+                            return Padding(
+                              padding: const EdgeInsets.fromLTRB(4, 8, 4, 8),
+                              child: BlocBuilder<GeminiVoiceBloc,
+                                  GeminiVoiceState>(
+                                buildWhen: (previous, current) {
+                                  return previous.recognizedWords !=
+                                          current.recognizedWords &&
+                                      current.showSpokenWords;
+                                },
+                                builder: (context, state) {
+                                  final words = state.recognizedWords;
+                                  return AnimatedSwitcher(
+                                    duration: Durations.medium1,
+                                    transitionBuilder: (child, animation) {
+                                      return FadeTransition(
+                                        opacity: animation,
+                                        child: SizedBox(
+                                          width: double.infinity,
+                                          child: child,
+                                        ),
+                                      );
+                                    },
+                                    child: words == null || words.isEmpty
+                                        ? const _NullRecognizedWords()
+                                        : Wrap(
+                                            children: [
+                                              for (var i = 0;
+                                                  i < (words.length);
+                                                  i++)
+                                                WordAnimator(
+                                                  word: words[i],
+                                                ),
+                                            ],
+                                          ),
+                                  );
+                                },
                               ),
                             );
                           },
-                          // sizeCurve: Curves.easeOutCirc,
-                          // // alignment: Alignment.center,
-                          // firstChild: const SizedBox.shrink(),
-                          // secondChild: const _EmptyRecognizedWords(),
-                          child: words == null || words.isEmpty
-                              ? const _NullRecognizedWords()
-                              : Wrap(
-                                  children: [
-                                    for (var i = 0; i < (words.length); i++)
-                                      WordAnimator(
-                                        word: words[i],
-                                      ),
-                                  ],
-                                ),
-                        );
-                      },
+                        ),
+                      ],
                     ),
-                  );
-                },
+                  ),
+                ),
               ),
+              // if (state.response != null) ...[
+              //   Card(
+              //     child: Text('data ${state.response}'),
+              //   ),
+              // ],
             ],
-          ),
-        ),
+          );
+        },
       ),
     );
   }

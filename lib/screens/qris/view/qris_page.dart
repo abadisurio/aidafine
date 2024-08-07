@@ -51,13 +51,11 @@ class _QRISPageState extends State<QRISPage> {
                 .preferences[PreferenceID.callGenieWhenOpenQRIS]!
                 .value! as bool;
         if (callGenieWhenOpenQRIS) {
-          if (_isLanded) {
-            context.read<GeminiVoiceBloc>().add(const ToggleShowGenieWidget());
-          } else {
-            context.read<GeminiVoiceBloc>().add(
-                  const ToggleShowGenieWidget(isShown: false),
-                );
-          }
+          Future.delayed(Durations.long2, () {
+            context
+                .read<GeminiVoiceBloc>()
+                .add(ToggleShowGenieWidget(isShown: _isLanded));
+          });
         }
 
         if (!_isLanded) {

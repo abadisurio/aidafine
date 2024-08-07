@@ -2,9 +2,8 @@
 
 import 'dart:async';
 import 'dart:developer';
-import 'dart:io';
-
 import 'package:aidafine/engine/engine.dart';
+import 'package:aidafine/router/aidafine_router.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,7 +27,7 @@ class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
     on<ListenDebouncer>(
       _onListenDebouncer,
       transformer: (events, mapper) =>
-          events.debounceTime(const Duration(seconds: 5)).switchMap(mapper),
+          events.debounceTime(const Duration(seconds: 3)).switchMap(mapper),
     );
     _initialize();
   }
@@ -52,20 +51,14 @@ class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
         tools: [
           Tool(
             functionDeclarations: [
-              _payWithOnlineTool,
+              // _payWithOnlineTool,
               _payWithQRISTool,
-              _transferTool,
+              // _transferTool,
+              _summarizingOrderTool,
             ],
           ),
         ],
-        systemInstruction: Content.system(
-          '''
-Listen for the user intent when making a transaction within the app.
-Is it want to pay, tranfer, or seeing the balance.
-They're likely using bahasa indonesia.
-Use Bahasa Indonesia and its localization to interact.
-''',
-        ),
+        systemInstruction: _contentSystemInstruction,
       );
       _chatSession = _vertexAI.startChat();
     } catch (e) {
@@ -82,6 +75,7 @@ Use Bahasa Indonesia and its localization to interact.
         showGenieWidget: event.isShown,
         isListening: event.isShown,
         recognizedWords: null,
+        response: null,
         showSpokenWords: event.showSpokenWords,
       ),
     );
@@ -107,27 +101,27 @@ Use Bahasa Indonesia and its localization to interact.
       ),
     );
 
-    String? pushNamedRoute;
-    Object? data;
-    Map<String, Object?>? dataMap;
+    GenieRespose<dynamic>? response;
+    // Map<String, Object?>? dataMap;
 
-    final file = File(event.path);
-    final fileBytes = await file.readAsBytes();
     try {
-      final response =
-          await _chatSession.sendMessage(Content.data('audio/m4a', fileBytes));
+      final geminiResponse =
+          await _chatSession.sendMessage(Content.text(event.spokenWords));
 
-      final functionCalls = response.functionCalls.toList();
+      final functionCalls = geminiResponse.functionCalls.toList();
 
-      // When the model response with a function call, invoke the function.
+      // When the model geminiResponse with a function call, invoke the function.
       log('functionCalls $functionCalls');
       if (functionCalls.isNotEmpty) {
         final functionCall = functionCalls.first;
-        log('functionCalls ${functionCall.name}');
+        // for (final functionCall in functionCalls) {
+        log('functionName ${functionCall.name}');
+        log('functionArgs ${functionCall.args}');
         final result = switch (functionCall.name) {
           'payWithQRIS' => await _payWithQRIS(functionCall.args),
           'payWithOnline' => await _payWithOnline(functionCall.args),
           'transfer' => await _transfer(functionCall.args),
+          'summarizingOrder' => await _summarizingOrder(functionCall.args),
           _ => throw UnimplementedError(
               'Function not implemented: ${functionCall.name}',
             )
@@ -135,22 +129,21 @@ Use Bahasa Indonesia and its localization to interact.
 
         log('result $result');
 
-        if (functionCall.name == 'payWithQRIS') {
-          pushNamedRoute = 'QRISRoute';
-          data = result['amount'];
+        if (functionCall.name == 'summarizingOrder') {
+          response = result as GenieRespose<BillSummary>?;
         }
+        // }
       }
+
       emit(
         state.copyWith(
           isLoadingAnswer: false,
           isGeneratingAnswer: false,
-          pushNamedRoute: pushNamedRoute,
-          data: data,
-          dataMap: dataMap,
+          response: response,
         ),
       );
     } catch (e) {
-      log('error $e');
+      log('error 2 $e');
       emit(
         state.copyWith(
           isLoadingAnswer: false,
@@ -200,7 +193,9 @@ Use Bahasa Indonesia and its localization to interact.
     Emitter<GeminiVoiceState> emit,
   ) {
     if (!event.isListening) {
-      add(const ToggleShowGenieWidget(isShown: false));
+      add(VoicePrompt(spokenWords: _existingWords.join(' ')));
+      _stopListening();
+      // add(const ToggleShowGenieWidget(isShown: false));
     }
   }
 

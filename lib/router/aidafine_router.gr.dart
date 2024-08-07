@@ -21,6 +21,16 @@ abstract class _$AidafineRouter extends RootStackRouter {
         child: const AppPreferencesPage(),
       );
     },
+    BillSummarizerRoute.name: (routeData) {
+      final args = routeData.argsAs<BillSummarizerRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: BillSummarizerPage(
+          billSummary: args.billSummary,
+          key: args.key,
+        ),
+      );
+    },
     DashboardRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -93,6 +103,44 @@ class AppPreferencesRoute extends PageRouteInfo<void> {
   static const String name = 'AppPreferencesRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [BillSummarizerPage]
+class BillSummarizerRoute extends PageRouteInfo<BillSummarizerRouteArgs> {
+  BillSummarizerRoute({
+    required BillSummary billSummary,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          BillSummarizerRoute.name,
+          args: BillSummarizerRouteArgs(
+            billSummary: billSummary,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'BillSummarizerRoute';
+
+  static const PageInfo<BillSummarizerRouteArgs> page =
+      PageInfo<BillSummarizerRouteArgs>(name);
+}
+
+class BillSummarizerRouteArgs {
+  const BillSummarizerRouteArgs({
+    required this.billSummary,
+    this.key,
+  });
+
+  final BillSummary billSummary;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'BillSummarizerRouteArgs{billSummary: $billSummary, key: $key}';
+  }
 }
 
 /// generated route for

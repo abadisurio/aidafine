@@ -169,25 +169,54 @@ class _Shortcuts extends StatelessWidget {
           StaggeredGridTile.count(
             crossAxisCellCount: 2,
             mainAxisCellCount: 1,
-            child: ClipPath(
-              clipper: const ShapeBorderClipper(
-                shape: ContinuousRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(50),
-                  ),
+            child: ElevatedButton(
+              style: buttonStyle.copyWith(
+                backgroundColor: WidgetStatePropertyAll(
+                  brigthness == Brightness.light
+                      ? Colors.blue.shade500
+                      : Colors.blue.shade700,
                 ),
               ),
-              child: Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: brigthness == Brightness.light
-                      ? Colors.teal.shade400
-                      : Colors.teal.shade700,
-                ),
-                child: Text(
-                  'text',
-                  style: TextStyleTheme(context).bodyMedium,
-                ),
+              onPressed: () {
+                context.router.push(
+                  BillSummarizerRoute(
+                    billSummary: BillSummary(
+                      id: 'id',
+                      billItems: [
+                        BillItem(
+                          id: 'id',
+                          name: 'nasi goreng',
+                          quantity: 1,
+                          price: 10000,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: Icon(
+                      Icons.trending_up,
+                      color: brigthness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Flexible(
+                    child: Text(
+                      'Pengeluaran meningkat',
+                      style: labelStyle.copyWith(
+                        color: brigthness == Brightness.light
+                            ? Colors.black
+                            : Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

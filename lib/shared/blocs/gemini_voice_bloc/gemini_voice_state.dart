@@ -3,10 +3,8 @@ part of 'gemini_voice_bloc.dart';
 @freezed
 class GeminiVoiceState with _$GeminiVoiceState {
   const factory GeminiVoiceState({
-    String? pushNamedRoute,
-    Object? data,
     List<String>? recognizedWords,
-    Map<String, Object?>? dataMap,
+    GenieRespose<dynamic>? response,
     @Default(false) bool isLoadingAnswer,
     @Default(false) bool showGenieWidget,
     @Default(false) bool showSpokenWords,
@@ -22,4 +20,22 @@ class GeminiVoiceState with _$GeminiVoiceState {
   String toString() {
     return 'GeminiVoiceState recognizedWords $recognizedWords';
   }
+}
+
+@freezed
+class GenieRespose<T> with _$GenieRespose<T> {
+  const factory GenieRespose({
+    T? data,
+    String? pushNamedRoute,
+    String? message,
+    // Map<String, Object?>? dataMap,
+    String? errorMessage,
+  }) = _GenieRespose;
+
+  // const GenieRespose._();
+
+  // @override
+  // String toString() {
+  //   return 'GenieRespose recognizedWords $data';
+  // }
 }
