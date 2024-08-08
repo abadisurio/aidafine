@@ -16,6 +16,7 @@ class TextStyleTheme {
       );
   TextStyle? get titleMedium => _textTheme.titleMedium?.copyWith(
         fontWeight: FontWeight.w700,
+        // fontSize: 34,
       );
   TextStyle? get titleSmall => _textTheme.titleSmall?.copyWith(
         fontWeight: FontWeight.w700,

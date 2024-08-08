@@ -70,6 +70,16 @@ abstract class _$AidafineRouter extends RootStackRouter {
         ),
       );
     },
+    QRISPayRoute.name: (routeData) {
+      final args = routeData.argsAs<QRISPayRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: QRISPayPage(
+          qrisData: args.qrisData,
+          key: args.key,
+        ),
+      );
+    },
     RoomRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -257,6 +267,44 @@ class QRISRouteArgs {
   @override
   String toString() {
     return 'QRISRouteArgs{amount: $amount, key: $key}';
+  }
+}
+
+/// generated route for
+/// [QRISPayPage]
+class QRISPayRoute extends PageRouteInfo<QRISPayRouteArgs> {
+  QRISPayRoute({
+    required EmvqrModel qrisData,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          QRISPayRoute.name,
+          args: QRISPayRouteArgs(
+            qrisData: qrisData,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'QRISPayRoute';
+
+  static const PageInfo<QRISPayRouteArgs> page =
+      PageInfo<QRISPayRouteArgs>(name);
+}
+
+class QRISPayRouteArgs {
+  const QRISPayRouteArgs({
+    required this.qrisData,
+    this.key,
+  });
+
+  final EmvqrModel qrisData;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'QRISPayRouteArgs{qrisData: $qrisData, key: $key}';
   }
 }
 

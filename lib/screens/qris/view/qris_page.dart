@@ -29,16 +29,21 @@ class QRISPage extends StatefulWidget {
 }
 
 class _QRISPageState extends State<QRISPage> {
-  bool _isLanded = false;
-  final _cameraBloc = CameraBloc();
+  bool _showWindow = false;
+
+  late final CameraBloc _cameraBloc;
+  late final QRISBloc _qrisBloc;
   @override
   void initState() {
+    _cameraBloc = CameraBloc();
+    _qrisBloc = QRISBloc(amount: widget.amount);
+
     final scope = TabsRouterScope.of(context);
     if (scope != null) {
       final tabRouter = AutoTabsRouter.of(context);
       tabRouter.addListener(() {
         setState(() {
-          _isLanded = tabRouter.activeIndex == 0;
+          _showWindow = tabRouter.activeIndex == 0;
         });
 
         final callGenieWhenOpenQRIS = (context
@@ -52,19 +57,28 @@ class _QRISPageState extends State<QRISPage> {
                 .value! as bool;
         if (callGenieWhenOpenQRIS) {
           Future.delayed(Durations.long2, () {
-            context
-                .read<GeminiVoiceBloc>()
-                .add(ToggleShowGenieWidget(isShown: _isLanded));
+            if (_qrisBloc.state.data == null) {
+              context
+                  .read<GeminiVoiceBloc>()
+                  .add(ToggleShowGenieWidget(isShown: _showWindow));
+            }
           });
         }
 
-        if (!_isLanded) {
+        if (!_showWindow) {
           _cameraBloc.add(const DisposeCamera());
         }
       });
     } else {
       setState(() {
-        _isLanded = true;
+        _showWindow = true;
+      });
+      Future.delayed(Durations.long2, () {
+        if (_qrisBloc.state.data == null) {
+          context
+              .read<GeminiVoiceBloc>()
+              .add(ToggleShowGenieWidget(isShown: _showWindow));
+        }
       });
     }
     super.initState();
@@ -78,16 +92,61 @@ class _QRISPageState extends State<QRISPage> {
           create: (_) => _cameraBloc,
         ),
         BlocProvider(
-          create: (_) => QRISBloc(amount: widget.amount),
+          create: (_) => _qrisBloc,
         ),
       ],
-      child: Scaffold(
-        body: AnimatedSwitcher(
-          transitionBuilder: (child, animation) {
-            return FadeTransition(opacity: animation, child: child);
-          },
-          duration: Durations.medium3,
-          child: _isLanded ? const _QRISCameraView() : const _QRISPeekingView(),
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<CameraBloc, CameraState>(
+            bloc: _cameraBloc,
+            listenWhen: (previous, current) {
+              return previous.controller != current.controller;
+            },
+            listener: (context, state) {
+              if (state.controller != null) {
+                context.read<QRISBloc>().add(
+                      StartScanningQRIS(cameraController: state.controller!),
+                    );
+              } else {
+                context.read<QRISBloc>().add(const StopScanningQRIS());
+              }
+            },
+          ),
+          BlocListener<QRISBloc, QRISState>(
+            bloc: _qrisBloc,
+            listenWhen: (previous, current) {
+              return previous.data != current.data;
+            },
+            listener: (context, state) {
+              final qrisData = state.data;
+              if (qrisData == null) return;
+              context.read<CameraBloc>().add(const DisposeCamera());
+              final scope = TabsRouterScope.of(context);
+              if (scope != null) {
+                // await context.router.replace(QRISPayRoute(qrisData: qrisData));
+
+                context.router.push(QRISPayRoute(qrisData: qrisData));
+                Future.delayed(Durations.extralong4, () {
+                  AutoTabsRouter.of(context).navigate(const DashboardRoute());
+                });
+              } else {
+                context.router.replace(QRISPayRoute(qrisData: qrisData));
+              }
+              // Future(() async {
+              // });
+            },
+          ),
+        ],
+        child: Scaffold(
+          body: AnimatedSwitcher(
+            transitionBuilder: (child, animation) {
+              return FadeTransition(opacity: animation, child: child);
+            },
+            duration: Durations.medium3,
+            child: _showWindow
+                ? const _QRISCameraView()
+                : const _QRISPeekingView(),
+          ),
         ),
       ),
     );
@@ -113,14 +172,10 @@ class _QRISCameraView extends StatefulWidget {
 }
 
 class _QRISCameraViewState extends State<_QRISCameraView> {
-  bool _isMounted = false;
+  // bool _isMounted = false;
   String? amount;
   @override
   void initState() {
-    // const emvqr =
-    //     '''00020101021240530013ID.CO.BCA.WWW0118936000141577135652021057713565255204482953033605405500005802ID5918ABADI SURYO SETIYO6013Jakarta Pusat61051031062470804DMCT9935000200012557713565250017163042364086304655C''';
-    // final emvdecode = EMVMPM.decode(emvqr);
-    // log('emvdecode ${emvdecode.toJson()}');
     final stateAmount = context.read<QRISBloc>().state.amount;
     if (stateAmount != null) {
       final format = NumberFormat.currency(
@@ -130,24 +185,17 @@ class _QRISCameraViewState extends State<_QRISCameraView> {
       );
       amount = format.format(stateAmount);
     }
-    // Future.delayed(
-    //   Durations.medium2,
-    //   () {
-    //   },
-    // );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      setState(() {
-        _isMounted = true;
-      });
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   setState(() {
+    //     _isMounted = true;
+    //   });
+    // });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    log('debug _isMounted $_isMounted');
-
     return const Material(
       color: Colors.black,
       child: SafeArea(

@@ -4,6 +4,7 @@ import 'package:aidafine/engine/models/models.dart';
 import 'package:aidafine/router/auth_guard.dart';
 import 'package:aidafine/screens/screens.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:emvqrcode/emvqrcode.dart';
 import 'package:flutter/material.dart';
 
 part 'aidafine_router.gr.dart';
@@ -45,6 +46,12 @@ class AidafineRouter extends _$AidafineRouter {
             CustomRoute(
               guards: [AidafineGuard()],
               page: BillSummarizerRoute.page,
+              opaque: false,
+              transitionsBuilder: TransitionsBuilders.fadeIn,
+            ),
+            CustomRoute(
+              guards: [AidafineGuard()],
+              page: QRISPayRoute.page,
               opaque: false,
               transitionsBuilder: TransitionsBuilders.fadeIn,
             ),

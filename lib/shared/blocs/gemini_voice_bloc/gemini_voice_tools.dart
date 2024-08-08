@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 part of 'gemini_voice_bloc.dart';
 
 final _contentSystemInstruction = Content.system(
@@ -10,13 +12,20 @@ Mind that QRIS in indonesian is usually spelled as Chris, Keris, Greece, Kiris, 
 ''',
 );
 
-Future<Map<String, Object?>> _payWithQRIS(
+Future<GenieRespose<int>> _payWithQRIS(
   Map<String, Object?> arguments,
 ) async {
-  return {
-    'isPayingWithQRIS': arguments['isPayingWithQRIS'],
-    'amount': arguments['amount'],
-  };
+  // return {
+  //   'isPayingWithQRIS': arguments['isPayingWithQRIS'],
+  //   'amount': arguments['amount'],
+  // };
+
+  final amount = arguments['amount'] as num?;
+
+  return GenieRespose<int>(
+    pushNamedRoute: QRISRoute.name,
+    data: amount?.toInt(),
+  );
   // This hypothetical API returns a JSON such as:
   // {"base":"USD","date":"2024-04-17","rates":{"SEK": 10.99}}
 }

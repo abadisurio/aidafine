@@ -126,15 +126,16 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
 
     final cameraController = CameraController(
       camera,
-      ResolutionPreset.max,
+      ResolutionPreset.medium,
       enableAudio: false,
-      imageFormatGroup: ImageFormatGroup.jpeg,
+      imageFormatGroup: ImageFormatGroup.bgra8888,
     );
 
     try {
       await cameraController.initialize();
       cameraController.value = cameraController.value.copyWith(
         previewSize: const Size(1600, 1200),
+        focusMode: FocusMode.auto,
         flashMode: FlashMode.always,
       );
       // if (!cameraController.value.isInitialized) {

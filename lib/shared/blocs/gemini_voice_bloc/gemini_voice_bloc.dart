@@ -27,7 +27,7 @@ class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
     on<ListenDebouncer>(
       _onListenDebouncer,
       transformer: (events, mapper) =>
-          events.debounceTime(const Duration(seconds: 3)).switchMap(mapper),
+          events.debounceTime(const Duration(seconds: 5)).switchMap(mapper),
     );
     _initialize();
   }
@@ -131,6 +131,9 @@ class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
 
         if (functionCall.name == 'summarizingOrder') {
           response = result as GenieRespose<BillSummary>?;
+        }
+        if (functionCall.name == 'payWithQRIS') {
+          response = result as GenieRespose<int>?;
         }
         // }
       }

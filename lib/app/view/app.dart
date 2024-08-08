@@ -149,20 +149,6 @@ class _BlocListener extends StatelessWidget {
             }
           },
         ),
-        BlocListener<GeminiVoiceBloc, GeminiVoiceState>(
-          listenWhen: (prev, curr) {
-            return prev.errorMessage != curr.errorMessage;
-          },
-          listener: (context, state) {
-            if (state.errorMessage != null) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.errorMessage!),
-                ),
-              );
-            }
-          },
-        ),
         BlocListener<GeminiBloc, GeminiState>(
           listenWhen: (prev, curr) {
             return prev.isGeneratingAnswer && !curr.isGeneratingAnswer;
