@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:aidafine/shared/shared.dart';
 import 'package:bloc/bloc.dart';
 import 'package:camera/camera.dart';
@@ -36,7 +37,7 @@ class QRISBloc extends Bloc<QRISEvent, QRISState> {
     _qrisCapturer = Timer.periodic(Durations.long2, (Timer t) async {
       // log('debug image ${t.tick}');
       // _processCameraImage(_image!);
-      if (_image != null && _cameraController != null) {
+      if (_image != null) {
         add(DetectQRIS(image: _image!));
       }
     });
@@ -46,17 +47,20 @@ class QRISBloc extends Bloc<QRISEvent, QRISState> {
     DetectQRIS event,
     Emitter<QRISState> emit,
   ) async {
+    log('debug _cameraController $_cameraController');
     if (_cameraController == null) return;
     final inputImage = getInputImage(
       cameraImage: event.image,
       cameraController: _cameraController!,
       // camera:
     );
+    log('debug inputImage $inputImage');
     if (inputImage == null) return;
     final barcodes = await _barcodeScanner?.processImage(inputImage);
     final qrValue = barcodes?.firstOrNull?.rawValue;
 
     if (qrValue == null) return;
+    log('debug qrValue $qrValue');
     final emvdecode = EMVMPM.decode(qrValue).emvqr;
     if (emvdecode == null) return;
     // _isQRISDetected = true;

@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:camera/camera.dart';
@@ -128,7 +129,11 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
       camera,
       ResolutionPreset.medium,
       enableAudio: false,
-      imageFormatGroup: ImageFormatGroup.bgra8888,
+      imageFormatGroup: Platform.isAndroid
+          ? ImageFormatGroup.nv21
+          : Platform.isIOS
+              ? ImageFormatGroup.bgra8888
+              : null,
     );
 
     try {

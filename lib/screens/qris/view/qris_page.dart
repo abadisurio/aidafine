@@ -37,6 +37,13 @@ class _QRISPageState extends State<QRISPage> {
   void initState() {
     _cameraBloc = CameraBloc();
     _qrisBloc = QRISBloc(amount: widget.amount);
+    final callGenieWhenOpenQRIS = (context
+            .read<AppPreferencesBloc>()
+            .state
+            .preferences[PreferenceID.callGenieWhenOpenQRIS]
+            ?.value as bool?) ??
+        AppPreferencesState.defaultValues
+            .preferences[PreferenceID.callGenieWhenOpenQRIS]!.value! as bool;
 
     final scope = TabsRouterScope.of(context);
     if (scope != null) {
@@ -46,15 +53,6 @@ class _QRISPageState extends State<QRISPage> {
           _showWindow = tabRouter.activeIndex == 0;
         });
 
-        final callGenieWhenOpenQRIS = (context
-                .read<AppPreferencesBloc>()
-                .state
-                .preferences[PreferenceID.callGenieWhenOpenQRIS]
-                ?.value as bool?) ??
-            AppPreferencesState
-                .defaultValues
-                .preferences[PreferenceID.callGenieWhenOpenQRIS]!
-                .value! as bool;
         if (callGenieWhenOpenQRIS) {
           Future.delayed(Durations.long2, () {
             if (_qrisBloc.state.data == null) {
@@ -73,13 +71,15 @@ class _QRISPageState extends State<QRISPage> {
       setState(() {
         _showWindow = true;
       });
-      Future.delayed(Durations.long2, () {
-        if (_qrisBloc.state.data == null) {
-          context
-              .read<GeminiVoiceBloc>()
-              .add(ToggleShowGenieWidget(isShown: _showWindow));
-        }
-      });
+      if (callGenieWhenOpenQRIS) {
+        Future.delayed(Durations.long2, () {
+          if (_qrisBloc.state.data == null) {
+            context
+                .read<GeminiVoiceBloc>()
+                .add(ToggleShowGenieWidget(isShown: _showWindow));
+          }
+        });
+      }
     }
     super.initState();
   }
