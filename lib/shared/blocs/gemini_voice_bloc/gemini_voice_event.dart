@@ -7,15 +7,16 @@ class GeminiVoiceEvent {
 class ToggleShowGenieWidget extends GeminiVoiceEvent {
   const ToggleShowGenieWidget({
     this.isShown = true,
+    this.isLongPress = false,
     this.showSpokenWords = false,
   });
+  final bool isLongPress;
   final bool isShown;
   final bool showSpokenWords;
 }
 
-class VoicePrompt extends GeminiVoiceEvent {
-  const VoicePrompt({required this.spokenWords});
-  final String spokenWords;
+class ProceedPrompt extends GeminiVoiceEvent {
+  const ProceedPrompt();
 }
 
 class UpdateRecognizedWords extends GeminiVoiceEvent {

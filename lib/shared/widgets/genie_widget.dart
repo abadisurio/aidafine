@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:aidafine/app/app.dart';
@@ -146,25 +147,79 @@ class _GenieWidget extends StatelessWidget {
                             BlocBuilder<GeminiVoiceBloc, GeminiVoiceState>(
                               buildWhen: (previous, current) {
                                 return previous.isReloading !=
-                                    current.isReloading;
+                                        current.isReloading ||
+                                    previous.isLoadingAnswer !=
+                                        current.isLoadingAnswer ||
+                                    previous.isListening ||
+                                    current.isListening;
                               },
                               builder: (context, state) {
-                                return AnimatedCrossFade(
-                                  sizeCurve: Curves.easeOutCirc,
-                                  crossFadeState: !state.isReloading
-                                      ? CrossFadeState.showFirst
-                                      : CrossFadeState.showSecond,
-                                  duration: Durations.short4,
-                                  secondChild: Text(
-                                    'Tahan sebentar',
-                                    key: const Key('hold'),
+                                log('debug state.isLoadingAnswer ${state.isLoadingAnswer}');
+                                // return AnimatedCrossFade(
+                                //   sizeCurve: Curves.easeOutCirc,
+                                //   crossFadeState: !state.isReloading &&
+                                //           !state.isLoadingAnswer
+                                //       ? CrossFadeState.showFirst
+                                //       : CrossFadeState.showSecond,
+                                //   duration: Durations.short4,
+                                //   secondChild: Text(
+                                //     state.isLoadingAnswer
+                                //         ? 'Memproses'
+                                //         : 'Tahan sebentar',
+                                //     key: const Key('hold'),
+                                //     style: context.textTheme.titleMedium,
+                                //   ),
+                                //   firstChild: Text(
+                                //     'Mendengarkan',
+                                //     key: const Key('listening'),
+                                //     style: context.textTheme.titleMedium,
+                                //   ),
+                                // );
+
+                                late Widget child;
+                                if (state.isLoadingAnswer) {
+                                  child = Text(
+                                    'Memproses',
+                                    key: const Key('processing'),
                                     style: context.textTheme.titleMedium,
-                                  ),
-                                  firstChild: Text(
+                                  );
+                                } else if (state.isReloading) {
+                                  child = Text(
+                                    'Tahan sebentar',
+                                    key: const Key('holdup'),
+                                    style: context.textTheme.titleMedium,
+                                  );
+                                } else if (state.isListening) {
+                                  child = Text(
                                     'Mendengarkan',
                                     key: const Key('listening'),
                                     style: context.textTheme.titleMedium,
-                                  ),
+                                  );
+                                } else {
+                                  child = const SizedBox.shrink();
+                                }
+                                return AnimatedSwitcher(
+                                  duration: Durations.medium3,
+                                  layoutBuilder: (currChild, prevChild) {
+                                    return Stack(
+                                      alignment: Alignment.center,
+                                      children: <Widget>[
+                                        for (final child in prevChild)
+                                          AnimatedPositioned(
+                                            duration: Durations.medium3,
+                                            left: 0,
+                                            top: 0,
+                                            right: 0,
+                                            child: child,
+                                          ),
+                                        AnimatedPositioned(
+                                          duration: Durations.medium3,
+                                          child: currChild!,
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                  child: child,
                                 );
                               },
                             ),

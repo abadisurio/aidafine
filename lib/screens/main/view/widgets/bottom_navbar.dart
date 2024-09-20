@@ -10,7 +10,7 @@ class _BottomNavbar extends StatefulWidget {
 
 class _BottomNavbarState extends State<_BottomNavbar> {
   late TabsRouter _tabRouter;
-
+  late final _bloc = context.read<GeminiVoiceBloc>();
   @override
   void initState() {
     _tabRouter = AutoTabsRouter.of(context);
@@ -19,9 +19,12 @@ class _BottomNavbarState extends State<_BottomNavbar> {
 
   Future<void> _openGenie() async {
     unawaited(HapticFeedback.mediumImpact());
-    context
-        .read<GeminiVoiceBloc>()
-        .add(const ToggleShowGenieWidget(showSpokenWords: true));
+    _bloc.add(
+      const ToggleShowGenieWidget(
+        showSpokenWords: true,
+        isLongPress: true,
+      ),
+    );
   }
 
   @override
@@ -50,12 +53,38 @@ class _BottomNavbarState extends State<_BottomNavbar> {
             child: const Text('Home'),
           ),
           const SizedBox(width: 8),
-          ElevatedButton(
-            onPressed: () {
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onLongPressCancel: () {
+              _bloc.add(const ToggleShowGenieWidget(isShown: false));
+            },
+            onLongPressEnd: (details) {
+              log('debug onTapCancel');
+              final isShow = _bloc.state.showGenieWidget;
+              if (isShow) {
+                _bloc.add(const ProceedPrompt());
+              }
+            },
+            onTap: () {
               _tabRouter.navigate(const RoomRoute());
             },
             onLongPress: _openGenie,
-            child: const Text('Genie'),
+            child: AbsorbPointer(
+              child: ElevatedButton(
+                onPressed: () {},
+                onLongPress: () {},
+                child: const Text('Genie'),
+              ),
+            ),
+            // child: Card(
+            //   shape: RoundedRectangleBorder(
+            //     borderRadius: BorderRadius.circular(99),
+            //   ),
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(8.0),
+            //     child: const Text('text'),
+            //   ),
+            // ),
           ),
         ],
       ),

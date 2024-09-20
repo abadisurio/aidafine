@@ -20,14 +20,14 @@ part 'gemini_voice_bloc.freezed.dart';
 
 class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
   GeminiVoiceBloc() : super(const GeminiVoiceState()) {
-    on<VoicePrompt>(_onVoicePrompt);
+    on<ProceedPrompt>(_onProceedPrompt);
     on<ToggleShowGenieWidget>(_onToggleShowGenieWidget);
     on<UpdateRecognizedWords>(_onUpdateRecognizedWords);
     on<ReloadVoiceListener>(_onReloadVoiceListener);
     on<ListenDebouncer>(
       _onListenDebouncer,
       transformer: (events, mapper) =>
-          events.debounceTime(const Duration(seconds: 5)).switchMap(mapper),
+          events.debounceTime(const Duration(seconds: 3)).switchMap(mapper),
     );
     _initialize();
   }
@@ -36,7 +36,9 @@ class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
   late ChatSession _chatSession;
   late SpeechToText _speechToText;
   bool _speechEnabled = false;
+  bool _isLongPress = false;
 
+  List<String> _bufferedWords = [];
   List<String> _existingWords = [];
 
   Future<void> _initialize() async {
@@ -70,10 +72,12 @@ class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
     ToggleShowGenieWidget event,
     Emitter<GeminiVoiceState> emit,
   ) {
+    _isLongPress = event.isLongPress;
     emit(
       state.copyWith(
         showGenieWidget: event.isShown,
         isListening: event.isShown,
+        // isLoadingAnswer: event.isShown,
         recognizedWords: null,
         response: null,
         showSpokenWords: event.showSpokenWords,
@@ -84,19 +88,21 @@ class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
       _startListening();
     } else {
       _stopListening();
-      _existingWords = [];
+      _bufferedWords = [];
     }
   }
 
-  Future<void> _onVoicePrompt(
-    VoicePrompt event,
+  Future<void> _onProceedPrompt(
+    ProceedPrompt event,
     Emitter<GeminiVoiceState> emit,
   ) async {
+    await _stopListening();
     if (state.isLoadingAnswer) return;
 
     emit(
       state.copyWith(
         isLoadingAnswer: true,
+        isListening: false,
         isGeneratingAnswer: true,
       ),
     );
@@ -104,9 +110,11 @@ class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
     GenieRespose<dynamic>? response;
     // Map<String, Object?>? dataMap;
 
+    final spokenWords = _bufferedWords.join(' ');
+
     try {
       final geminiResponse =
-          await _chatSession.sendMessage(Content.text(event.spokenWords));
+          await _chatSession.sendMessage(Content.text(spokenWords));
 
       final functionCalls = geminiResponse.functionCalls.toList();
 
@@ -161,12 +169,17 @@ class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
     UpdateRecognizedWords event,
     Emitter<GeminiVoiceState> emit,
   ) {
+    if (_existingWords.isNotEmpty) {
+      _bufferedWords = [..._existingWords, ...event.recognizedWords];
+    } else {
+      _bufferedWords = event.recognizedWords;
+    }
+
+    // _bufferedWords = event.recognizedWords;
+
     emit(
       state.copyWith(
-        recognizedWords: [
-          ..._existingWords,
-          ...event.recognizedWords,
-        ],
+        recognizedWords: _bufferedWords,
       ),
     );
   }
@@ -175,7 +188,7 @@ class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
     ReloadVoiceListener event,
     Emitter<GeminiVoiceState> emit,
   ) async {
-    _existingWords = state.recognizedWords ?? <String>[];
+    _existingWords = _bufferedWords;
     emit(
       state.copyWith(
         isReloading: true,
@@ -185,9 +198,7 @@ class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
     await _stopListening();
     await Future<void>.delayed(Durations.long2);
     await _startListening();
-    if (_speechEnabled) {
-      log('debug _speechEnabled $_speechEnabled');
-    }
+    if (_speechEnabled) {}
     emit(state.copyWith(isReloading: false));
   }
 
@@ -195,19 +206,18 @@ class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
     ListenDebouncer event,
     Emitter<GeminiVoiceState> emit,
   ) {
-    if (!event.isListening) {
-      add(VoicePrompt(spokenWords: _existingWords.join(' ')));
-      _stopListening();
-      // add(const ToggleShowGenieWidget(isShown: false));
-    }
+    if (state.isLoadingAnswer || _isLongPress) return;
+    // if(_isLongPress)
+    add(const ProceedPrompt());
   }
 
   Future<void> _startListening() async {
     // final locales = await _speechToText.locales();
+
     // for (final element in locales) {
     //   log('locales ${element.localeId} ${element.name}');
     // }
-    add(const ListenDebouncer());
+    // add(const ListenDebouncer());
     _speechEnabled = await _speechToText.initialize();
     try {
       unawaited(
@@ -220,9 +230,7 @@ class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
             // onDevice: true,
             listenMode: ListenMode.dictation,
           ),
-          onSoundLevelChange: (level) {
-            // log('debug level $level');
-          },
+          onSoundLevelChange: (level) {},
         ),
       );
     } on ListenFailedException catch (e) {
@@ -242,13 +250,15 @@ class GeminiVoiceBloc extends Bloc<GeminiVoiceEvent, GeminiVoiceState> {
   /// This is the callback that the SpeechToText plugin calls when
   /// the platform returns recognized words.
   Future<void> _onSpeechResult(SpeechRecognitionResult result) async {
+    add(const ListenDebouncer());
     final recognizedWords = result.recognizedWords.split(' ');
+
     // if (_existingWords.isNotEmpty) {
     //   recognizedWords.insertAll(0, _existingWords);
     // }
-    // log('debug debouncing ${_speechToText.isListening}');
-    add(const ListenDebouncer());
-    if (_speechToText.isListening) {
+
+    if (state.isLoadingAnswer) return;
+    if (state.isListening) {
       add(UpdateRecognizedWords(recognizedWords));
     } else {
       add(const ReloadVoiceListener());
