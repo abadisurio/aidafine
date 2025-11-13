@@ -22,7 +22,9 @@ mixin _$BillSummarizerState {
   bool get isGeneratingAnswer => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BillSummarizerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BillSummarizerStateCopyWith<BillSummarizerState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,6 +55,8 @@ class _$BillSummarizerStateCopyWithImpl<$Res, $Val extends BillSummarizerState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of BillSummarizerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +90,8 @@ class _$BillSummarizerStateCopyWithImpl<$Res, $Val extends BillSummarizerState>
     ) as $Val);
   }
 
+  /// Create a copy of BillSummarizerState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $BillSummaryCopyWith<$Res> get billSummary {
@@ -122,6 +128,8 @@ class __$$BillSummarizerStateImplCopyWithImpl<$Res>
       $Res Function(_$BillSummarizerStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BillSummarizerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -205,7 +213,9 @@ class _$BillSummarizerStateImpl extends _BillSummarizerState {
   int get hashCode => Object.hash(runtimeType, createdAt, billSummary,
       modifiedAt, isGeneratingAnswer, errorMessage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BillSummarizerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BillSummarizerStateImplCopyWith<_$BillSummarizerStateImpl> get copyWith =>
@@ -232,8 +242,11 @@ abstract class _BillSummarizerState extends BillSummarizerState {
   bool get isGeneratingAnswer;
   @override
   String? get errorMessage;
+
+  /// Create a copy of BillSummarizerState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BillSummarizerStateImplCopyWith<_$BillSummarizerStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

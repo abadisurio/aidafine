@@ -26,8 +26,12 @@ mixin _$BillSummary {
   Map<String, int?>? get additionalCharges =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this BillSummary to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of BillSummary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BillSummaryCopyWith<BillSummary> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +59,8 @@ class _$BillSummaryCopyWithImpl<$Res, $Val extends BillSummary>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of BillSummary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -107,6 +113,8 @@ class __$$BillSummaryImplCopyWithImpl<$Res>
       _$BillSummaryImpl _value, $Res Function(_$BillSummaryImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BillSummary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -194,7 +202,7 @@ class _$BillSummaryImpl implements _BillSummary {
                 .equals(other._additionalCharges, _additionalCharges));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -203,7 +211,9 @@ class _$BillSummaryImpl implements _BillSummary {
       grandTotal,
       const DeepCollectionEquality().hash(_additionalCharges));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BillSummary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BillSummaryImplCopyWith<_$BillSummaryImpl> get copyWith =>
@@ -235,8 +245,11 @@ abstract class _BillSummary implements BillSummary {
   int? get grandTotal;
   @override
   Map<String, int?>? get additionalCharges;
+
+  /// Create a copy of BillSummary
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BillSummaryImplCopyWith<_$BillSummaryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

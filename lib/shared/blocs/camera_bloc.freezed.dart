@@ -23,7 +23,9 @@ mixin _$CameraState {
   FlashMode get flashMode => throw _privateConstructorUsedError;
   ControllerState get controllerState => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CameraState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CameraStateCopyWith<CameraState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,6 +55,8 @@ class _$CameraStateCopyWithImpl<$Res, $Val extends CameraState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CameraState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -117,6 +121,8 @@ class __$$CameraStateImplCopyWithImpl<$Res>
       _$CameraStateImpl _value, $Res Function(_$CameraStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CameraState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -226,7 +232,9 @@ class _$CameraStateImpl extends _CameraState {
       flashMode,
       controllerState);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CameraState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CameraStateImplCopyWith<_$CameraStateImpl> get copyWith =>
@@ -255,8 +263,11 @@ abstract class _CameraState extends CameraState {
   FlashMode get flashMode;
   @override
   ControllerState get controllerState;
+
+  /// Create a copy of CameraState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CameraStateImplCopyWith<_$CameraStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -25,8 +25,12 @@ mixin _$AppPreferencesState {
   Map<PreferenceID, Preference<Object>> get preferences =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this AppPreferencesState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AppPreferencesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AppPreferencesStateCopyWith<AppPreferencesState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,6 +57,8 @@ class _$AppPreferencesStateCopyWithImpl<$Res, $Val extends AppPreferencesState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AppPreferencesState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -94,6 +100,8 @@ class __$$AppPreferencesStateImplCopyWithImpl<$Res>
       $Res Function(_$AppPreferencesStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppPreferencesState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -155,12 +163,14 @@ class _$AppPreferencesStateImpl extends _AppPreferencesState {
                 .equals(other._preferences, _preferences));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, callGenieWhenOpenQRIS,
       const DeepCollectionEquality().hash(_preferences));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppPreferencesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AppPreferencesStateImplCopyWith<_$AppPreferencesStateImpl> get copyWith =>
@@ -191,8 +201,11 @@ abstract class _AppPreferencesState extends AppPreferencesState {
   bool get callGenieWhenOpenQRIS;
   @override
   Map<PreferenceID, Preference<Object>> get preferences;
+
+  /// Create a copy of AppPreferencesState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AppPreferencesStateImplCopyWith<_$AppPreferencesStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -208,8 +221,12 @@ mixin _$Preference<T> {
   String get name => throw _privateConstructorUsedError;
   Object? get value => throw _privateConstructorUsedError;
 
+  /// Serializes this Preference to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Preference
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PreferenceCopyWith<T, Preference<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -237,6 +254,8 @@ class _$PreferenceCopyWithImpl<T, $Res, $Val extends Preference<T>>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Preference
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -281,6 +300,8 @@ class __$$PreferenceImplCopyWithImpl<T, $Res>
       _$PreferenceImpl<T> _value, $Res Function(_$PreferenceImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of Preference
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -337,12 +358,14 @@ class _$PreferenceImpl<T> implements _Preference<T> {
             const DeepCollectionEquality().equals(other.value, value));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, name, const DeepCollectionEquality().hash(value));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Preference
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PreferenceImplCopyWith<T, _$PreferenceImpl<T>> get copyWith =>
@@ -373,8 +396,11 @@ abstract class _Preference<T> implements Preference<T> {
   String get name;
   @override
   Object? get value;
+
+  /// Create a copy of Preference
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PreferenceImplCopyWith<T, _$PreferenceImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

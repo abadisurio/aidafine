@@ -30,8 +30,12 @@ mixin _$Catalog {
   String? get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
 
+  /// Serializes this Catalog to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Catalog
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CatalogCopyWith<Catalog> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -60,6 +64,8 @@ class _$CatalogCopyWithImpl<$Res, $Val extends Catalog>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Catalog
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -119,6 +125,8 @@ class __$$CatalogImplCopyWithImpl<$Res>
       _$CatalogImpl _value, $Res Function(_$CatalogImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Catalog
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -204,12 +212,14 @@ class _$CatalogImpl implements _Catalog {
                 other.description == description));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, createdAt, modifiedAt, name, description);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Catalog
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CatalogImplCopyWith<_$CatalogImpl> get copyWith =>
@@ -236,19 +246,22 @@ abstract class _Catalog implements Catalog {
   factory _Catalog.fromJson(Map<String, dynamic> json) = _$CatalogImpl.fromJson;
 
   @override
-  String get id;
-  @override // @Default(DateTime(2024))
+  String get id; // @Default(DateTime(2024))
+  @override
   @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
-  DateTime get createdAt;
-  @override // @Default(DateTime(2024))
+  DateTime get createdAt; // @Default(DateTime(2024))
+  @override
   @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
   DateTime? get modifiedAt;
   @override
   String? get name;
   @override
   String? get description;
+
+  /// Create a copy of Catalog
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CatalogImplCopyWith<_$CatalogImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

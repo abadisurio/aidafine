@@ -56,9 +56,11 @@ class _QRISPageState extends State<QRISPage> {
         if (callGenieWhenOpenQRIS) {
           Future.delayed(Durations.long2, () {
             if (_qrisBloc.state.data == null) {
-              context
-                  .read<GeminiVoiceBloc>()
-                  .add(ToggleShowGenieWidget(isShown: _showWindow));
+              if (mounted) {
+                context
+                    .read<GeminiVoiceBloc>()
+                    .add(ToggleShowGenieWidget(isShown: _showWindow));
+              }
             }
           });
         }
@@ -74,9 +76,11 @@ class _QRISPageState extends State<QRISPage> {
       if (callGenieWhenOpenQRIS) {
         Future.delayed(Durations.long2, () {
           if (_qrisBloc.state.data == null) {
-            context
-                .read<GeminiVoiceBloc>()
-                .add(ToggleShowGenieWidget(isShown: _showWindow));
+            if (mounted) {
+              context
+                  .read<GeminiVoiceBloc>()
+                  .add(ToggleShowGenieWidget(isShown: _showWindow));
+            }
           }
         });
       }
@@ -127,7 +131,9 @@ class _QRISPageState extends State<QRISPage> {
 
                 context.router.push(QRISPayRoute(qrisData: qrisData));
                 Future.delayed(Durations.extralong4, () {
-                  AutoTabsRouter.of(context).navigate(const DashboardRoute());
+                  if (context.mounted) {
+                    AutoTabsRouter.of(context).navigate(const DashboardRoute());
+                  }
                 });
               } else {
                 context.router.replace(QRISPayRoute(qrisData: qrisData));

@@ -25,8 +25,12 @@ mixin _$BillItem {
   int? get quantity => throw _privateConstructorUsedError;
   int? get price => throw _privateConstructorUsedError;
 
+  /// Serializes this BillItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of BillItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BillItemCopyWith<BillItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$BillItemCopyWithImpl<$Res, $Val extends BillItem>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of BillItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -97,6 +103,8 @@ class __$$BillItemImplCopyWithImpl<$Res>
       _$BillItemImpl _value, $Res Function(_$BillItemImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BillItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -161,11 +169,13 @@ class _$BillItemImpl implements _BillItem {
             (identical(other.price, price) || other.price == price));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, quantity, price);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BillItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BillItemImplCopyWith<_$BillItemImpl> get copyWith =>
@@ -197,8 +207,11 @@ abstract class _BillItem implements BillItem {
   int? get quantity;
   @override
   int? get price;
+
+  /// Create a copy of BillItem
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BillItemImplCopyWith<_$BillItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -31,8 +31,12 @@ mixin _$Pilot {
   String? get photoUrl => throw _privateConstructorUsedError;
   String? get fcmToken => throw _privateConstructorUsedError;
 
+  /// Serializes this Pilot to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Pilot
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PilotCopyWith<Pilot> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -62,6 +66,8 @@ class _$PilotCopyWithImpl<$Res, $Val extends Pilot>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Pilot
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -127,6 +133,8 @@ class __$$PilotImplCopyWithImpl<$Res>
       _$PilotImpl _value, $Res Function(_$PilotImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Pilot
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -223,12 +231,14 @@ class _$PilotImpl implements _Pilot {
                 other.fcmToken == fcmToken));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, username, createdAt, modifiedAt, photoUrl, fcmToken);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Pilot
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PilotImplCopyWith<_$PilotImpl> get copyWith =>
@@ -258,19 +268,22 @@ abstract class _Pilot implements Pilot {
   @override
   String get id;
   @override
-  String get username;
-  @override // @Default(DateTime(2024))
+  String get username; // @Default(DateTime(2024))
+  @override
   @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
-  DateTime get createdAt;
-  @override // @Default(DateTime(2024))
+  DateTime get createdAt; // @Default(DateTime(2024))
+  @override
   @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
   DateTime? get modifiedAt;
   @override
   String? get photoUrl;
   @override
   String? get fcmToken;
+
+  /// Create a copy of Pilot
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PilotImplCopyWith<_$PilotImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

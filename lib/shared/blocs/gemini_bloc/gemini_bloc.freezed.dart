@@ -27,8 +27,12 @@ mixin _$GeminiState {
   bool get isGeneratingAnswer => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
+  /// Serializes this GeminiState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GeminiState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GeminiStateCopyWith<GeminiState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$GeminiStateCopyWithImpl<$Res, $Val extends GeminiState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GeminiState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -119,6 +125,8 @@ class __$$GeminiStateImplCopyWithImpl<$Res>
       _$GeminiStateImpl _value, $Res Function(_$GeminiStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GeminiState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -217,7 +225,7 @@ class _$GeminiStateImpl extends _GeminiState {
                 other.errorMessage == errorMessage));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -228,7 +236,9 @@ class _$GeminiStateImpl extends _GeminiState {
       isGeneratingAnswer,
       errorMessage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GeminiState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GeminiStateImplCopyWith<_$GeminiStateImpl> get copyWith =>
@@ -267,8 +277,11 @@ abstract class _GeminiState extends GeminiState {
   bool get isGeneratingAnswer;
   @override
   String? get errorMessage;
+
+  /// Create a copy of GeminiState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GeminiStateImplCopyWith<_$GeminiStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

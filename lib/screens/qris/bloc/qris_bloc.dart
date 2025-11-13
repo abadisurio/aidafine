@@ -37,7 +37,7 @@ class QRISBloc extends Bloc<QRISEvent, QRISState> {
     _qrisCapturer = Timer.periodic(Durations.long2, (Timer t) async {
       // log('debug image ${t.tick}');
       // _processCameraImage(_image!);
-      if (_image != null) {
+      if (_image != null && !isClosed) {
         add(DetectQRIS(image: _image!));
       }
     });

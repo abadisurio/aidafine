@@ -27,8 +27,12 @@ mixin _$RoomState {
   Chat? get answerStreaming => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
+  /// Serializes this RoomState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of RoomState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $RoomStateCopyWith<RoomState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -60,6 +64,8 @@ class _$RoomStateCopyWithImpl<$Res, $Val extends RoomState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of RoomState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -98,6 +104,8 @@ class _$RoomStateCopyWithImpl<$Res, $Val extends RoomState>
     ) as $Val);
   }
 
+  /// Create a copy of RoomState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PilotCopyWith<$Res>? get user {
@@ -110,6 +118,8 @@ class _$RoomStateCopyWithImpl<$Res, $Val extends RoomState>
     });
   }
 
+  /// Create a copy of RoomState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ChatCopyWith<$Res>? get answerStreaming {
@@ -153,6 +163,8 @@ class __$$RoomStateImplCopyWithImpl<$Res>
       _$RoomStateImpl _value, $Res Function(_$RoomStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RoomState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -248,7 +260,7 @@ class _$RoomStateImpl extends _RoomState {
                 other.errorMessage == errorMessage));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -259,7 +271,9 @@ class _$RoomStateImpl extends _RoomState {
       answerStreaming,
       errorMessage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RoomState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RoomStateImplCopyWith<_$RoomStateImpl> get copyWith =>
@@ -298,8 +312,11 @@ abstract class _RoomState extends RoomState {
   Chat? get answerStreaming;
   @override
   String? get errorMessage;
+
+  /// Create a copy of RoomState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RoomStateImplCopyWith<_$RoomStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -155,7 +155,7 @@ class _MerchantColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final qrisData = context.read<QRISPayBloc>().state.qrisData!;
+    final qrisData = context.read<QRISPayBloc>().state.qrisData;
     return Column(
       children: [
         Text(
@@ -183,10 +183,10 @@ class _CustomerColumnState extends State<_CustomerColumn> {
 
   @override
   void initState() {
-    Future(() async {
-      await Future.delayed(Durations.long4, () {
+    Future.delayed(Durations.long4, () {
+      if (mounted) {
         FocusScope.of(context).requestFocus(_focusNode);
-      });
+      }
     });
     super.initState();
   }

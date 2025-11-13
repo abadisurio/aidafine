@@ -31,8 +31,12 @@ mixin _$Chat {
   DateTime? get modifiedAt => throw _privateConstructorUsedError;
   List<Catalog>? get catalogs => throw _privateConstructorUsedError;
 
+  /// Serializes this Chat to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Chat
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ChatCopyWith<Chat> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -62,6 +66,8 @@ class _$ChatCopyWithImpl<$Res, $Val extends Chat>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Chat
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -126,6 +132,8 @@ class __$$ChatImplCopyWithImpl<$Res>
   __$$ChatImplCopyWithImpl(_$ChatImpl _value, $Res Function(_$ChatImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Chat
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -228,12 +236,14 @@ class _$ChatImpl implements _Chat {
             const DeepCollectionEquality().equals(other._catalogs, _catalogs));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, username, data, createdAt,
       modifiedAt, const DeepCollectionEquality().hash(_catalogs));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Chat
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChatImplCopyWith<_$ChatImpl> get copyWith =>
@@ -265,17 +275,20 @@ abstract class _Chat implements Chat {
   @override
   String get username;
   @override
-  String get data;
-  @override // @Default(DateTime(2024))
+  String get data; // @Default(DateTime(2024))
+  @override
   @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
-  DateTime get createdAt;
-  @override // @Default(DateTime(2024))
+  DateTime get createdAt; // @Default(DateTime(2024))
+  @override
   @JsonKey(defaultValue: getDefaultDateTime, fromJson: fromDateTimeJson)
   DateTime? get modifiedAt;
   @override
   List<Catalog>? get catalogs;
+
+  /// Create a copy of Chat
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChatImplCopyWith<_$ChatImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

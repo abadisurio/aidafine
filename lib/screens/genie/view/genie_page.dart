@@ -6,7 +6,7 @@ part 'widgets/marble.dart';
 // part 'widgets/animated_marble.dart';
 // part 'widgets/bubble_input.dart';
 
-@RoutePage<String?>()
+@RoutePage()
 class GeniePage extends StatelessWidget {
   const GeniePage({super.key});
 

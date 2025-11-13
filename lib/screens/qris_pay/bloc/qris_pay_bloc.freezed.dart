@@ -16,12 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$QRISPayState {
+  EmvqrModel get qrisData => throw _privateConstructorUsedError;
   bool get isScanning => throw _privateConstructorUsedError;
-  EmvqrModel? get qrisData => throw _privateConstructorUsedError;
   double? get amount => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QRISPayState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $QRISPayStateCopyWith<QRISPayState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -33,8 +35,8 @@ abstract class $QRISPayStateCopyWith<$Res> {
       _$QRISPayStateCopyWithImpl<$Res, QRISPayState>;
   @useResult
   $Res call(
-      {bool isScanning,
-      EmvqrModel? qrisData,
+      {EmvqrModel qrisData,
+      bool isScanning,
       double? amount,
       String? errorMessage});
 }
@@ -49,23 +51,25 @@ class _$QRISPayStateCopyWithImpl<$Res, $Val extends QRISPayState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of QRISPayState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? qrisData = null,
     Object? isScanning = null,
-    Object? qrisData = freezed,
     Object? amount = freezed,
     Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
+      qrisData: null == qrisData
+          ? _value.qrisData
+          : qrisData // ignore: cast_nullable_to_non_nullable
+              as EmvqrModel,
       isScanning: null == isScanning
           ? _value.isScanning
           : isScanning // ignore: cast_nullable_to_non_nullable
               as bool,
-      qrisData: freezed == qrisData
-          ? _value.qrisData
-          : qrisData // ignore: cast_nullable_to_non_nullable
-              as EmvqrModel?,
       amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
@@ -87,8 +91,8 @@ abstract class _$$QRISPayStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isScanning,
-      EmvqrModel? qrisData,
+      {EmvqrModel qrisData,
+      bool isScanning,
       double? amount,
       String? errorMessage});
 }
@@ -101,23 +105,25 @@ class __$$QRISPayStateImplCopyWithImpl<$Res>
       _$QRISPayStateImpl _value, $Res Function(_$QRISPayStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of QRISPayState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? qrisData = null,
     Object? isScanning = null,
-    Object? qrisData = freezed,
     Object? amount = freezed,
     Object? errorMessage = freezed,
   }) {
     return _then(_$QRISPayStateImpl(
+      qrisData: null == qrisData
+          ? _value.qrisData
+          : qrisData // ignore: cast_nullable_to_non_nullable
+              as EmvqrModel,
       isScanning: null == isScanning
           ? _value.isScanning
           : isScanning // ignore: cast_nullable_to_non_nullable
               as bool,
-      qrisData: freezed == qrisData
-          ? _value.qrisData
-          : qrisData // ignore: cast_nullable_to_non_nullable
-              as EmvqrModel?,
       amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
@@ -134,13 +140,16 @@ class __$$QRISPayStateImplCopyWithImpl<$Res>
 
 class _$QRISPayStateImpl implements _QRISPayState {
   const _$QRISPayStateImpl(
-      {this.isScanning = false, this.qrisData, this.amount, this.errorMessage});
+      {required this.qrisData,
+      this.isScanning = false,
+      this.amount,
+      this.errorMessage});
 
+  @override
+  final EmvqrModel qrisData;
   @override
   @JsonKey()
   final bool isScanning;
-  @override
-  final EmvqrModel? qrisData;
   @override
   final double? amount;
   @override
@@ -148,7 +157,7 @@ class _$QRISPayStateImpl implements _QRISPayState {
 
   @override
   String toString() {
-    return 'QRISPayState(isScanning: $isScanning, qrisData: $qrisData, amount: $amount, errorMessage: $errorMessage)';
+    return 'QRISPayState(qrisData: $qrisData, isScanning: $isScanning, amount: $amount, errorMessage: $errorMessage)';
   }
 
   @override
@@ -156,10 +165,10 @@ class _$QRISPayStateImpl implements _QRISPayState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$QRISPayStateImpl &&
-            (identical(other.isScanning, isScanning) ||
-                other.isScanning == isScanning) &&
             (identical(other.qrisData, qrisData) ||
                 other.qrisData == qrisData) &&
+            (identical(other.isScanning, isScanning) ||
+                other.isScanning == isScanning) &&
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
@@ -167,9 +176,11 @@ class _$QRISPayStateImpl implements _QRISPayState {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, isScanning, qrisData, amount, errorMessage);
+      Object.hash(runtimeType, qrisData, isScanning, amount, errorMessage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QRISPayState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$QRISPayStateImplCopyWith<_$QRISPayStateImpl> get copyWith =>
@@ -178,21 +189,24 @@ class _$QRISPayStateImpl implements _QRISPayState {
 
 abstract class _QRISPayState implements QRISPayState {
   const factory _QRISPayState(
-      {final bool isScanning,
-      final EmvqrModel? qrisData,
+      {required final EmvqrModel qrisData,
+      final bool isScanning,
       final double? amount,
       final String? errorMessage}) = _$QRISPayStateImpl;
 
   @override
-  bool get isScanning;
+  EmvqrModel get qrisData;
   @override
-  EmvqrModel? get qrisData;
+  bool get isScanning;
   @override
   double? get amount;
   @override
   String? get errorMessage;
+
+  /// Create a copy of QRISPayState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$QRISPayStateImplCopyWith<_$QRISPayStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -26,7 +26,9 @@ mixin _$GeminiVoiceState {
   bool get isReloading => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GeminiVoiceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GeminiVoiceStateCopyWith<GeminiVoiceState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -61,6 +63,8 @@ class _$GeminiVoiceStateCopyWithImpl<$Res, $Val extends GeminiVoiceState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GeminiVoiceState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -114,6 +118,8 @@ class _$GeminiVoiceStateCopyWithImpl<$Res, $Val extends GeminiVoiceState>
     ) as $Val);
   }
 
+  /// Create a copy of GeminiVoiceState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $GenieResposeCopyWith<dynamic, $Res>? get response {
@@ -158,6 +164,8 @@ class __$$GeminiVoiceStateImplCopyWithImpl<$Res>
       $Res Function(_$GeminiVoiceStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GeminiVoiceState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -299,7 +307,9 @@ class _$GeminiVoiceStateImpl extends _GeminiVoiceState {
       isReloading,
       errorMessage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GeminiVoiceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GeminiVoiceStateImplCopyWith<_$GeminiVoiceStateImpl> get copyWith =>
@@ -338,8 +348,11 @@ abstract class _GeminiVoiceState extends GeminiVoiceState {
   bool get isReloading;
   @override
   String? get errorMessage;
+
+  /// Create a copy of GeminiVoiceState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GeminiVoiceStateImplCopyWith<_$GeminiVoiceStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -352,7 +365,9 @@ mixin _$GenieRespose<T> {
       throw _privateConstructorUsedError; // Map<String, Object?>? dataMap,
   String? get errorMessage => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GenieRespose
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GenieResposeCopyWith<T, GenieRespose<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -377,6 +392,8 @@ class _$GenieResposeCopyWithImpl<T, $Res, $Val extends GenieRespose<T>>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GenieRespose
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -426,6 +443,8 @@ class __$$GenieResposeImplCopyWithImpl<T, $Res>
       _$GenieResposeImpl<T> _value, $Res Function(_$GenieResposeImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of GenieRespose
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -497,7 +516,9 @@ class _$GenieResposeImpl<T> implements _GenieRespose<T> {
       message,
       errorMessage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GenieRespose
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GenieResposeImplCopyWith<T, _$GenieResposeImpl<T>> get copyWith =>
@@ -517,11 +538,14 @@ abstract class _GenieRespose<T> implements GenieRespose<T> {
   @override
   String? get pushNamedRoute;
   @override
-  String? get message;
-  @override // Map<String, Object?>? dataMap,
-  String? get errorMessage;
+  String? get message; // Map<String, Object?>? dataMap,
   @override
-  @JsonKey(ignore: true)
+  String? get errorMessage;
+
+  /// Create a copy of GenieRespose
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GenieResposeImplCopyWith<T, _$GenieResposeImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

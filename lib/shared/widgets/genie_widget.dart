@@ -154,7 +154,7 @@ class _GenieWidget extends StatelessWidget {
                                     current.isListening;
                               },
                               builder: (context, state) {
-                                log('debug state.isLoadingAnswer ${state.isLoadingAnswer}');
+                                log('''debug state.isLoadingAnswer ${state.isLoadingAnswer}''');
                                 // return AnimatedCrossFade(
                                 //   sizeCurve: Curves.easeOutCirc,
                                 //   crossFadeState: !state.isReloading &&

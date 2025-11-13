@@ -10,18 +10,18 @@ import 'package:flutter/material.dart';
 part 'aidafine_router.gr.dart';
 
 @AutoRouterConfig()
-class AidafineRouter extends _$AidafineRouter {
+class AidafineRouter extends RootStackRouter {
   @override
   RouteType get defaultRouteType =>
       Platform.isIOS ? const RouteType.cupertino() : const RouteType.material();
 
   @override
   List<AutoRoute> get routes => [
-        CustomRoute(
+        CustomRoute<void>(
           initial: true,
           page: RootRoute.page,
           children: [
-            CustomRoute(
+            CustomRoute<void>(
               transitionsBuilder: TransitionsBuilders.noTransition,
               initial: true,
               guards: [AidafineGuard()],
@@ -43,13 +43,13 @@ class AidafineRouter extends _$AidafineRouter {
               guards: [AidafineGuard()],
               page: RoomRoute.page,
             ),
-            CustomRoute(
+            CustomRoute<void>(
               guards: [AidafineGuard()],
               page: BillSummarizerRoute.page,
               opaque: false,
               transitionsBuilder: TransitionsBuilders.fadeIn,
             ),
-            CustomRoute(
+            CustomRoute<void>(
               guards: [AidafineGuard()],
               page: QRISPayRoute.page,
               opaque: false,
@@ -59,14 +59,14 @@ class AidafineRouter extends _$AidafineRouter {
               guards: [AidafineGuard()],
               page: AppPreferencesRoute.page,
             ),
-            CustomRoute(
+            CustomRoute<void>(
               // initial: true,
               transitionsBuilder: TransitionsBuilders.fadeIn,
               guards: [AidafineGuard()],
               page: QRISRoute.page,
               path: 'pay-qris',
             ),
-            CustomRoute(
+            CustomRoute<void>(
               // initial: true,
               transitionsBuilder: TransitionsBuilders.fadeIn,
               guards: [AidafineGuard()],
@@ -74,7 +74,7 @@ class AidafineRouter extends _$AidafineRouter {
               path: 'genie',
               opaque: false,
             ),
-            CustomRoute(
+            CustomRoute<void>(
               // initial: true,
               transitionsBuilder: TransitionsBuilders.fadeIn,
               guards: [AidafineGuard()],

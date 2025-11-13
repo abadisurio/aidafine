@@ -9,98 +9,6 @@
 
 part of 'aidafine_router.dart';
 
-abstract class _$AidafineRouter extends RootStackRouter {
-  // ignore: unused_element
-  _$AidafineRouter({super.navigatorKey});
-
-  @override
-  final Map<String, PageFactory> pagesMap = {
-    AppPreferencesRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const AppPreferencesPage(),
-      );
-    },
-    BillSummarizerRoute.name: (routeData) {
-      final args = routeData.argsAs<BillSummarizerRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: BillSummarizerPage(
-          billSummary: args.billSummary,
-          key: args.key,
-        ),
-      );
-    },
-    DashboardRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const DashboardPage(),
-      );
-    },
-    GenieRoute.name: (routeData) {
-      return AutoRoutePage<String?>(
-        routeData: routeData,
-        child: const GeniePage(),
-      );
-    },
-    GenieResultRoute.name: (routeData) {
-      final args = routeData.argsAs<GenieResultRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: GenieResultPage(
-          prompt: args.prompt,
-          key: args.key,
-        ),
-      );
-    },
-    MainRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const MainPage(),
-      );
-    },
-    QRISRoute.name: (routeData) {
-      final args =
-          routeData.argsAs<QRISRouteArgs>(orElse: () => const QRISRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: QRISPage(
-          amount: args.amount,
-          key: args.key,
-        ),
-      );
-    },
-    QRISPayRoute.name: (routeData) {
-      final args = routeData.argsAs<QRISPayRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: QRISPayPage(
-          qrisData: args.qrisData,
-          key: args.key,
-        ),
-      );
-    },
-    RoomRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const RoomPage(),
-      );
-    },
-    RootRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const RootPage(),
-      );
-    },
-    SignInRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SignInPage(),
-      );
-    },
-  };
-}
-
 /// generated route for
 /// [AppPreferencesPage]
 class AppPreferencesRoute extends PageRouteInfo<void> {
@@ -112,7 +20,12 @@ class AppPreferencesRoute extends PageRouteInfo<void> {
 
   static const String name = 'AppPreferencesRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const AppPreferencesPage();
+    },
+  );
 }
 
 /// generated route for
@@ -133,8 +46,16 @@ class BillSummarizerRoute extends PageRouteInfo<BillSummarizerRouteArgs> {
 
   static const String name = 'BillSummarizerRoute';
 
-  static const PageInfo<BillSummarizerRouteArgs> page =
-      PageInfo<BillSummarizerRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<BillSummarizerRouteArgs>();
+      return BillSummarizerPage(
+        billSummary: args.billSummary,
+        key: args.key,
+      );
+    },
+  );
 }
 
 class BillSummarizerRouteArgs {
@@ -164,7 +85,12 @@ class DashboardRoute extends PageRouteInfo<void> {
 
   static const String name = 'DashboardRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const DashboardPage();
+    },
+  );
 }
 
 /// generated route for
@@ -178,7 +104,12 @@ class GenieRoute extends PageRouteInfo<void> {
 
   static const String name = 'GenieRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const GeniePage();
+    },
+  );
 }
 
 /// generated route for
@@ -199,8 +130,16 @@ class GenieResultRoute extends PageRouteInfo<GenieResultRouteArgs> {
 
   static const String name = 'GenieResultRoute';
 
-  static const PageInfo<GenieResultRouteArgs> page =
-      PageInfo<GenieResultRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<GenieResultRouteArgs>();
+      return GenieResultPage(
+        prompt: args.prompt,
+        key: args.key,
+      );
+    },
+  );
 }
 
 class GenieResultRouteArgs {
@@ -230,7 +169,12 @@ class MainRoute extends PageRouteInfo<void> {
 
   static const String name = 'MainRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const MainPage();
+    },
+  );
 }
 
 /// generated route for
@@ -251,7 +195,17 @@ class QRISRoute extends PageRouteInfo<QRISRouteArgs> {
 
   static const String name = 'QRISRoute';
 
-  static const PageInfo<QRISRouteArgs> page = PageInfo<QRISRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args =
+          data.argsAs<QRISRouteArgs>(orElse: () => const QRISRouteArgs());
+      return QRISPage(
+        amount: args.amount,
+        key: args.key,
+      );
+    },
+  );
 }
 
 class QRISRouteArgs {
@@ -288,8 +242,16 @@ class QRISPayRoute extends PageRouteInfo<QRISPayRouteArgs> {
 
   static const String name = 'QRISPayRoute';
 
-  static const PageInfo<QRISPayRouteArgs> page =
-      PageInfo<QRISPayRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<QRISPayRouteArgs>();
+      return QRISPayPage(
+        qrisData: args.qrisData,
+        key: args.key,
+      );
+    },
+  );
 }
 
 class QRISPayRouteArgs {
@@ -319,7 +281,12 @@ class RoomRoute extends PageRouteInfo<void> {
 
   static const String name = 'RoomRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const RoomPage();
+    },
+  );
 }
 
 /// generated route for
@@ -333,7 +300,12 @@ class RootRoute extends PageRouteInfo<void> {
 
   static const String name = 'RootRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const RootPage();
+    },
+  );
 }
 
 /// generated route for
@@ -347,5 +319,10 @@ class SignInRoute extends PageRouteInfo<void> {
 
   static const String name = 'SignInRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SignInPage();
+    },
+  );
 }
